@@ -23,4 +23,3 @@ for (var i = 0; i < cases.length; i++) {
 for (var i = 0; i < cases.length; i++) {
     console.log("Case #" + (i + 1) + ": " + cases[i].output.join(' '));
 }
-//Case #1: 2 3

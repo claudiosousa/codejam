@@ -1,0 +1,2 @@
+Host bitbucket.org 
+ IdentityFile private_key.ppk
