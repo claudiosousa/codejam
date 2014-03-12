@@ -1,1 +1,0 @@
-bin\node script.js sample.in > sample.out

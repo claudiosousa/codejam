@@ -1,1 +1,0 @@
-bin\node script.js small.in > small.out

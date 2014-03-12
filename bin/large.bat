@@ -1,0 +1,1 @@
+node ..\template\script.js ..\template\large.in > ..\template\large.out

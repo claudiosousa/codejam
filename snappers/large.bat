@@ -1,1 +1,0 @@
-bin\node script.js large.in > large.out
