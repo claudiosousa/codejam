@@ -1,0 +1,92 @@
+﻿
+.auditADAWindowBackground {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(25, 25, 25, 0.55);
+    z-index: 9999999;
+}
+
+
+.auditADAWindow {
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Helvetica, Arial, serif;
+    font-weight: 400;
+    position: fixed;
+    top: -webkit-calc(50% - 270px);
+    left: -webkit-calc(50% - 300px);
+    min-width: 600px;
+    background-color: rgba(240, 240, 240, 0.8);
+    border: 1px solid gray;
+    border-radius: 10px;
+    text-shadow: none;
+    color: #fff;
+    z-index: 9999999;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 25px;
+    box-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 25px;
+}
+
+
+    .auditADAWindow .draggableTitle {
+        color: #333;
+        font-size: 18px;
+        font-weight: normal;
+        background-color: rgb(230, 230, 230);
+        padding: 5px;
+        border-radius: 9px 9px 0 0;
+        text-align: center;
+        border: 0;
+        border-bottom: 1px solid grey;
+        cursor: move;
+    }
+
+
+    .auditADAWindow .content {
+        background-color: white;
+        border: 1px solid gray;
+        color: #333333;
+        font: normal 14px Arial;
+        margin: 10px;
+        height: 200px;
+        padding: 7px;
+    }
+
+        .auditADAWindow .content table {
+            min-width: 100%;
+            border-collapse: collapse;
+        }
+
+            .auditADAWindow .content table .adaNOKControl {
+                background-color: red;
+            }
+
+            .auditADAWindow .content table .adaOKControl {
+                background-color: green;
+            }
+
+            .auditADAWindow .content table tr > * {
+                border: 1px solid grey;
+            }
+
+            .auditADAWindow .content table tr.selected {
+                background-color: lightblue;
+            }
+
+
+    .auditADAWindow .auditADAActionPanel {
+        position: relative;
+        background-color: white;
+        border-top: 1px solid gray;
+        height: 51px;
+        border-radius: 0 0 9px 9px;
+    }
+
+
+        .auditADAWindow .auditADAActionPanel .AuditADACloseButton {
+            position: absolute;
+            top: 10px;
+            left: -webkit-calc(50% - 40px);
+            width: 80px;
+        }

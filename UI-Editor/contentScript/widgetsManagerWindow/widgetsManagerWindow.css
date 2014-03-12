@@ -1,0 +1,100 @@
+
+.widgetsMngrWindowPanel {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(25, 25, 25, 0.55);
+    z-index: 9999999;
+}
+
+.widgetsMngrWindow {
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Helvetica, Arial, serif;
+    font-weight: 400;
+    position: absolute;
+    width: 1071px;
+    height: 95%;
+    top: 2.5%;
+    left: calc(50% - 535px);
+    background-color: rgb(240, 240, 240);
+    border: 1px solid gray;
+    border-radius: 10px;
+    text-shadow: none;
+    color: #fff;
+    z-index: 9999999;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 25px;
+    box-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 25px;
+}
+
+    .widgetsMngrWindow .widgetsMngrTitle {
+        color: #333;
+        font-size: 18px;
+        font-weight: normal;
+        background-color: rgb(230, 230, 230);
+        margin-bottom: 0;
+        padding: 5px;
+        border-radius: 9px 9px 0 0;
+        text-align: left;
+        padding-left: 14px;
+        border: 0;
+        border-bottom: 1px solid grey;
+        cursor: move;
+    }
+    
+		.widgetsMngrWindow .widgetsMngrCloseBtn {
+			position: absolute;
+			width: 26px;
+			height: 26px;
+            top: -4px;
+			right: -5px;
+			padding-top: 8px;
+			padding-left: 8px;
+			color: #222222;
+		}
+		
+		.widgetsMngrWindow .widgetsMngrCloseBtn .widgetsMngrCloseBtnOff,
+		.widgetsMngrWindow .widgetsMngrCloseBtn .widgetsMngrCloseBtnOn {
+			font-size: 16px;
+			color: #444444;
+			cursor: pointer;
+		}
+		
+		.widgetsMngrWindow .widgetsMngrCloseBtn .widgetsMngrCloseBtnOff {
+			display: inline-block;	
+		}
+		
+		.widgetsMngrWindow .widgetsMngrCloseBtn .widgetsMngrCloseBtnOn {
+			display: none;	
+		}
+		
+		.widgetsMngrWindow .widgetsMngrCloseBtn:hover .widgetsMngrCloseBtnOff {
+				display: none;	
+		}
+		
+		.widgetsMngrWindow .widgetsMngrCloseBtn:hover .widgetsMngrCloseBtnOn{
+			display: inline-block;		
+		}
+
+
+    .widgetsMngrWindow .widgetsMngrContainer {
+        position: relative;
+        height: calc(100% - 31px - 9px);
+        padding: 8px;
+        background-color: white;
+        box-sizing: border-box;
+    }
+
+        .widgetsMngrWindow .widgetsMngrIframe {
+            display: block; 
+            visibility: visible; 
+            width: 100%; 
+            height: 100%; 
+            margin: 0; 
+            padding: 0;
+            border: none; 
+            z-index: 10000100; 
+            opacity: 1; 
+        }
+

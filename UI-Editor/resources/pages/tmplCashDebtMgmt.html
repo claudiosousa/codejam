@@ -1,0 +1,82 @@
+<div uib-attr uib-control="page" dataurl="rest/template/cashDebtMgmt">
+    <div class="sgw-viewtitle" uib-attr sg-page-header sg-title="Cash/Dept Management" sg-subtitle=""></div>
+    <div layout="list" uib-container-content="">
+        <form ui-cell ui-col="12" uib-control="form" name="dataFormm" class="sgw-form" sgw-editable-form="" id="658918857108801700">
+            <div>
+                <div class="sgw-formTitle">
+                    <div uib-attr ng-bind-template="Emergency Savings and Pay Cash Account"></div>
+                    <div sgw-editable-form-error="">
+                        <ul>
+                            <li ng-repeat="error in formError">{{error}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sgw-formInset">
+                    <div uib-container-content="" uib-panel class="uib-pagePanel">
+                        <div uib-row>
+                            <div ui-cell ui-col="2" uib-attr uib-control="label" class="sgw-label" align="left" ng-bind-template="Pay Cash Account" offset="6" id="Div1"></div>
+                            <div ui-cell ui-col="2" uib-attr uib-control="label" class="sgw-label" align="left" ng-bind-template="Emergency Savings" offset="2" id="Div2"></div>
+                        </div>
+                        <div uib-row>
+                            <div ui-cell ui-col="4" uib-attr uib-control="label" class="sgw-label" align="left" ng-bind-template="Current monthly living expenses" offset="0" id="Div3"></div>
+                            <sgw-currency-input uib-attr ui-cell ui-col="2" uib-control="cur" sgw-decimals="2" offset="2" id="Sgw-currency-input1" ng-model="rest_template_cashDebtMgmt.cashDebtMgmtPayCashCurMonthlyLivingExpensesAmount"></sgw-currency-input>
+                            <sgw-currency-input uib-attr ui-cell ui-col="2" uib-control="cur" sgw-decimals="2" offset="2" id="Sgw-currency-input2" ng-model="rest_template_cashDebtMgmt.cashDebtMgmtEmergencySavingsCurMonthlyLivingExpensesAmount"></sgw-currency-input>
+                        </div>
+                        <div uib-row>
+                            <div ui-cell ui-col="4" uib-attr uib-control="label" class="sgw-label" align="left" ng-bind-template="Number of months of living expenses" offset="0" id="Div4"></div>
+                            <div ui-cell ui-col="2" uib-attr uib-control="label" class="sgw-label" align="right" ng-bind-template="multiply (x)" offset="1" id="Div5"></div>
+                            <sgw-decimal-number-input uib-attr ui-cell ui-col="1" uib-control="decimalNumber" ng-model="rest_template_cashDebtMgmt.payCashMonthsMultiplier" sgw-decimals="2" offset="0" id="Sgw-decimal-number-input1"></sgw-decimal-number-input>
+                            <div ui-cell ui-col="2" uib-attr uib-control="label" class="sgw-label" align="right" ng-bind-template="multiply (x)" offset="1" id="Div6"></div>
+                            <sgw-decimal-number-input uib-attr ui-cell ui-col="1" uib-control="decimalNumber" ng-model="rest_template_cashDebtMgmt.emergSavingsMonthsMultiplier" sgw-decimals="2" offset="0" id="Sgw-decimal-number-input2"></sgw-decimal-number-input>
+                        </div>
+                        <div uib-row>
+                            <div ui-cell ui-col="3" uib-attr uib-control="label" class="sgw-label" align="left" ng-bind-template="Recommended Amount" offset="0" id="Div7"></div>
+                            <sgw-currency-input uib-attr ui-cell ui-col="2" uib-control="cur" sgw-decimals="2" offset="3" id="Sgw-currency-input3" ng-model="rest_template_cashDebtMgmt.cashDebtMgmtPayCashRecommendedAmount"></sgw-currency-input>
+                            <sgw-currency-input uib-attr ui-cell ui-col="2" uib-control="cur" sgw-decimals="2" offset="2" id="Sgw-currency-input4" ng-model="rest_template_cashDebtMgmt.cashDebtMgmtEmergencySavingsRecommendedAmount"></sgw-currency-input>
+                        </div>
+                        <div uib-row>
+                            <div ui-cell ui-col="4" uib-attr uib-control="label" class="sgw-label" align="left" ng-bind-template="Available cash assets" offset="0" id="Div8"></div>
+                            <div ui-cell ui-col="2" uib-attr uib-control="label" class="sgw-label" align="right" ng-bind-template="less (-)" offset="0" id="Div9"></div>
+                            <sgw-currency-input uib-attr ui-cell ui-col="2" uib-control="cur" sgw-decimals="2" offset="0" id="Sgw-currency-input5" ng-model="rest_template_cashDebtMgmt.cashDebtMgmtPayCashAvailAssetsAmount"></sgw-currency-input>
+                            <div ui-cell ui-col="2" uib-attr uib-control="label" class="sgw-label" align="right" ng-bind-template="less (-)" offset="0" id="Div10"></div>
+
+                            <sgw-currency-input uib-attr ui-cell ui-col="2" uib-control="cur" sgw-decimals="2" offset="0" id="Sgw-currency-input6" ng-model="rest_template_cashDebtMgmt.cashDebtMgmtEmergencySavingsAvailAssetsAmount"></sgw-currency-input>
+
+                        </div>
+                        <div uib-row>
+                            <div ui-cell ui-col="4" uib-attr uib-control="label" class="sgw-label" align="left" ng-bind-template="Additional amount needed" offset="0" id="Div11"></div>
+                            <sgw-currency-input uib-attr ui-cell ui-col="2" uib-control="cur" sgw-decimals="2" offset="2" id="Sgw-currency-input7" ng-model="rest_template_cashDebtMgmt.cashDebtMgmtPayCashAddAmtNeeded"></sgw-currency-input>
+                            <sgw-currency-input uib-attr ui-cell ui-col="2" uib-control="cur" sgw-decimals="2" offset="2" id="Sgw-currency-input8" ng-model="rest_template_cashDebtMgmt.cashDebtMgmtEmergencySavingsAddAmtNeeded"></sgw-currency-input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form ui-cell ui-col="12" uib-control="form" name="dataFormm" class="sgw-form" sgw-editable-form="" id="Form1">
+            <div>
+                <div class="sgw-formTitle">
+                    <div ng-bind-template="Fully Funding Additional Amount Needed"></div>
+                    <div sgw-editable-form-error="">
+                        <ul>
+                            <li ng-repeat="error in formError">{{error}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sgw-formInset">
+                    <div uib-container-content="" uib-panel class="uib-pagePanel">
+                        <div uib-row>
+                            <div ui-cell ui-col="4" uib-control="label" class="sgw-label" align="left" ng-bind-template="Months to contribute" offset="0" id="Div12"></div>
+                            <sgw-number-input ui-cell ui-col="1" uib-control="number" offset="3" id="Sgw-number-input1" ng-model="rest_template_cashDebtMgmt.cashDebtMgmtPayCashMonths"></sgw-number-input>
+                            <sgw-number-input ui-cell ui-col="1" uib-control="number" offset="3" id="Sgw-number-input2" ng-model="rest_template_cashDebtMgmt.cashDebtMgmtEmgSavingsMonths"></sgw-number-input>
+                        </div>
+                        <div uib-row>
+                            <div ui-cell ui-col="4" uib-control="label" class="sgw-label" align="left" ng-bind-template="Required Monthly Contributions" offset="0" id="Div13"></div>
+                            <sgw-currency-input ui-cell ui-col="2" uib-control="cur" sgw-decimals="2" offset="2" id="Sgw-currency-input9" ng-model="rest_template_cashDebtMgmt.cashDebtMgmtPayCashRequiredMonthlyContribs"></sgw-currency-input>
+                            <sgw-currency-input ui-cell ui-col="2" uib-control="cur" sgw-decimals="2" offset="2" id="Sgw-currency-input10" ng-model="rest_template_cashDebtMgmt.cashDebtMgmtEmergencySavingsRequiredMonthlyContribs"></sgw-currency-input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

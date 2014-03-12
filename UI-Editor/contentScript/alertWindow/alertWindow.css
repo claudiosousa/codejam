@@ -1,0 +1,74 @@
+
+.alertWindowPanel {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(25, 25, 25, 0.55);
+    z-index: 9999999;
+}
+
+
+.alertWindow {
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Helvetica, Arial, serif;
+    font-weight: 400;
+    position: relative;
+    width: 405px;
+    top: 200px;
+    left: -webkit-calc(50% - 200px);
+    background-color: rgb(240, 240, 240);
+    border: 1px solid gray;
+    border-radius: 10px;
+    text-shadow: none;
+    color: #fff;
+    z-index: 9999999;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 25px;
+    box-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 25px;
+}
+
+    .alertWindow .draggableTitle {
+        color: #333;
+        font-size: 18px;
+        font-weight: normal;
+        background-color: rgb(230, 230, 230);
+        margin: 0;
+        padding: 5px;
+        border-radius: 9px 9px 0 0;
+        text-align: left;
+        padding-left: 14px;
+        border: 0;
+        /* border-bottom: 1px solid grey; */
+        cursor: move;
+    }
+
+        .alertWindow .draggableTitle .fa-exclamation-circle {
+            margin-left: -5px;
+            margin-right: 5px;
+            color: rgb(235, 66, 65);
+        }
+
+    .alertWindow .alertContainer {
+        position: relative;
+        background-color: white;
+        padding: 15px 10px;
+        color: #333;
+        text-align: center;
+    }
+
+    .alertWindow .actionPanel {
+        position: relative;
+        background-color: white;
+        /* border-top: 1px solid gray; */
+        height: 51px;
+        border-radius: 0 0 9px 9px;
+    }
+
+        .alertWindow .actionPanel .okButton {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            -webkit-transform: translate3d(-40px, 0, 0);
+            width: 80px;
+        }

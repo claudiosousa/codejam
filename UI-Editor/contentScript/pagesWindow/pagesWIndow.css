@@ -1,0 +1,372 @@
+
+.pagesWindowPanel {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(25, 25, 25, 0.55);
+    z-index: 9999999;
+}
+
+
+.pagesWindow {
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Helvetica, Arial, serif;
+    font-weight: 400;
+    position: relative;
+    width: 415px;
+    top: 100px;
+    left: -webkit-calc(50% - 200px);
+    background-color: rgb(240, 240, 240);
+    border: 1px solid gray;
+    border-radius: 10px;
+    text-shadow: none;
+    color: #fff;
+    z-index: 9999999;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 25px;
+    box-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 25px;
+    -webkit-user-select: none;
+}
+
+    .pagesWindow .draggableTitle {
+        color: #333;
+        font-size: 18px;
+        font-weight: normal;
+        background-color: rgb(230, 230, 230);
+        padding: 5px;
+        border-radius: 9px 9px 0 0;
+        text-align: left;
+        padding-left: 14px;
+        border: 0;
+        border-bottom: 1px solid grey;
+        cursor: move;
+    }
+    
+    .pagesWindow ul.pagesTabs {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        list-style: none;
+        margin: 0;
+        padding: 0 8px;
+        box-sizing: border-box;
+        border-bottom: 1px solid gray;
+        overflow: visible;
+    }
+
+     .pagesWindow ul.pagesTabs > li {
+        float: left;
+        display: block;
+        position: relative;
+        margin-bottom: -1px;
+    }
+
+        .pagesWindow ul.pagesTabs > li > a {
+            display: block;
+            position: relative;
+            margin-right: 2px;
+            padding: 10px 15px;
+            border: 1px solid transparent;
+            border-left: 0;
+            border-right: 0;
+            border-radius: 4px 4px 0 0;
+            color: #428bca;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+      .pagesWindow ul.pagesTabs > li.active > a {
+            color: #333;
+            background-color: transparent;
+            border: 1px solid gray;
+            border-bottom-color: #F0F0F0;
+            cursor: default;
+      }
+      
+      .pagesWindow ul.pagesTabs > li > a:hover {
+            background-color: #fff;
+            border-bottom-color: gray;
+      }
+
+        .pagesWindow ul.pagesTabs > li.active > a:hover {
+            background-color: transparent;
+            border-bottom-color: #F0F0F0;
+        }
+
+    .pagesWindow .pagesContainer {
+        display: none;
+        position: relative;
+        height: 380px;
+        margin: 8px 0 0 8px;
+        overflow-y: scroll;
+    }
+
+   .pagesWindow .pagesContainer.active {
+       display: block;
+    }
+
+.pagesWindowPanel .page {
+    float: left;
+    position: relative;
+    width: 86px;
+    height: 114px;
+    box-sizing: border-box;
+    margin: 5px;
+    border: 1px solid gray;
+    background-color: white;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.pageWindow .page {
+    cursor: pointer;
+}
+
+.pagesWindow .pageSelected {
+    outline: 3px solid #08c !important;
+}
+
+.pagesWindow .page:hover {
+    color: #2268b2;
+    border-color: #2268b2;
+    -webkit-box-shadow: rgba(34, 104, 178, 0.498039) 0px 1px 25px;
+    box-shadow: rgba(34, 104, 178, 0.498039) 0px 1px 25px;
+}
+
+.pagesWindow .page .iconForbiden {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(225, 225, 225, 0.6);
+}
+
+    .pagesWindow .page .iconForbiden > div {
+        position: relative;
+        top: 30px;
+        left: 30px;
+    }
+
+    .pagesWindow .page .iconForbiden i {
+        color: rgba(235, 66, 65, .75);
+        font-size: xx-large;
+    }
+
+.pagesWindow .pageNotAvailable {
+    cursor: default;
+}
+
+    .pagesWindow .pageNotAvailable:hover {
+        color: #333;
+        border-color: gray;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+.pagesWindow .pageNotAvailable {
+    cursor: default;
+}
+
+    .pagesWindow .pageNotAvailable .iconForbiden {
+        display: block;
+    }
+
+.pagesWindowPanel .page .icon {
+    height: 84px;
+    width: 84px;
+    background-size: 84px 84px;
+    background-repeat: no-repeat;
+}
+
+.pagesWindowPanel .page .tmplEmptyPage {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/resources/pages/tmplEmptyPage.png');
+}
+
+.pagesWindowPanel .page .tmplInvSummary {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/resources/pages/tmplInvSummary.png');
+}
+
+.pagesWindowPanel .page .templTransactions {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/resources/pages/templTransactions.png');
+}
+
+.pagesWindowPanel .page .tmplHoldings {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/resources/pages/tmplHoldings.png');
+}
+
+.pagesWindowPanel .page .tmplAccountList {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/resources/pages/tmplAccountList.png');
+}
+
+.pagesWindowPanel .page .tmplTrading {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/resources/pages/tmplTrading.png');
+}
+
+.pagesWindowPanel .page .tmplReports {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/resources/pages/tmplReports.png');
+}
+
+.pagesWindowPanel .page .tmplEducationFunding {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/resources/pages/tmplEducationFunding.png');
+}
+
+.pagesWindowPanel .page .tmplRetirement {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/resources/pages/tmplRetirement.png');
+}
+
+.pagesWindowPanel .page .tmplFinancialStatements {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/resources/pages/tmplFinancialStatements.png');
+}
+
+.pagesWindowPanel .page .tmplFinancialGoals {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/resources/pages/tmplFinancialGoals.png');
+}
+
+.pagesWindowPanel .page .tmplCashDebtMgmt {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/resources/pages/tmplCashDebtMgmt.png');
+}
+
+.pagesWindowPanel .page .tmpl1cellLayout {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/resources/layouts/tmpl1cellLayout.png');
+}
+
+.pagesWindowPanel .page .tmpl2cellsLayout {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/resources/layouts/tmpl2cellsLayout.png');
+}
+
+.pagesWindowPanel .page .tmpl3cellsLayout {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/resources/layouts/tmpl3cellsLayout.png');
+}
+
+.pagesWindowPanel .page .tmplLeftColumnCellLayout {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/resources/layouts/tmplLeftColumnCellLayout.png');
+}
+
+.pagesWindowPanel .page .tmplRightColumnCellLayout {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/resources/layouts/tmplRightColumnCellLayout.png');
+}
+
+
+.pagesWindowPanel .page .title {
+    padding: 3px;
+    font: normal 12px Arial;
+    color: #333;
+    text-align: center;
+    margin-top: -5px;
+}
+
+.pagesWindow .page:hover .title {
+    color: #2268b2;
+    text-shadow: 1px 0 rgb(34, 104, 178);
+}
+
+.pagesWindow .pageNotAvailable:hover .title {
+    color: #333;
+    text-shadow: none;
+}
+
+.pagesWindow .actionPanel {
+    position: relative;
+    background-color: white;
+    border-top: 1px solid gray;
+    height: 51px;
+    border-radius: 0 0 9px 9px;
+}
+
+    .pagesWindow .actionPanel .cancelPageButton {
+        position: absolute;
+        top: 10px;
+        left: 15%;
+        width: 80px;
+    }
+
+    .pagesWindow .actionPanel .nextPageButton {
+        position: absolute;
+        top: 10px;
+        right: 15%;
+        width: 80px;
+    }
+
+.createPageWindow {
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Helvetica, Arial, serif;
+    font-weight: 400;
+    position: relative;
+    width: 405px;
+    top: 200px;
+    left: -webkit-calc(50% - 200px);
+    background-color: rgb(240, 240, 240);
+    border: 1px solid gray;
+    border-radius: 10px;
+    text-shadow: none;
+    color: #fff;
+    z-index: 9999999;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 25px;
+    box-shadow: rgba(0, 0, 0, 0.498039) 0px 1px 25px;
+}
+
+    .createPageWindow .createPageDraggableTitle {
+        color: #333;
+        font-size: 18px;
+        font-weight: normal;
+        background-color: rgb(230, 230, 230);
+        padding: 5px;
+        border-radius: 9px 9px 0 0;
+        text-align: left;
+        padding-left: 14px;
+        border: 0;
+        border-bottom: 1px solid grey;
+        cursor: move;
+    }
+
+
+    .createPageWindow .newPageContainer {
+        position: relative;
+        height: 134px;
+        margin: 0 0 0 8px;
+    }
+
+        .createPageWindow .newPageContainer .newPageTitleLbl {
+            position: absolute;
+            top: 40px;
+            left: 110px;
+            color: #333;
+        }
+
+        .createPageWindow .newPageContainer .newPageTitleInput {
+            position: absolute;
+            top: 60px;
+            left: 110px;
+        }
+
+    .createPageWindow .createPageActionPanel {
+        position: relative;
+        background-color: white;
+        border-top: 1px solid gray;
+        height: 51px;
+        border-radius: 0 0 9px 9px;
+    }
+
+        .createPageWindow .createPageActionPanel .createPageBackButton {
+            position: absolute;
+            top: 10px;
+            left: 14px;
+            width: 80px;
+        }
+
+        .createPageWindow .createPageActionPanel .createPageCancelButton {
+            position: absolute;
+            top: 10px;
+            left: 104px;
+            width: 80px;
+        }
+
+        .createPageWindow .createPageActionPanel .createPageCreateButton {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            width: 80px;
+        }

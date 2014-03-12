@@ -1,0 +1,24 @@
+<div uib-attr uib-control="page">
+    <div class="sgw-viewtitle" uib-attr sg-page-header sg-title="Financial Statements" sg-subtitle=""></div>
+    <div layout="list" uib-container-content="">
+        <div uib-control="proformachart" uib-attr dataurl="" class="sgwPnl" id="950042934622615600">
+            <div>
+                <div class="sgwPnlHeader" uib-attr ng-bind-template="Net Worth at Retirement"></div>
+                <div class="sgwPnlBody">
+                    <proforma-chart uib-attr ng-init="chartData={ liabilities: { category: 'Liabilities', values: [ -180000, -160000, -120000, -100000, -90000, -60000, -40000, -20000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ] }, assets: { category: 'Assets', values: [ 200000, 230000, 250000, 280000, 320000, 400000, 420000, 410000, 400000, 0, 410000, 490000, 530000, 620000, 770000, 830000, 930000, 1020000, 1195637 ] }, labels: { today: 'TODAY', retirement: 'RETIREMENT', networth: 'Net Worth' }, startyear: 2011 }"
+                        style="width: 100%; height: 350px;" ng-model="chartData"></proforma-chart>
+                </div>
+            </div>
+        </div>
+        <div uib-control="editabletable" class="sgwPnl" id="Div1">
+            <div>
+                <div class="sgwPnlHeader" uib-attr ng-bind-template="Annual Table"></div>
+                <div class="sgwPnlBody">
+                    <table editable-grid="" uib-attr dataurl="rest/template/financialStatements" metadata="{&quot;dataModel&quot;:&quot;rest_template_financialStatements&quot;,&quot;columns&quot;:[{&quot;field&quot;:&quot;proFormaYear&quot;,&quot;label&quot;:&quot;Year&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;proFormaAge&quot;,&quot;label&quot;:&quot;Age&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;proFormaAssets&quot;,&quot;label&quot;:&quot;Assets&quot;,&quot;datatype&quot;:&quot;currency&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;proFormaLiabilities&quot;,&quot;label&quot;:&quot;Liabilities&quot;,&quot;datatype&quot;:&quot;currency&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;proFormaNetWorth&quot;,&quot;label&quot;:&quot;Net Worth&quot;,&quot;datatype&quot;:&quot;currency&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true}]}"
+                        on-row-select="" insertable="false" editable="false" deletable="false" reorderable="false" reorderablefield="">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

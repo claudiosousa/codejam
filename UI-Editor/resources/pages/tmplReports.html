@@ -1,0 +1,45 @@
+<div uib-attr uib-control="page">
+    <div class="sgw-viewtitle" uib-attr sg-page-header sg-title="Reports" sg-subtitle=""></div>
+    <div layout="list" uib-container-content="">
+        <div uib-control="editabletable" class="sgwPnl" id="947006165049970200">
+            <div>
+                <div class="sgwPnlHeader" uib-attr ng-bind-template="Statements"></div>
+                <div class="sgwPnlBody">
+                    <table editable-grid="" uib-attr dataurl="rest/template/reportsStatements" metadata="{&quot;dataModel&quot;:&quot;rest_template_reportsStatements&quot;,&quot;columns&quot;:[{&quot;field&quot;:&quot;accountNumber&quot;,&quot;label&quot;:&quot;Account Number&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;interestedPartyNumber&quot;,&quot;label&quot;:&quot;Interested Party Number&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;description&quot;,&quot;label&quot;:&quot;Description&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;startDate&quot;,&quot;label&quot;:&quot;Start Date&quot;,&quot;datatype&quot;:&quot;date&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;endDate&quot;,&quot;label&quot;:&quot;End Date&quot;,&quot;datatype&quot;:&quot;date&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;filePath&quot;,&quot;label&quot;:&quot;File Path&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:false,&quot;editable&quot;:true},{&quot;field&quot;:&quot;errorMessage&quot;,&quot;label&quot;:&quot;Error Message&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:false,&quot;editable&quot;:true}]}"
+                        on-row-select="" insertable="false" editable="false" deletable="false" reorderable="false" reorderablefield="">
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div uib-control="editabletable" class="sgwPnl" id="Div1">
+            <div>
+                <div class="sgwPnlHeader" uib-attr ng-bind-template="Custom Reports"></div>
+                <div class="sgwPnlBody">
+                    <table editable-grid="" uib-attr dataurl="rest/template/reportsCustom" metadata="{&quot;dataModel&quot;:&quot;rest_template_reportsCustom&quot;,&quot;columns&quot;:[{&quot;field&quot;:&quot;fileFrequency&quot;,&quot;label&quot;:&quot;File Frequency&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;reportName&quot;,&quot;label&quot;:&quot;Report Name&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;filePath&quot;,&quot;label&quot;:&quot;File Path&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:false,&quot;editable&quot;:true},{&quot;field&quot;:&quot;errorMessage&quot;,&quot;label&quot;:&quot;Error Message&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:false,&quot;editable&quot;:true}]}"
+                        on-row-select="" insertable="false" editable="false" deletable="false" reorderable="false" reorderablefield="">
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div uib-control="editabletable" class="sgwPnl" id="Div2">
+            <div>
+                <div class="sgwPnlHeader" uib-attr ng-bind-template="Performance Reports"></div>
+                <div class="sgwPnlBody">
+                    <table editable-grid="" uib-attr dataurl="rest/template/reportsPerformance" metadata="{&quot;dataModel&quot;:&quot;rest_template_reportsPerformance&quot;,&quot;columns&quot;:[{&quot;field&quot;:&quot;startDate&quot;,&quot;label&quot;:&quot;Start Date&quot;,&quot;datatype&quot;:&quot;date&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;endDate&quot;,&quot;label&quot;:&quot;End Date&quot;,&quot;datatype&quot;:&quot;date&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;fileFrequency&quot;,&quot;label&quot;:&quot;File Frequency&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;reportName&quot;,&quot;label&quot;:&quot;Report Name&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;filePath&quot;,&quot;label&quot;:&quot;File Path&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:false,&quot;editable&quot;:true},{&quot;field&quot;:&quot;errorMessage&quot;,&quot;label&quot;:&quot;Error Message&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:false,&quot;editable&quot;:true}]}"
+                        on-row-select="" insertable="false" editable="false" deletable="false" reorderable="false" reorderablefield="">
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div uib-control="editabletable" class="sgwPnl" id="Div3">
+            <div>
+                <div class="sgwPnlHeader" uib-attr ng-bind-template="Special Reports"></div>
+                <div class="sgwPnlBody">
+                    <table editable-grid="" uib-attr dataurl="rest/template/reportsSpecial" metadata="{&quot;dataModel&quot;:&quot;rest_template_reportsSpecial&quot;,&quot;columns&quot;:[{&quot;field&quot;:&quot;startDate&quot;,&quot;label&quot;:&quot;Start Date&quot;,&quot;datatype&quot;:&quot;date&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;endDate&quot;,&quot;label&quot;:&quot;End Date&quot;,&quot;datatype&quot;:&quot;date&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;fileFrequency&quot;,&quot;label&quot;:&quot;File Frequency&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;reportName&quot;,&quot;label&quot;:&quot;Report Name&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;filePath&quot;,&quot;label&quot;:&quot;File Path&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:false,&quot;editable&quot;:true},{&quot;field&quot;:&quot;errorMessage&quot;,&quot;label&quot;:&quot;Error Message&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:false,&quot;editable&quot;:true}]}"
+                        on-row-select="" insertable="false" editable="false" deletable="false" reorderable="false" reorderablefield="">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

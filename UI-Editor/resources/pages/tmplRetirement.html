@@ -1,0 +1,81 @@
+<div uib-attr uib-control="page">
+    <div class="sgw-viewtitle" uib-attr sg-page-header sg-title="Retirement" sg-subtitle=""></div>
+    <div layout="list" uib-container-content="">
+        <div uib-control="donut" uib-attr dataurl="rest/charting/retirementSummary" class="sgwPnl" id="25732066482305530">
+            <div>
+                <div class="sgwPnlHeader" uib-attr ng-bind-template="Retirement Summary"></div>
+                <div class="sgwPnlBody">
+                    <div style="position: relative;" ng-init="showDonutChart=true;donutdata = {'series': [[{ value: 3750, tooltip: 'Needs', 'tooltip-detail': 3750, color: 'rgb(55, 96, 146)',metRate:1,metAchievableAmount: 3750 },{ value: 2609, tooltip: 'Wants', 'tooltip-detail': 2927, color: 'rgb(176, 0, 0)' ,metRate:0.41,metAchievableAmount:2609}],[{ value: 2544, tooltip: 'Income Resources', 'tooltip-detail': 2544, color: 'rgb(119, 147, 60)',percentage:40 },{ value: 2544, tooltip: 'Current Assets', 'tooltip-detail': 2544, color: 'rgb(255, 255, 0)', percentage: 40 },{ value: 953, tooltip: 'Additional Contributions', 'tooltip-detail': 953, color: 'rgb(85, 142, 213)', percentage: 15 },{ value: 318, tooltip: 'Shorfall', 'color': 'darkred', 'tooltip-detail': 318, color: 'rgb(255, 0, 0)', percentage: 5 }]], 'line': { percentage: 0.95, label: 'Funded', 'color': 'darkred', tooltip: 'Funded', 'tooltip-detail': '95%' }};donutdatatotal = {retirementTotalGoalsMetRate:0.95,retirementTotalGoalsAmount:6359,retirementTotalGoalsAchievableAmount:6041}">
+                        <div style="display: inline-block; width: 408px; margin-left: 80px;">
+                            <div ng-repeat="band in donutdata.series" class="{{{0:'', 1 :'xlargeMargTop'}[$index]}}">
+                                <ng-switch on="$index">
+                                    <div class="sgw-groupedTable normalMargTop" ng-switch-when="0">
+                                        <div class="sgw-groupedTableRow sgw-groupedTableTitleRow">
+                                            <div class="sgw-groupedTableCellFluid">Monthly Retirement Goals</div>
+                                            <div class="textRight bold" style="width: 20%;">Goal</div>
+                                            <div class="textRight bold" style="width: 20%;">Achievable</div>
+                                        </div>
+                                        <div ng-repeat="slice in band" class="sgw-groupedTableRow sgw-groupedTableUngroupedRow sgw-groupedTableRowWithSep sgw-groupedTableClickableRow" ng-class="{true:'sgw-groupedTableSelectedRow'}[!!slice.selected]" ng-mouseenter="slice.selected=true" ng-mouseleave="slice.selected=false">
+                                            <div class="{{{true:'sgw-groupedTableRowIcon', false :'sgw-groupedTableRowSquareIcon'}[showDonutChart]}}" ng-style="{'background-color':slice.color}"></div>
+                                            <div class="sgw-groupedTableCellFluid">{{slice.tooltip}}</div>
+                                            <div class="textRight" style="width: 30%;">(<span ng-bind-html-unsafe="slice.metRate | sgwPercentage"></span> met)</div>
+                                            <div class="textRight" style="width: 20%;" ng-bind-html-unsafe="slice.value | sgwCurrency"></div>
+                                            <div class="textRight" style="width: 20%;" ng-bind-html-unsafe="slice.metAchievableAmount | sgwCurrency"></div>
+                                        </div>
+                                        <div class="sgw-groupedTableRow sgw-groupedTableFooterRow sgw-groupedTableUngroupedRow sgw-groupedTableRowWithSep">
+                                            <div class="sgw-groupedTableRowIcon sgw-groupedTableRowNoIcon"></div>
+                                            <div class="sgw-groupedTableCellFluid">Total</div>
+                                            <div class="textRight" style="width: 30%;">(<span ng-bind-html-unsafe="donutdatatotal.retirementTotalGoalsMetRate | sgwPercentage"></span> met)</div>
+                                            <div class="textRight" style="width: 20%;" ng-bind-html-unsafe="donutdatatotal.retirementTotalGoalsAmount | sgwCurrency"></div>
+                                            <div class="textRight" style="width: 20%;" ng-bind-html-unsafe="donutdatatotal.retirementTotalGoalsAchievableAmount | sgwCurrency"></div>
+                                        </div>
+                                    </div>
+                                    <div class="sgw-groupedTable" ng-switch-when="1">
+                                        <div class="sgw-groupedTableRow sgw-groupedTableTitleRow">
+                                            <div class="sgw-groupedTableCellFluid">Monthly Funding Resources</div>
+                                            <div class="textRight bold" style="width: 20%;">Percent</div>
+                                            <div class="textRight bold" style="width: 20%;">Amount</div>
+                                        </div>
+                                        <div ng-repeat="slice in band" class="sgw-groupedTableRow sgw-groupedTableUngroupedRow sgw-groupedTableRowWithSep sgw-groupedTableClickableRow" ng-class="{true:'sgw-groupedTableSelectedRow'}[!!slice.selected]" ng-mouseenter="slice.selected=true" ng-mouseleave="slice.selected=false">
+                                            <div class="{{{true:'sgw-groupedTableRowIcon', false :'sgw-groupedTableRowSquareIcon'}[showDonutChart]}}" ng-style="{'background-color':slice.color}"></div>
+                                            <div class="sgw-groupedTableCellFluid">{{slice.tooltip}}</div>
+                                            <div class="textRight" style="width: 20%;" ng-bind-html-unsafe="slice.percentage| sgwPercentage"></div>
+                                            <div class="textRight" style="width: 20%;" ng-bind-html-unsafe="slice.value | sgwCurrency"></div>
+                                        </div>
+                                    </div>
+                                </ng-switch>
+                            </div>
+                        </div>
+						<div style="display: inline-block; position: relative; vertical-align: top;">
+                        	<donut-chart refresh-on="showDonutChart" ng-show="showDonutChart" ng-model="donutdata" style="width: 300px; height: 300px; margin-left: 100px; top: 10px; position: relative;"></donut-chart>
+							<donut-chart type="bars" ng-model="donutdata" refresh-on="showDonutChart+refreshDonutChart" style="width: 300px; height: 200px; margin-top: 60px; margin-left: 100px; position: relative;" ng-show="!showDonutChart"></donut-chart>
+						</div>
+						<div style="position: relative; display: inline-block; vertical-align: top; margin-left: 50px;">
+							<button class="btn btnImageToggleLeft" ng-disabled="showDonutChart" ng-click="showDonutChart=true">
+								<div style="position:relative; top: -14px; left: -14px;">
+									<div style="position: absolute; top: 5px; left: 15px; height: 18px; width: 18px; border-radius: 18px; background-color: rgb(119, 147, 60);"></div>
+									<div style="position: absolute; top: 5px; left: 15px; height: 9px; width: 9px; border-radius: 0; border-top-left-radius: 18px; background-color: rgb(55, 96, 146);"></div>
+								</div>
+							</button>
+							<button class="btn btnImageToggleRight" ng-disabled="!showDonutChart" ng-click="showDonutChart=false">
+								<div style="position:relative; top: -14px; left: -14px;">
+									<div style="position: absolute; top: 9px; left: 10px; height: 5px; width: 12px; background-color: rgb(55, 96, 146);"></div>
+									<div style="position: absolute; top: 15px; left: 10px; height: 5px; width: 28px; background-color: rgb(119, 147, 60);"></div>
+								</div>
+							</button>
+						</div>
+						
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div uib-control="editabletable" class="sgwPnl" id="Div1">
+            <div>
+                <div class="sgwPnlHeader" uib-attr ng-bind-template="Additional Contributions"></div>
+                <div class="sgwPnlBody">
+                    <table editable-grid="" uib-attr dataurl="rest/template/retirementContributions" on-row-select="" metadata="{&quot;dataModel&quot;:&quot;rest_template_retirementContributions&quot;,&quot;columns&quot;:[{&quot;field&quot;:&quot;contribution&quot;,&quot;label&quot;:&quot;Contribution&quot;,&quot;datatype&quot;:&quot;string&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;neededContributions&quot;,&quot;label&quot;:&quot;Needed Contributions&quot;,&quot;datatype&quot;:&quot;currency&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;afterTaxComparison&quot;,&quot;label&quot;:&quot;After Tax Comparison&quot;,&quot;datatype&quot;:&quot;currency&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true},{&quot;field&quot;:&quot;proposeContributionAmount&quot;,&quot;label&quot;:&quot;Propose Contribution Amount&quot;,&quot;datatype&quot;:&quot;currency&quot;,&quot;visible&quot;:true,&quot;editable&quot;:true}]}"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
