@@ -2,16 +2,16 @@ var fs = require('fs');
 var LINES_PER_CASE = 3;
 
 var processCase = function (acase) {
-    debugger;
 
-    acase.input[1].sort();
-    acase.input[2].sort().reverse();
+    acase.input[1].sort(function (a, b) { return b - a });
+    acase.input[2].sort(function (a, b) { return a - b });
     var nElements = acase.input[0];
     var multiplication = 0;
     for (var i = 0; i < nElements ; i++) {
         multiplication += acase.input[1][i] * acase.input[2][i];
     }
     acase.output = multiplication;
+    debugger;
 }
 
 var cases = [];
