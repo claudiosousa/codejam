@@ -24,8 +24,7 @@
   ],   
   "permissions": [
     "activeTab",
-	"https://code.google.com/codejam/contest/*",
-	"tabs"
+	"storage"
   ],
   "background": {
     "scripts": ["background/background.js"],

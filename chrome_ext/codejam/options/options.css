@@ -1,0 +1,33 @@
+﻿
+.columnArea {
+    width: 100%;
+    height: calc(100% - 50px);
+    position: relative;
+}
+
+.column {
+    position: relative;
+    width: 32%;
+    display: inline-block;
+    height: 100%;
+    margin-left: 1%;
+}
+
+    .column:first-of-type {
+        margin-left: 0%;
+    }
+
+textarea {
+    width: 100%;
+    height: calc(100% - 55px );
+    resize: none;
+    tab-size:4;
+}
+
+button {
+    display: block;
+    margin-left: auto;
+    position: relative;
+    right: 20px;
+    margin-top: 20px;
+}
