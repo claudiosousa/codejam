@@ -1,0 +1,8 @@
+﻿.codejam-container {
+    height: 100px;
+    width: 100px;
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    background-color: red;
+}
