@@ -18,7 +18,7 @@
 		"resources/jquery.js",
 		"resources/textareaTabKey.js",
 		"resources/tabs.js",
-		"content/codeVersionner.js",
+		"codeVersionner.js",
 		"content/messageListenner.js",
 		"content/extensionState.js",
 		"content/codeWindow/codeWindow.js",
@@ -39,7 +39,9 @@
   }, 
   "web_accessible_resources": [
 	"content/codeWindow/codeWindow.css",
-	"content/codeWindow/codeWindow.html"
+	"content/codeWindow/codeWindow.html",
+	"resources/SaveButton.png",
+	"resources/small-reset_button.jpg"
   ],
   "manifest_version": 2
 }

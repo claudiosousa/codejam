@@ -42,7 +42,28 @@
         flex-grow: 1;
         flex-direction: column;
         display: flex;
+        position: relative;
     }
+
+        .codejam-window .codejam-container .reset,
+        .codejam-window .codejam-container .save {
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            top: 10px;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .codejam-window .codejam-container .reset {
+            right: 40px;
+            background-image: url('chrome-extension://__MSG_@@extension_id__/resources/small-reset_button.jpg');
+        }
+
+        .codejam-window .codejam-container .save {
+            RIGHT: 10PX;
+            background-image: url('chrome-extension://__MSG_@@extension_id__/resources/SaveButton.png');
+        }
 
     .codejam-window .codejam-code-panel {
         flex-grow: 1;
