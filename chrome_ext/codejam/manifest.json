@@ -16,6 +16,7 @@
 		"content/messageListenner.js",
 		"content/extensionState.js",
 		"content/pageManagement.js",
+		"content/problemSolver.js",
 		"content/content.js"
 	  ],
 	  "run_at": "document_idle"
