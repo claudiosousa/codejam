@@ -10,15 +10,14 @@ setPageActionState('off');
 pageActionClicked = function () {
     switch (pageActionState) {
         case "off":
-            addAddons();
+            pageManipulator.addAddons();
             setPageActionState('on');
             break;
         case "on":
-            removeAddons();
+            pageManipulator.removeAddons();
             setPageActionState('off');
             break;
         default:
-
     }
 
 }

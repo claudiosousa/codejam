@@ -1,5 +1,4 @@
 var fs = require('fs');
-var LINES_PER_CASE = 3;
 
 var processCase = function (acase) {
 
@@ -15,22 +14,24 @@ var processCase = function (acase) {
 }
 
 var cases = [];
-var parseCases = function () {
-    var inputFile = process.argv[2];
-    var inputStr = fs.readFileSync(inputFile, { encoding: 'utf8' });
 
-    var lines = inputStr.split('\n');
-    var nbCases = Number(lines[0]);
-    for (var i = 0; i < nbCases; i++) {
-        var caseLine = i * LINES_PER_CASE + 1;
-        var newcase = {
-            input: []
-        }
-        for (var iLine = 0; iLine < LINES_PER_CASE; iLine++) {
-            newcase.input.push(lines[caseLine + iLine].split(' ').map(function (nb) { return Number(nb) }));
-        }
-        cases.push(newcase);
+var lines = inputStr.split('\n');
+var nbCases = Number(lines[0]);
+var linesPerCase = (lines.length - 1) / nbCases;
+for (var i = 0; i < nbCases; i++) {
+    var caseLine = i * linesPerCase + 1;
+    var newcase = {
+        input: []
     }
+    for (var iLine = 0; iLine < linesPerCase; iLine++) {
+        var lineStr = lines[caseLine + iLine];
+        var lineValues = lineStr.split(' ');
+        lineValues = lineValues.map(function (nb) { 
+            return Number(nb);
+        });
+        newcase.input.push(lineValues);
+    }
+    cases.push(newcase);
 }
 
 var printCasesOutput = function () {

@@ -1,4 +1,4 @@
-﻿(function () {
+﻿handleTabKey = function (textAreas) {
     var handleKeyDown = function (e) {
         if (e.keyCode === 9) { // tab was pressed
             // get caret position/selection
@@ -21,8 +21,7 @@
         }
     };
 
-    textAreas = document.querySelectorAll("textarea");
     for (var i = 0; i < textAreas.length; i++) {
         textAreas[i].addEventListener('keydown', handleKeyDown, false);
     }
-})()
+}

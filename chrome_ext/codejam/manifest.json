@@ -10,12 +10,19 @@
   "content_scripts": [
     {
 	  "matches": ["https://code.google.com/codejam/*"],	  
-	  "css": ["content/content.css"],
+	  "css": [
+		"content/content.css",
+		"content/codeWindow/codeWindow.css"
+	   ],
       "js": [
 		"resources/jquery.js",
+		"resources/textareaTabKey.js",
+		"resources/tabs.js",
+		"content/codeVersionner.js",
 		"content/messageListenner.js",
 		"content/extensionState.js",
-		"content/pageManagement.js",
+		"content/codeWindow/codeWindow.js",
+		"content/pageManipulator.js",
 		"content/problemSolver.js",
 		"content/content.js"
 	  ],
@@ -30,5 +37,9 @@
     "scripts": ["background/background.js"],
 	"persistent": false
   }, 
+  "web_accessible_resources": [
+	"content/codeWindow/codeWindow.css",
+	"content/codeWindow/codeWindow.html"
+  ],
   "manifest_version": 2
 }
