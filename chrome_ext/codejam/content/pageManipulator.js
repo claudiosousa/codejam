@@ -11,7 +11,7 @@
         var outputCode = $(codes[1]);
         var solvedCode = $(codes[2]);
         solvedCode.css("background-color", outputCode.text().trim() == sampleResult ? 'lightgreen' : 'lightpink');
-        solvedCode.html(sampleResult.replace('\n', '<br>'))
+        solvedCode.html(sampleResult.replace(/\n/g, '<br>'))
     }
 
 
