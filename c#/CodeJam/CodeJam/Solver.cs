@@ -10,7 +10,22 @@ namespace CodeJam
     {
         static void processCase(Case cas)
         {
-            string res = Math.Truncate(Math.Pow(3 + Math.Sqrt(5), cas.input[0][0]) % 1000)+"";
+            int milkshakesNb = (int)cas.input[0][0];
+            int personsNb = (int)cas.input[1][0];
+            dynamic[] persons = new dynamic[personsNb];
+            for (int i = 0; i < personsNb; i++)
+            {
+                var personLine = cas.input[1 + i];
+                int personShakesNb = (int)personLine[0];
+                List<int> personRegularShakes = new List<int>();
+                int? maltedIndex;
+                for (int ips = 0; ips < personShakesNb; ips++)
+                {
+                    int shakeIndex = (int)personLine[1 + ips * 2];
+                    bool malted = personLine[1 + ips * 2 + 1] == 1;
+                }
+            }
+            string res = Math.Truncate(Math.Pow(3 + Math.Sqrt(5), cas.input[0][0]) % 1000) + "";
             while (res.Length < 3)
                 res = "0" + res;
             cas.output = res;
