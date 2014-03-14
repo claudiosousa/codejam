@@ -2,11 +2,11 @@
     var codeVersionner = {};
 
     var getData = function (storage, key, callback) {
-        chrome.storage.sync.get([key], function (values) {
+        storage.get([key], function (values) {
             if (chrome.runtime.lastError) {
                 alert('Impossible to load defaults: ' + chrome.runtime.lastError)
             } else {
-                callback(values);
+                callback(values[key]);
             }
         });
     }
@@ -41,6 +41,8 @@
         getData(chrome.storage.local, location.href, function (values) {
             if (!values)
                 codeVersionner.loadDefaults(callback);
+            else 
+                callback(values)
         });
     }
 
