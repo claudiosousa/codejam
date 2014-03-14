@@ -17,5 +17,10 @@ namespace CodeJam
             InitializeComponent();
         }
 
+        private void btnSolve_Click(object sender, EventArgs e)
+        {
+            tbOutput.Text = Solver.Solve(tbInput.Text);
+        }
+
     }
 }

@@ -28,32 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tbInput = new System.Windows.Forms.TextBox();
+            this.tbOutput = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbInput = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnSolve = new System.Windows.Forms.Button();
-            this.btnLoadLastDownloadedFile = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnLoadFile = new System.Windows.Forms.Button();
+            this.btSaveFile = new System.Windows.Forms.Button();
+            this.btnSolve = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tbInput
+            // tbOutput
             // 
-            this.tbInput.AcceptsReturn = true;
-            this.tbInput.AcceptsTab = true;
-            this.tbInput.AllowDrop = true;
-            this.tbInput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbInput.Location = new System.Drawing.Point(623, 33);
-            this.tbInput.MaxLength = 999999999;
-            this.tbInput.Multiline = true;
-            this.tbInput.Name = "tbInput";
-            this.tbInput.Size = new System.Drawing.Size(464, 583);
-            this.tbInput.TabIndex = 0;
+            this.tbOutput.AcceptsReturn = true;
+            this.tbOutput.AcceptsTab = true;
+            this.tbOutput.AllowDrop = true;
+            this.tbOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbOutput.Location = new System.Drawing.Point(623, 33);
+            this.tbOutput.MaxLength = 999999999;
+            this.tbOutput.Multiline = true;
+            this.tbOutput.Name = "tbOutput";
+            this.tbOutput.Size = new System.Drawing.Size(464, 583);
+            this.tbOutput.TabIndex = 0;
             // 
             // label1
             // 
@@ -81,11 +81,11 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.textBox2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tbInput, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tbInput, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tbOutput, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button3, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btSaveFile, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.btnSolve, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -97,18 +97,18 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1090, 661);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
-            // textBox2
+            // tbInput
             // 
-            this.textBox2.AcceptsReturn = true;
-            this.textBox2.AcceptsTab = true;
-            this.textBox2.AllowDrop = true;
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Location = new System.Drawing.Point(3, 33);
-            this.textBox2.MaxLength = 999999999;
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(464, 583);
-            this.textBox2.TabIndex = 4;
+            this.tbInput.AcceptsReturn = true;
+            this.tbInput.AcceptsTab = true;
+            this.tbInput.AllowDrop = true;
+            this.tbInput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbInput.Location = new System.Drawing.Point(3, 33);
+            this.tbInput.MaxLength = 999999999;
+            this.tbInput.Multiline = true;
+            this.tbInput.Name = "tbInput";
+            this.tbInput.Size = new System.Drawing.Size(464, 583);
+            this.tbInput.TabIndex = 4;
             // 
             // label2
             // 
@@ -120,35 +120,13 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Input:";
             // 
-            // btnSolve
-            // 
-            this.btnSolve.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnSolve.Location = new System.Drawing.Point(498, 60);
-            this.btnSolve.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
-            this.btnSolve.Name = "btnSolve";
-            this.btnSolve.Size = new System.Drawing.Size(94, 42);
-            this.btnSolve.TabIndex = 0;
-            this.btnSolve.Text = "Solve";
-            this.btnSolve.UseVisualStyleBackColor = true;
-            // 
-            // btnLoadLastDownloadedFile
-            // 
-            this.btnLoadLastDownloadedFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoadLastDownloadedFile.Location = new System.Drawing.Point(374, 4);
-            this.btnLoadLastDownloadedFile.Margin = new System.Windows.Forms.Padding(0);
-            this.btnLoadLastDownloadedFile.Name = "btnLoadLastDownloadedFile";
-            this.btnLoadLastDownloadedFile.Size = new System.Drawing.Size(96, 26);
-            this.btnLoadLastDownloadedFile.TabIndex = 1;
-            this.btnLoadLastDownloadedFile.Text = "Load from file";
-            this.btnLoadLastDownloadedFile.UseVisualStyleBackColor = true;
-            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.btnLoadLastDownloadedFile, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.btnLoadFile, 1, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
@@ -159,16 +137,39 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(470, 30);
             this.tableLayoutPanel3.TabIndex = 6;
             // 
-            // button3
+            // btnLoadFile
             // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button3.Location = new System.Drawing.Point(807, 627);
-            this.button3.Margin = new System.Windows.Forms.Padding(0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(96, 26);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Save to file";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnLoadFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoadFile.Location = new System.Drawing.Point(374, 4);
+            this.btnLoadFile.Margin = new System.Windows.Forms.Padding(0);
+            this.btnLoadFile.Name = "btnLoadFile";
+            this.btnLoadFile.Size = new System.Drawing.Size(96, 26);
+            this.btnLoadFile.TabIndex = 1;
+            this.btnLoadFile.Text = "Load from file";
+            this.btnLoadFile.UseVisualStyleBackColor = true;
+            // 
+            // btSaveFile
+            // 
+            this.btSaveFile.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btSaveFile.Location = new System.Drawing.Point(807, 627);
+            this.btSaveFile.Margin = new System.Windows.Forms.Padding(0);
+            this.btSaveFile.Name = "btSaveFile";
+            this.btSaveFile.Size = new System.Drawing.Size(96, 26);
+            this.btSaveFile.TabIndex = 7;
+            this.btSaveFile.Text = "Save to file";
+            this.btSaveFile.UseVisualStyleBackColor = true;
+            // 
+            // btnSolve
+            // 
+            this.btnSolve.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnSolve.Location = new System.Drawing.Point(498, 60);
+            this.btnSolve.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
+            this.btnSolve.Name = "btnSolve";
+            this.btnSolve.Size = new System.Drawing.Size(94, 42);
+            this.btnSolve.TabIndex = 0;
+            this.btnSolve.Text = "Solve";
+            this.btnSolve.UseVisualStyleBackColor = true;
+            this.btnSolve.Click += new System.EventHandler(this.btnSolve_Click);
             // 
             // frmCodeJam
             // 
@@ -189,16 +190,16 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox tbInput;
+        private System.Windows.Forms.TextBox tbOutput;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbInput;
         private System.Windows.Forms.Button btnSolve;
-        private System.Windows.Forms.Button btnLoadLastDownloadedFile;
+        private System.Windows.Forms.Button btnLoadFile;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btSaveFile;
     }
 }
 
