@@ -8,10 +8,10 @@ namespace CodeJam
 {
     class Case
     {
-        public int[][] input;
+        public long[][] input;
         public string output;
 
-        public int[] extraInts;
+        public long[] extraInts;
         public string[] extraStrs;
     }
 }

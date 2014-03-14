@@ -16,7 +16,7 @@ namespace CodeJam
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmCodeJam());
+            Application.Run(new frmCodeJam());            
         }
     }
 }

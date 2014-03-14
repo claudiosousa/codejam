@@ -54,6 +54,7 @@
             this.tbOutput.Name = "tbOutput";
             this.tbOutput.Size = new System.Drawing.Size(464, 583);
             this.tbOutput.TabIndex = 0;
+            this.tbOutput.WordWrap = false;
             // 
             // label1
             // 
@@ -109,6 +110,7 @@
             this.tbInput.Name = "tbInput";
             this.tbInput.Size = new System.Drawing.Size(464, 583);
             this.tbInput.TabIndex = 4;
+            this.tbInput.WordWrap = false;
             // 
             // label2
             // 
@@ -147,6 +149,7 @@
             this.btnLoadFile.TabIndex = 1;
             this.btnLoadFile.Text = "Load from file";
             this.btnLoadFile.UseVisualStyleBackColor = true;
+            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
             // 
             // btSaveFile
             // 
@@ -158,6 +161,7 @@
             this.btSaveFile.TabIndex = 7;
             this.btSaveFile.Text = "Save to file";
             this.btSaveFile.UseVisualStyleBackColor = true;
+            this.btSaveFile.Click += new System.EventHandler(this.btSaveFile_Click);
             // 
             // btnSolve
             // 
@@ -180,6 +184,7 @@
             this.Controls.Add(this.button1);
             this.Name = "frmCodeJam";
             this.Text = "Code Jam";
+            this.Shown += new System.EventHandler(this.frmCodeJam_Shown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
