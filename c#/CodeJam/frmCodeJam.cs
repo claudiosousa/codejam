@@ -26,7 +26,7 @@ namespace CodeJam
 
         void frmCodeJam_FormClosing(object sender, FormClosingEventArgs e)
         {
-            File.WriteAllText(currentinputFile, tbInput.Text);
+            saveTemporarayFile();           
         }
 
         private void btnSolve_Click(object sender, EventArgs e)
@@ -55,6 +55,15 @@ namespace CodeJam
         {
             var outPath = Path.Combine(pathDownload, "output.out");
             File.WriteAllText(outPath, tbOutput.Text);
+        }
+
+        void saveTemporarayFile()
+        {
+            File.WriteAllText(currentinputFile, tbInput.Text);
+        }
+        private void tbInput_Leave(object sender, EventArgs e)
+        {
+            saveTemporarayFile();
         }
 
     }

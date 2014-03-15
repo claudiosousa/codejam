@@ -17,14 +17,14 @@ namespace CodeJam
             int milkshakesNb = (int)cas.input[0][0];
             int personsNb = (int)cas.input[1][0];
             ExpandoObject[] persons = new ExpandoObject[personsNb];
-            long shakes = (long)Math.Pow(2, milkshakesNb) - 1;
+            bool[] shakes = new bool[milkshakesNb];
             for (int i = 0; i < personsNb; i++)
             {
                 var personLine = cas.input[2 + i];
                 int personShakesNb = (int)personLine[0];
                 dynamic person = new ExpandoObject();
                 person.malted = null;
-                person.regularShakes = (long)0;
+                person.regularShakes = new List<int>();
                 for (int ips = 0; ips < personShakesNb; ips++)
                 {
                     int shakeIndex = (int)personLine[1 + ips * 2];
@@ -32,7 +32,7 @@ namespace CodeJam
                     if (malted)
                         person.malted = shakeIndex;
                     else
-                        person.regularShakes |= (long)Math.Pow(2, shakeIndex - 1);
+                        person.regularShakes.Add(shakeIndex);
                 }
 
                 persons[i] = person;
@@ -46,14 +46,14 @@ namespace CodeJam
                 for (int i = 0; i < personsNb; i++)
                 {
                     dynamic person = persons[i];
-                    if ((person.regularShakes & shakes) == 0)
+                    var hasOneCommonRegularShake = ((List<int>)person.regularShakes).Any((rsi) => !shakes[rsi - 1]);
+                    if (!hasOneCommonRegularShake)
                     {
                         if (person.malted != null)
                         {
-                            long maltValueBaSe10 = (long)Math.Pow(2, person.malted - 1);
-                            if ((shakes & maltValueBaSe10) != 0)
+                            if (!shakes[person.malted - 1])
                             {
-                                shakes -= maltValueBaSe10;
+                                shakes[person.malted - 1] = true;
                                 changedShakes = true;
                             }
                         }
@@ -66,16 +66,12 @@ namespace CodeJam
                 cas.output = "IMPOSSIBLE";
             else
             {
-
-                char[] charArray = Convert.ToString((long)Math.Pow(2, milkshakesNb) - 1 - shakes, 2).PadLeft(milkshakesNb, '0').ToCharArray();
-                char[] newcharArray = new char[charArray.Length * 2 - 1];
-                for (int i = charArray.Length - 1, i0 = 0; i >= 0; i--, i0++)
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < shakes.Length; i++)
                 {
-                    newcharArray[i0 * 2] = charArray[i];
-                    if (i != 0)
-                        newcharArray[i0 * 2 + 1] = ' ';
+                    sb.Append(!shakes[i] ? "0 " : "1 ");
                 }
-                cas.output = new string(newcharArray);// Convert.ToString((int)Math.Pow(2, milkshakesNb) - 1 - shakes, 2).PadLeft(milkshakesNb, '0');
+                cas.output = sb.ToString().TrimEnd();
             }
         }
 
