@@ -48,7 +48,7 @@ namespace CodeJam
             int res = getMatches(0, 0);
             cas.output = (res % 10000 + "").PadLeft(4, '0');
 
-            Solver.printMatches();
+           // Solver.printMatches();
         }
 
         public static void printMatches()

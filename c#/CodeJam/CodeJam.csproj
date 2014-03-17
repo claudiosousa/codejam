@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>C.C</StartupObject>
+    <StartupObject>CodeJam.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
