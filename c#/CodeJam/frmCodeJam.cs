@@ -13,9 +13,9 @@ namespace CodeJam
 {
     public partial class frmCodeJam : Form
     {
-       static string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-       static string pathDownload = Path.Combine(pathUser, "Downloads");
-       static string currentinputFile = "currentinput.txt";
+        static string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        static string pathDownload = Path.Combine(pathUser, "Downloads");
+        static string currentinputFile = "currentinput.txt";
 
         public frmCodeJam()
         {
@@ -26,7 +26,7 @@ namespace CodeJam
 
         void frmCodeJam_FormClosing(object sender, FormClosingEventArgs e)
         {
-            saveTemporarayFile();           
+            saveTemporarayFile();
         }
 
         private void btnSolve_Click(object sender, EventArgs e)
@@ -55,18 +55,22 @@ namespace CodeJam
         {
             var outPath = Path.Combine(pathDownload, "output.out");
             File.WriteAllText(outPath, tbOutput.Text);
+
+            string codeoutPath = Path.Combine(pathDownload, "Solver.cs");
+            string codeInPath = Path.Combine(Environment.CurrentDirectory, @"..\..\Solver.cs");
+            File.Copy(codeInPath, codeoutPath, true);
         }
 
         void saveTemporarayFile()
         {
             File.WriteAllText(currentinputFile, tbInput.Text);
         }
-      
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             saveTemporarayFile();
         }
 
-    
+
     }
 }
