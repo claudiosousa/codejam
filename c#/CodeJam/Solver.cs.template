@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace CodeJam
 {
-
+welcome to code jam
+wweellccoommee to code qps jam
     class Solver
     {
         static void processCase(Case cas)

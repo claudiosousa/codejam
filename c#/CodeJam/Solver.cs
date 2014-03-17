@@ -15,45 +15,96 @@ namespace CodeJam
 
         static void processCase(Case cas)
         {
-            int matches = 0;
             char[] inputChars = cas.input.ToArray();
-            int[] foundCharsindexes = new int[charsToFind.Length];
-            bool found = false;
+            List<int>[] foundCharsindexes = new List<int>[charsToFind.Length];
             for (int i = 0; i < charsToFind.Length; i++)
             {
                 char toFind = charsToFind[i];
-                found = false;
-                for (int i2 = 0; i2 < inputChars.Length; i2++)
+                List<int> foundCharPos = new List<int>();
+                int start = i > 0 ? foundCharsindexes[i - 1][0] + 1 : i;
+                int end = inputChars.Length - charsToFind.Length + i + 1;
+                for (int i2 = start; i2 < end; i2++)
                 {
                     if (inputChars[i2] == toFind)
                     {
-                        found = true;
-                        foundCharsindexes[i] = i2;
-                        break; ;
+                        foundCharPos.Add(i2);
                     }
                 }
-                if (!found)
-                    break;
+                if (foundCharPos.Count == 0)
+                {
+                    cas.output = "0000";
+                    return;
+                }
+
+                foundCharsindexes[i] = foundCharPos;
+            }
+            int matches = 1;
+            int[] charPosIndex = new int[charsToFind.Length];
+            for (int i = 0; i < charsToFind.Length; i++)
+            {
+                charPosIndex[i] = 0;
             }
 
-            if (found)
+
+            var found1match = false;
+            do
             {
-                matches = 1;
+                found1match = false;
                 for (int i = charsToFind.Length - 1; i >= 0; i--)
                 {
-                    var charToFind = charsToFind[i];
-                    var charFirstFoundAt = foundCharsindexes[i];
-                    for (int i2 = charFirstFoundAt + 1; i2 < inputChars.Length; i2++)
+                    int iCurrentPosIndex = charPosIndex[i];
+                    List<int> charPositions = foundCharsindexes[i];
+                    while (iCurrentPosIndex < charPositions.Count - 1)
                     {
-                        if (inputChars[i2] == charToFind)
+                        bool i2charposfound = true;
+                        iCurrentPosIndex += 1;
+                        charPosIndex[i] = iCurrentPosIndex;
+                        var nextPos = charPositions[iCurrentPosIndex];
+                        var currentCharPos = nextPos;
+                        for (int i2 = i + 1; i2 < charsToFind.Length; i2++)
                         {
-
-                            matches++;
+                            i2charposfound = false;
+                            List<int> char2Positions = foundCharsindexes[i2];
+                            for (int i3 = 0; i3 < char2Positions.Count; i3++)
+                            {
+                                int charPos = char2Positions[i3];
+                                if (charPos > currentCharPos)
+                                {
+                                    charPosIndex[i2] = i3;
+                                    currentCharPos = charPos;
+                                    i2charposfound = true;
+                                    break;
+                                }
+                            }
+                            if (!i2charposfound)
+                                break;
                         }
+                        if (i2charposfound)
+                        {
+                            found1match = true;
+                        }
+                        break;
+
                     }
+                    if (found1match)
+                        break;
                 }
-            }
-            cas.output = (matches % 10000 + "").PadLeft(3, '0');
+                if (found1match)
+                {
+                    /*
+                    var currentMatch = cas.input.ToArray();
+                    for (int i = 0; i < charPosIndex.Length; i++)
+                    {
+                        int pos = foundCharsindexes[i][charPosIndex[i]];
+                        currentMatch[pos] = '_';
+                    }
+                    Console.WriteLine(new string(currentMatch));
+                     */
+                    matches++;
+                }
+            } while (found1match);
+
+            cas.output = (matches % 10000 + "").PadLeft(4, '0');
         }
 
         public static string Solve(string input)
@@ -61,6 +112,7 @@ namespace CodeJam
             Case[] cases = Case.parseinput(input);
             for (int i = 0; i < cases.Length; i++)
             {
+                Console.WriteLine("Case: " + i);
                 processCase(cases[i]);
             }
             return writeOutput(cases);
