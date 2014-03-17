@@ -55,7 +55,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Solver.cs.template" />
     <Compile Include="Solver.cs" />
-    <Compile Include="Tools.cs" />
     <EmbeddedResource Include="frmCodeJam.resx">
       <DependentUpon>frmCodeJam.cs</DependentUpon>
     </EmbeddedResource>

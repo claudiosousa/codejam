@@ -5,7 +5,7 @@
 
     public static Case[] parseinput(string input)
     {
-        string[] lines = input.Trim().Split('\n');
+        string[] lines = input.Trim().Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
 
         int nbCases = Convert.ToInt32(lines[0]);
         int linesPerCase = (lines.Length - 1) / nbCases;

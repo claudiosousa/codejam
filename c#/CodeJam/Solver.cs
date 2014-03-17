@@ -11,9 +11,49 @@ namespace CodeJam
 
     class Solver
     {
+        static char[] charsToFind = "welcome to code jam".ToArray();
+
         static void processCase(Case cas)
         {
-            cas.output = "";
+            int matches = 0;
+            char[] inputChars = cas.input.ToArray();
+            int[] foundCharsindexes = new int[charsToFind.Length];
+            bool found = false;
+            for (int i = 0; i < charsToFind.Length; i++)
+            {
+                char toFind = charsToFind[i];
+                found = false;
+                for (int i2 = 0; i2 < inputChars.Length; i2++)
+                {
+                    if (inputChars[i2] == toFind)
+                    {
+                        found = true;
+                        foundCharsindexes[i] = i2;
+                        break; ;
+                    }
+                }
+                if (!found)
+                    break;
+            }
+
+            if (found)
+            {
+                matches = 1;
+                for (int i = charsToFind.Length - 1; i >= 0; i--)
+                {
+                    var charToFind = charsToFind[i];
+                    var charFirstFoundAt = foundCharsindexes[i];
+                    for (int i2 = charFirstFoundAt + 1; i2 < inputChars.Length; i2++)
+                    {
+                        if (inputChars[i2] == charToFind)
+                        {
+
+                            matches++;
+                        }
+                    }
+                }
+            }
+            cas.output = (matches % 10000 + "").PadLeft(3, '0');
         }
 
         public static string Solve(string input)
@@ -39,12 +79,12 @@ namespace CodeJam
 
         class Case
         {
-            public int[][] input;
+            public string input;
             public string output;
 
             public static Case[] parseinput(string input)
             {
-                string[] lines = input.Trim().Split('\n');
+                string[] lines = input.Trim().Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
 
                 long nbCases = Convert.ToInt64(lines[0]);
                 long linesPerCase = (lines.Length - 1) / nbCases;
@@ -54,13 +94,7 @@ namespace CodeJam
                 for (int i = 0; i < nbCases; i++)
                 {
                     var caseLine = i * linesPerCase + 1;
-                    Case newcase = new Case { input = new int[linesPerCase][] };
-
-                    for (var iLine = 0; iLine < linesPerCase; iLine++)
-                    {
-                        string[] lineParts = lines[caseLine + iLine].Split(' ');
-                        newcase.input[iLine] = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
-                    }
+                    Case newcase = new Case { input = lines[caseLine] };
                     cases[i] = newcase;
                 }
                 return cases;
