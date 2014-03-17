@@ -61,10 +61,12 @@ namespace CodeJam
         {
             File.WriteAllText(currentinputFile, tbInput.Text);
         }
-        private void tbInput_Leave(object sender, EventArgs e)
+      
+        private void btnSave_Click(object sender, EventArgs e)
         {
             saveTemporarayFile();
         }
 
+    
     }
 }
