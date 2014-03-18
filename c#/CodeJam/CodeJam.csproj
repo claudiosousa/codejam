@@ -69,6 +69,8 @@
     <None Include="solved\2010.RopeIntranet.cs_" />
     <None Include="solved\2010.LoadTesting.Log.cs_" />
     <None Include="solved\2010.LoadTesting.Loop.cs_" />
+    <None Include="solved\draft.2010.checkers.cs_" />
+    <None Include="solved\2010.FileFixIt.cs_" />
     <Compile Include="Solver.cs" />
     <EmbeddedResource Include="frmCodeJam.resx">
       <DependentUpon>frmCodeJam.cs</DependentUpon>
