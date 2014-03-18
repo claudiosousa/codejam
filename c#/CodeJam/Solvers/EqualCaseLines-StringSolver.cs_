@@ -11,16 +11,20 @@ namespace CodeJam
 
     class Solver
     {
+
         static void processCase(Case cas)
         {
+
             cas.output = "";
         }
+
 
         public static string Solve(string input)
         {
             Case[] cases = Case.parseinput(input);
             for (int i = 0; i < cases.Length; i++)
             {
+                Console.WriteLine("Case: " + i);
                 processCase(cases[i]);
             }
             return writeOutput(cases);
@@ -39,12 +43,12 @@ namespace CodeJam
 
         class Case
         {
-            public int[][] input;
+            public string[][] input;
             public string output;
 
             public static Case[] parseinput(string input)
             {
-                string[] lines = input.Trim().Split('\n');
+                string[] lines = input.Trim().Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
 
                 int nbCases = Convert.ToInt32(lines[0]);
                 int linesPerCase = (lines.Length - 1) / nbCases;
@@ -54,12 +58,11 @@ namespace CodeJam
                 for (int i = 0; i < nbCases; i++)
                 {
                     var caseLine = i * linesPerCase + 1;
-                    Case newcase = new Case { input = new int[linesPerCase][] };
+                    Case newcase = new Case { input = new string[linesPerCase][] };
 
                     for (var iLine = 0; iLine < linesPerCase; iLine++)
                     {
-                        string[] lineParts = lines[caseLine + iLine].Split(' ');
-                        newcase.input[iLine] = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
+                        newcase.input[iLine] = lines[caseLine + iLine].Split(' ');
                     }
                     cases[i] = newcase;
                 }
@@ -69,4 +72,5 @@ namespace CodeJam
     }
 
 }
+
 

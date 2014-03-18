@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="C.cs" />
     <Compile Include="frmCodeJam.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,7 +56,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="Solver.cs.template" />
+    <None Include="Solvers\1LineCase-Solver.cs_" />
+    <None Include="Solvers\EqualCaseLines-StringSolver.cs_" />
+    <None Include="solved\2008.floatingCommaPrecision.cs_" />
+    <None Include="solved\2008.milkshakes.cs_" />
+    <None Include="solved\2008.minScalar.cs_" />
+    <None Include="solved\2009.AlienLanguage.cs_" />
+    <None Include="solved\2009.Watersheds.cs_" />
+    <None Include="solved\2009.welcomeToCodeJam.cs_" />
     <Compile Include="Solver.cs" />
     <EmbeddedResource Include="frmCodeJam.resx">
       <DependentUpon>frmCodeJam.cs</DependentUpon>
@@ -80,14 +86,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Solvers\EqualCaseLines-IntSolver.cs_" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Cases\" />
-    <Folder Include="solved\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
