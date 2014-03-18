@@ -33,12 +33,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tbInput = new System.Windows.Forms.TextBox();
-            this.btnSave = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.btnLoadFile = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.btSaveFile = new System.Windows.Forms.Button();
             this.btnSolve = new System.Windows.Forms.Button();
+            this.btClearInput = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
@@ -116,18 +117,6 @@
             this.tbInput.TabIndex = 4;
             this.tbInput.WordWrap = false;
             // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(368, 4);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(0);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(69, 26);
-            this.btnSave.TabIndex = 2;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -140,13 +129,15 @@
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 3;
+            this.tableLayoutPanel3.ColumnCount = 4;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.btClearInput, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.btnLoadFile, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.btnSave, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.btnLoadFile, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.btnSave, 3, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
@@ -167,6 +158,18 @@
             this.btnLoadFile.Text = "Load from file";
             this.btnLoadFile.UseVisualStyleBackColor = true;
             this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Location = new System.Drawing.Point(368, 4);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(0);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(69, 26);
+            this.btnSave.TabIndex = 2;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btSaveFile
             // 
@@ -191,6 +194,18 @@
             this.btnSolve.Text = "Solve";
             this.btnSolve.UseVisualStyleBackColor = true;
             this.btnSolve.Click += new System.EventHandler(this.btnSolve_Click);
+            // 
+            // btClearInput
+            // 
+            this.btClearInput.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btClearInput.Location = new System.Drawing.Point(152, 2);
+            this.btClearInput.Margin = new System.Windows.Forms.Padding(0);
+            this.btClearInput.Name = "btClearInput";
+            this.btClearInput.Size = new System.Drawing.Size(69, 26);
+            this.btClearInput.TabIndex = 8;
+            this.btClearInput.Text = "Clear";
+            this.btClearInput.UseVisualStyleBackColor = true;
+            this.btClearInput.Click += new System.EventHandler(this.btClearInput_Click);
             // 
             // frmCodeJam
             // 
@@ -223,6 +238,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button btSaveFile;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btClearInput;
     }
 }
 

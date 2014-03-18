@@ -71,6 +71,11 @@ namespace CodeJam
             saveTemporarayFile();
         }
 
+        private void btClearInput_Click(object sender, EventArgs e)
+        {
+            tbInput.Text = "";
+        }
+
 
     }
 }
