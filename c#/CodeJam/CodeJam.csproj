@@ -56,7 +56,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="Solvers\1LineCase-Solver.cs_" />
+    <None Include="Solvers\1LineCase-IntSolver.cs_" />
+    <None Include="Solvers\1stLineTellsCaseLines-IntSolver.cs_" />
+    <None Include="Solvers\1LineCase-StringSolver.cs_" />
     <None Include="Solvers\EqualCaseLines-StringSolver.cs_" />
     <None Include="solved\2008.floatingCommaPrecision.cs_" />
     <None Include="solved\2008.milkshakes.cs_" />
@@ -64,6 +66,9 @@
     <None Include="solved\2009.AlienLanguage.cs_" />
     <None Include="solved\2009.Watersheds.cs_" />
     <None Include="solved\2009.welcomeToCodeJam.cs_" />
+    <None Include="solved\2010.RopeIntranet.cs_" />
+    <None Include="solved\2010.LoadTesting.Log.cs_" />
+    <None Include="solved\2010.LoadTesting.Loop.cs_" />
     <Compile Include="Solver.cs" />
     <EmbeddedResource Include="frmCodeJam.resx">
       <DependentUpon>frmCodeJam.cs</DependentUpon>

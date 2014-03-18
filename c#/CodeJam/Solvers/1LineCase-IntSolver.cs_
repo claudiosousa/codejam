@@ -14,23 +14,7 @@ namespace CodeJam
 
         static void processCase(Case cas)
         {
-            long L = cas.input[0];
-            long P = cas.input[1];
-            long C = cas.input[2];
-            double PoL = P / L;
-
-
-            int slots = 0;
-            long coveredAmount = Math.Max(1, L);
-            while (coveredAmount * C < P)
-            {
-                coveredAmount *= C;
-                slots++;
-            }
-            if (slots == 0)
-                cas.output = "0";
-            else
-                cas.output = ""+ Convert.ToString(slots, 2).Length;          
+            cas.output = "0";
         }
 
 
