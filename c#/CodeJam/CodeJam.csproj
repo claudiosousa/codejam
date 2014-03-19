@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="A.cs" />
     <Compile Include="frmCodeJam.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,6 +57,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="solved\2010\1AA.Rotate.cs_" />
+    <Compile Include="tools.cs" />
     <None Include="Solvers\1LineCase-IntSolver.cs_" />
     <None Include="Solvers\1stLineTellsCaseLines-IntSolver.cs_" />
     <None Include="Solvers\1LineCase-StringSolver.cs_" />
@@ -66,12 +69,11 @@
     <None Include="solved\2009.AlienLanguage.cs_" />
     <None Include="solved\2009.Watersheds.cs_" />
     <None Include="solved\2009.welcomeToCodeJam.cs_" />
-    <None Include="solved\2010.RopeIntranet.cs_" />
-    <None Include="solved\2010.LoadTesting.Log.cs_" />
-    <None Include="solved\2010.LoadTesting.Loop.cs_" />
-    <None Include="solved\draft.2010.checkers.cs_" />
-    <None Include="solved\2010.1BA.FileFixIt.cs_" />
-    <None Include="solved\2010.1BB.PickCheckensSolver.cs_" />
+    <None Include="solved\2010\1CA.RopeIntranet.cs_" />
+    <None Include="solved\2010\1CB.LoadTesting.Log.cs_" />
+    <None Include="solved\2010\1CB.LoadTesting.Loop.cs_" />
+    <None Include="solved\2010\draft.1CC.checkers.cs_" />
+    <None Include="solved\2010\1BA.FileFixIt.cs_" />
     <Compile Include="Solver.cs" />
     <EmbeddedResource Include="frmCodeJam.resx">
       <DependentUpon>frmCodeJam.cs</DependentUpon>
