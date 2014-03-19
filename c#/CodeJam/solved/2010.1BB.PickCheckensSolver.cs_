@@ -1,0 +1,117 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace CodeJam
+{
+
+    class Solver
+    {
+        static void processCase(Case cas)
+        {
+            long n = cas.input[0][0];
+            long k = cas.input[0][1];
+            long b = cas.input[0][2];
+            long t = cas.input[0][3];
+
+            long[] x = (long[])cas.input[1].Clone();
+            long[] v = cas.input[2];
+            if (k == 0)
+            {
+                cas.output = "0";
+            }
+            long arrived = 0;
+            for (long i = 0; i < t; i++)
+            {
+                for (long xi = 0; xi < x.Length; xi++)
+                {
+                    if (x[xi] >= b)
+                        continue;
+                    long newx = x[xi] + v[xi];
+                    x[xi] = newx;
+                    if (x[xi] >= b)
+                    {
+                        arrived++;
+                    }
+                }
+            }
+            if (arrived < k)
+                cas.output = "IMPOSSIBLE";
+            else
+            {
+                arrived = 0;
+                long swaps = 0;
+                int toJumpOverTOBarn = 0;
+                for (int xi = x.Length - 1; xi >= 0; xi--)
+                {
+                    if (x[xi] < b)
+                    {
+                        toJumpOverTOBarn++;
+                        continue;
+                    }
+                    swaps += toJumpOverTOBarn;
+                    arrived++;
+                    if (arrived == k)
+                        break;
+                }
+                cas.output = "" + swaps;
+            }
+        }
+        public static string Solve(string input)
+        {
+            Case[] cases = Case.parseinput(input);
+            for (int i = 0; i < cases.Length; i++)
+            {
+                processCase(cases[i]);
+            }
+            return writeOutput(cases);
+        }
+
+        static string writeOutput(Case[] cases)
+        {
+            var sb = new StringBuilder();
+            for (var i = 0; i < cases.Length; i++)
+            {
+                sb.AppendLine("Case #" + (i + 1) + ": " + cases[i].output);
+
+            }
+            return sb.ToString(); ;
+        }
+
+        class Case
+        {
+            public long[][] input;
+            public string output;
+
+            public static Case[] parseinput(string input)
+            {
+                string[] lines = input.Trim().Split('\n');
+
+                int nbCases = Convert.ToInt32(lines[0]);
+                int linesPerCase = (lines.Length - 1) / nbCases;
+
+                Case[] cases = new Case[nbCases];
+
+                for (int i = 0; i < nbCases; i++)
+                {
+                    var caseLine = i * linesPerCase + 1;
+                    Case newcase = new Case { input = new long[linesPerCase][] };
+
+                    for (var iLine = 0; iLine < linesPerCase; iLine++)
+                    {
+                        string[] lineParts = lines[caseLine + iLine].Split(' ');
+                        newcase.input[iLine] = lineParts.Select(p => Convert.ToInt64(p)).ToArray();
+                    }
+                    cases[i] = newcase;
+                }
+                return cases;
+            }
+        }
+    }
+
+}
+
