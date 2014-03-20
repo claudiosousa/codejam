@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -48,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="A.cs" />
     <Compile Include="frmCodeJam.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,17 +58,20 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="solved\2010\1AA.Rotate.cs_" />
-    <Compile Include="tools.cs" />
+    <None Include="solved\2010\1AC.NumberGame.cs_" />
+    <Compile Include="tools\tools.cs" />
+    <None Include="solved\2010\1BB.swapChickes.cs_" />
+    <None Include="solved\2010\draft.1BC.PureNumber.cs_" />
     <None Include="Solvers\1LineCase-IntSolver.cs_" />
     <None Include="Solvers\1stLineTellsCaseLines-IntSolver.cs_" />
     <None Include="Solvers\1LineCase-StringSolver.cs_" />
     <None Include="Solvers\EqualCaseLines-StringSolver.cs_" />
-    <None Include="solved\2008.floatingCommaPrecision.cs_" />
-    <None Include="solved\2008.milkshakes.cs_" />
-    <None Include="solved\2008.minScalar.cs_" />
-    <None Include="solved\2009.AlienLanguage.cs_" />
-    <None Include="solved\2009.Watersheds.cs_" />
-    <None Include="solved\2009.welcomeToCodeJam.cs_" />
+    <None Include="solved\2008\2008.floatingCommaPrecision.cs_" />
+    <None Include="solved\2008\2008.milkshakes.cs_" />
+    <None Include="solved\2008\2008.minScalar.cs_" />
+    <None Include="solved\2009\2009.AlienLanguage.cs_" />
+    <None Include="solved\2009\2009.Watersheds.cs_" />
+    <None Include="solved\2009\2009.welcomeToCodeJam.cs_" />
     <None Include="solved\2010\1CA.RopeIntranet.cs_" />
     <None Include="solved\2010\1CB.LoadTesting.Log.cs_" />
     <None Include="solved\2010\1CB.LoadTesting.Loop.cs_" />

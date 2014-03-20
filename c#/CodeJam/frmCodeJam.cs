@@ -31,7 +31,7 @@ namespace CodeJam
 
         private void btnSolve_Click(object sender, EventArgs e)
         {
-            tbOutput.Text = Solver.Solve(tbInput.Text);
+           tbOutput.Text = Solver.Solve(tbInput.Text);
         }
 
         private void frmCodeJam_Shown(object sender, EventArgs e)

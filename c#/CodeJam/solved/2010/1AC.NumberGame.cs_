@@ -13,12 +13,11 @@ namespace CodeJam
     class Solver
     {
 
-        static bool[,] cache = new bool[100, 100];
+        static bool[,] cache = new bool[200, 200];
         static decimal golden;
         static Solver()
         {
             golden = (1 + (decimal)Math.Sqrt(5)) / 2;
-            /*
             StringBuilder sb = new StringBuilder();
             for (int a = 0; a < cache.GetLength(0); a++)
             {
@@ -69,10 +68,9 @@ namespace CodeJam
                 }
 
             }
-            //Console.WriteLine(sb);
+            Console.WriteLine(sb);
 
-            Console.WriteLine(Tools.printArray(cache));
-             * */
+            //Console.WriteLine(Tools.printArray(cache));
 
         }
 
