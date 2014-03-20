@@ -72,6 +72,7 @@
     <None Include="solved\draft.2010.checkers.cs_" />
     <None Include="solved\2010.1BA.FileFixIt.cs_" />
     <None Include="solved\2010.1BB.PickCheckensSolver.cs_" />
+    <None Include="solved\draft.2010.1BC.PureNumber.cs_" />
     <Compile Include="Solver.cs" />
     <EmbeddedResource Include="frmCodeJam.resx">
       <DependentUpon>frmCodeJam.cs</DependentUpon>

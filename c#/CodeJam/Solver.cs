@@ -11,21 +11,69 @@ namespace CodeJam
 
     class Solver
     {
-        static int n = 501;
-        static int[] values = new int[n];
-        static Solver()
+
+        static bool[,] cache;
+
+        static void calculate(int a, int b)
         {
-            values[2] = 1;
-            values[3] = 2;
-            for (int i = 4; i < n; i++)
+            bool res = true;
+
+            if (a == b || a == 0 || b == 0)
             {
-                values[i] = (values[i - 1] + values[i - 2]) % 100003;
+                res = false;
             }
+            else
+            {
+                int big = 0;
+                int small = 0;
+
+                if (b > a)
+                {
+                    big = b;
+                    small = a;
+                }
+                else
+                {
+                    big = a;
+                    small = b;
+                }
+
+                int moves = (int)Math.Floor((float)big / small);
+                for (int i = 0; i < moves; i++)
+                {
+                    if (cache[small, big - (small * (i + 1))])
+                    {
+                        res = false;
+                        break;
+                    }
+                }
+            }
+
+            cache[a, b] = cache[a, b] = res;
+            //return res;
         }
+
         static void processCase(Case cas)
         {
+            cache = new bool[31, 31];
+            for (int i = 0; i < cache.GetLength(0); i++)
+            {
+                for (int j = 0; j < cache.GetLength(0); j++)
+                {
+                    calculate(i, j);
+                }
 
-            cas.output = values[cas.input[0]] + "";
+            }
+            int alwasyWins = 0;
+            for (int a = cas.input[0]; a <= cas.input[1]; a++)
+            {
+                for (int b = cas.input[2]; b <= cas.input[3]; b++)
+                {
+                    if (cache[a, b])
+                        alwasyWins++;
+                }
+            }
+            cas.output = alwasyWins + "";
         }
 
 
