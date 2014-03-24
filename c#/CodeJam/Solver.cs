@@ -1,5 +1,4 @@
-﻿using CodeJam.tools;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
@@ -12,91 +11,73 @@ namespace CodeJam
 
     class Solver
     {
+        static int[,] calculated;
+        static int[][] curerentInput;
+        static int[,] compareINdexes = new int[,] { { 0, -1 }, { 0, 1 }, { 1, 0 }, { -1, 0 } };
 
-        static bool[,] cache = new bool[100, 100];
-        static decimal golden;
-        static Solver()
+        static bool canLoan(int x, int y, int fromDirection, out int height)
         {
-            golden = (1 + (decimal)Math.Sqrt(5)) / 2;
-            /*
-            StringBuilder sb = new StringBuilder();
-            for (int a = 0; a < cache.GetLength(0); a++)
+            var calculatedHeight = calculated[x, y];
+            if (calculatedHeight != 0)
             {
-                for (int b = 0; b < cache.GetLength(0); b++)
-                {
-                    bool res = false;
-
-                    if (a == b)
-                        res = false;
-                    else if (a == 0 || b == 0)
-                        res = true;
-                    else
-                    {
-                        int big = 0;
-                        int small = 0;
-
-                        if (b > a)
-                        {
-                            big = b;
-                            small = a;
-                        }
-                        else
-                        {
-                            big = a;
-                            small = b;
-                        }
-
-                        int moves = (int)Math.Floor((float)big / small);
-                        for (int i = 0; i < moves; i++)
-                        {
-                            if (!cache[small, big - (small * (i + 1))])
-                            {
-                                res = true;
-
-                                break;
-                            }
-                        }
-                    }
-
-                    if (a != 0 && b != 0)
-                    {
-                        decimal ratio = (decimal)a / b;
-                        if (!res && golden < ratio)
-                            sb.AppendLine(a + ", " + b + ": " + ratio);
-                    }
-                    cache[a, b] = cache[a, b] = res;
-                    //return res;
-                }
-
+                height = calculatedHeight;
+                return true;
             }
-            //Console.WriteLine(sb);
+            var cewllHeight = curerentInput[y][x];
+            if (x == 0 || y == 0 || x == calculated.GetLength(0)-1 || y == calculated.GetLength(1)-1)
+            {
+                height = cewllHeight;
+                calculated[x, y] = cewllHeight;
+                return true;
+            }
+            int nextCellheight = 0;
+            for (int i = 0; i < compareINdexes.GetLength(0); i++)
+            {
+                if (fromDirection == 1 && i == 0 || fromDirection == 0 && i == 1 ||
+                    fromDirection == 3 && i == 2 || fromDirection == 2 && i == 3)
+                    continue;
 
-            Console.WriteLine(Tools.printArray(cache));
-             * */
-
+                if (!canLoan(x + compareINdexes[i, 0], y + compareINdexes[i, 1], i, out nextCellheight))
+                {
+                    height = 0;
+                    return false;
+                }
+                if (nextCellheight <= cewllHeight)
+                {
+                    calculated[x, y] = cewllHeight;
+                    height = cewllHeight;
+                    return true;
+                }
+            }
+            height = 0;
+            return false;
         }
-
         static void processCase(Case cas)
         {
-            ulong alwasyWins = 0;
-            for (int a = cas.input[0]; a <= cas.input[1]; a++)
+            int n = cas.input[0][0];
+            int m = cas.input[0][1];
+            curerentInput = cas.input.Skip(1).ToArray();
+            calculated = new int[m, n];
+            int cellHeight = 0;
+            for (int y = 0; y < n; y++)
             {
-                int maxB = (int)Math.Floor(a / golden);
-                int minB = (int)Math.Ceiling(a * golden);
-                int delta = cas.input[3] - cas.input[2] + 1;
-                alwasyWins += (ulong)Math.Min(delta, Math.Max(0, maxB - cas.input[2] + 1));
-                alwasyWins += (ulong)Math.Min(delta, Math.Max(0, cas.input[3] - minB + 1));
+                for (int x = 0; x < m; x++)
+                {
+                    if (!canLoan(x, y,-1,  out cellHeight))
+                    {
+                        cas.output = "NO";
+                        return;
+                    }
+                }
             }
-            cas.output = alwasyWins + "";
+            cas.output = "YES";
         }
-
 
         public static string Solve(string input)
         {
             Case[] cases = Case.parseinput(input);
             for (int i = 0; i < cases.Length; i++)
             {
-                Console.WriteLine("Case: " + i);
                 processCase(cases[i]);
             }
             return writeOutput(cases);
@@ -115,22 +96,35 @@ namespace CodeJam
 
         class Case
         {
-            public int[] input;
+            public int[][] input;
             public string output;
 
             public static Case[] parseinput(string input)
             {
-                string[] lines = input.Trim().Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
+                string[] lines = input.Trim().Split('\n');
 
-                long nbCases = Convert.ToInt64(lines[0]);
+                int nbCases = Convert.ToInt32(lines[0]);
                 Case[] cases = new Case[nbCases];
 
+                int iLine = 1;
                 for (int i = 0; i < nbCases; i++)
                 {
-                    var caseLine = i + 1;
-                    var lineParts = lines[caseLine].Split(' ');
-                    Case newcase = new Case { input = lineParts.Select(n => Convert.ToInt32(n)).ToArray() };
+                    string[] lineParts = lines[iLine].Split(' ');
+                    int[] linePartsint = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
+
+                    int caseLines = linePartsint[0];
+                    Case newcase = new Case { input = new int[caseLines + 1][] };
+                    newcase.input[0] = linePartsint;
+
+                    for (var caseLine = 0; caseLine < caseLines; caseLine++)
+                    {
+                        iLine++;
+                        lineParts = lines[iLine].Split(' ');
+                        linePartsint = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
+                        newcase.input[caseLine + 1] = linePartsint;
+                    }
                     cases[i] = newcase;
+                    iLine++;
                 }
                 return cases;
             }
