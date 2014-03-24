@@ -11,56 +11,36 @@ namespace CodeJam
 
     class Solver
     {
+
+        static long[] fairAndSquares;
+        static Solver()
+        {
+            List<long> fairs = new List<long>();
+                long firstHalfFrom = (long)Math.Pow(10, 7);
+                string palindrome = "";
+                for (long j = 1; j <= firstHalfUntil; j++)
+                {
+                    palindrome = j.ToString();
+                    for (int j2 = 0; j2 < j; j2++)
+			{
+			 
+			}
+                long = Convert.ToUInt64()
+                }
+            }
+        }
         static void processCase(Case cas)
         {
-            int n = cas.input[0][0];
-            int m = cas.input[0][1];
-            int[][] curerentInput = cas.input.Skip(1).ToArray();
-            bool[,] okCells = new bool[m, n];
-            for (int y = 0; y < n; y++)
-            {
-                var rowMaxValue = 0;
-                for (int x = 0; x < m; x++)
-                {
-                    int cellValue = curerentInput[y][x];
-                    rowMaxValue = Math.Max(rowMaxValue, cellValue);
-                }
-                for (int x = 0; x < m; x++)
-                {
-                    int cellValue = curerentInput[y][x];
-                    if (cellValue == rowMaxValue)
-                        okCells[x, y] = true;
-                }
-            }
-            for (int x = 0; x < m; x++)
-            {
-                var columnMaxValue = 0;
-                for (int y = 0; y < n; y++)
-                {
-                    int cellValue = curerentInput[y][x];
-                    columnMaxValue = Math.Max(columnMaxValue, cellValue);
-                }
-                for (int y = 0; y < n; y++)
-                {
-                    int cellValue = curerentInput[y][x];
-                    if (cellValue == columnMaxValue)
-                        okCells[x, y] = true;
-                    else if (!okCells[x, y])
-                    {
-                        cas.output = "NO";
-                        return;
-                    }
-                }
-            }
-
-            cas.output = "YES";
+            cas.output = "0";
         }
+
 
         public static string Solve(string input)
         {
             Case[] cases = Case.parseinput(input);
             for (int i = 0; i < cases.Length; i++)
             {
+                Console.WriteLine("Case: " + i);
                 processCase(cases[i]);
             }
             return writeOutput(cases);
@@ -79,35 +59,22 @@ namespace CodeJam
 
         class Case
         {
-            public int[][] input;
+            public int[] input;
             public string output;
 
             public static Case[] parseinput(string input)
             {
-                string[] lines = input.Trim().Split('\n');
+                string[] lines = input.Trim().Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
 
-                int nbCases = Convert.ToInt32(lines[0]);
+                long nbCases = Convert.ToInt64(lines[0]);
                 Case[] cases = new Case[nbCases];
 
-                int iLine = 1;
                 for (int i = 0; i < nbCases; i++)
                 {
-                    string[] lineParts = lines[iLine].Split(' ');
-                    int[] linePartsint = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
-
-                    int caseLines = linePartsint[0];
-                    Case newcase = new Case { input = new int[caseLines + 1][] };
-                    newcase.input[0] = linePartsint;
-
-                    for (var caseLine = 0; caseLine < caseLines; caseLine++)
-                    {
-                        iLine++;
-                        lineParts = lines[iLine].Split(' ');
-                        linePartsint = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
-                        newcase.input[caseLine + 1] = linePartsint;
-                    }
+                    var caseLine = i + 1;
+                    var lineParts = lines[caseLine].Split(' ');
+                    Case newcase = new Case { input = lineParts.Select(n => Convert.ToInt32(n)).ToArray() };
                     cases[i] = newcase;
-                    iLine++;
                 }
                 return cases;
             }
