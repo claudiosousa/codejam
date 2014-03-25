@@ -1,0 +1,122 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace CodeJam
+{
+
+    class Solver
+    {
+
+        static bool testCas(string[] input, int x, int y, int incx, int incy, out string answer)
+        {
+            answer = "";
+            string found = "";
+            for (int i = 0; i < 4; i++)
+            {
+                string character = input[y + (i * incy)][x + (i * incx)] + "";
+                if (character == ".")
+                    return false;
+                if (character == "T")
+                    continue;
+                if (found == "")
+                {
+                    found = character;
+                    continue;
+                }
+                if (found != character)
+                    return false;
+            }
+            answer = found + " won";
+            return true;
+        }
+        static void processCase(Case cas)
+        {
+            string res;
+            var won = testCas(cas.input, 0, 0, 1, 0, out res) ||
+                testCas(cas.input, 0, 0, 0, 1, out res) ||
+                testCas(cas.input, 0, 0, 1, 1, out res) ||
+                testCas(cas.input, 3, 0, -1, 1, out res) ||
+                testCas(cas.input, 1, 0, 0, 1, out res) ||
+                testCas(cas.input, 2, 0, 0, 1, out res) ||
+                testCas(cas.input, 3, 0, 0, 1, out res) ||
+                testCas(cas.input, 0, 1, 1, 0, out res) ||
+                testCas(cas.input, 0, 2, 1, 0, out res) ||
+                testCas(cas.input, 0, 3, 1, 0, out res);
+            if (won)
+            {
+                cas.output = res;
+                return;
+            }
+            else
+                for (int i = 0; i < cas.input.Count(); i++)
+                {
+                    if (cas.input[i].Contains("."))
+                    {
+                        cas.output = "Game has not completed";
+                        return;
+                    }
+                }
+            cas.output = "Draw";
+        }
+
+
+        public static string Solve(string input)
+        {
+            Case[] cases = Case.parseinput(input);
+            for (int i = 0; i < cases.Length; i++)
+            {
+                Console.WriteLine("Case: " + i);
+                processCase(cases[i]);
+            }
+            return writeOutput(cases);
+        }
+
+        static string writeOutput(Case[] cases)
+        {
+            var sb = new StringBuilder();
+            for (var i = 0; i < cases.Length; i++)
+            {
+                sb.AppendLine("Case #" + (i + 1) + ": " + cases[i].output);
+
+            }
+            return sb.ToString(); ;
+        }
+
+        class Case
+        {
+            public string[] input;
+            public string output;
+
+            public static Case[] parseinput(string input)
+            {
+                string[] lines = input.Trim().Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
+
+                int nbCases = Convert.ToInt32(lines[0]);
+                int linesPerCase = 4;
+
+                Case[] cases = new Case[nbCases];
+
+                for (int i = 0; i < nbCases; i++)
+                {
+                    var caseLine = i * (linesPerCase + 1) + 1;
+                    Case newcase = new Case { input = new string[linesPerCase] };
+
+                    for (var iLine = 0; iLine < linesPerCase; iLine++)
+                    {
+                        newcase.input[iLine] = lines[caseLine + iLine];
+                    }
+                    cases[i] = newcase;
+                }
+                return cases;
+            }
+        }
+    }
+
+}
+
+

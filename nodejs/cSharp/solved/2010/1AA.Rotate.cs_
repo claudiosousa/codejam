@@ -1,0 +1,171 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace CodeJam
+{
+
+    class Solver
+    {
+        static bool is4InRow(int[,] rotated, int x, int y, int start, int matches)
+        {
+            var n = rotated.GetLength(0);
+            bool canGoLeft = x + matches <= n;
+            bool canGoRight = x >= matches-1;
+            bool canGoDown = y + matches <= n;
+            int i = 1;
+            if (canGoLeft)
+            {
+                for (i = 1; i < matches; i++)
+                    if (rotated[x + i, y] != start)
+                        break;
+                if (i == matches)
+                    return true;
+            }
+            if (canGoDown)
+            {
+                for (i = 1; i < matches; i++)
+                    if (rotated[x, y + i] != start)
+                        break;
+                if (i == matches)
+                    return true;
+            }
+
+            if (canGoRight && canGoDown)
+            {
+                for (i = 1; i < matches; i++)
+                    if (rotated[x - i, y + i] != start)
+                        break;
+                if (i == matches)
+                    return true;
+
+            }
+            if (canGoLeft && canGoDown)
+            {
+                for (i = 1; i < matches; i++)
+                    if (rotated[x + i, y + i] != start)
+                        break;
+                if (i == matches)
+                    return true;
+
+            }
+            return false;
+        }
+
+        static void processCase(Case cas)
+        {
+            var n = cas.input.GetLength(0);
+            int[,] rotated = new int[n, n];
+            for (int y = 0; y < n; y++)
+            {
+                int foundHorizontally = 0;
+                for (int x = n - 1; x >= 0; x--)
+                {
+                    if (cas.input[x, y] == 0)
+                        continue;
+                    rotated[n - 1 - y, n - 1 - foundHorizontally] = cas.input[x, y];
+                    foundHorizontally++;
+                }
+            }
+            bool found1 = false;
+            bool found2 = false;
+            for (int y = 0; y < n; y++)
+            {
+                for (int x = 0; x < n; x++)
+                {
+                    var nb = rotated[x, y];
+                    if (nb == 0)
+                        continue;
+                    if (found1 && nb == 1)
+                        continue;
+                    if (found2 && nb == 2)
+                        continue;
+                    if (is4InRow(rotated, x, y, nb, cas.matches))
+                        if (nb == 1)
+                            found1 = true;
+                        else
+                            found2 = true;
+                }
+
+            }
+            if (found1 && found2)
+                cas.output = "Both";
+            else if (found1 ^ found2)
+                if (found1)
+                    cas.output = "Red";
+                else
+                    cas.output = "Blue";
+            else
+                cas.output = "Neither";
+            //cas.output += " "+cas.matches+  tools.printArray(rotated);
+        }
+
+        public static string Solve(string input)
+        {
+            Case[] cases = Case.parseinput(input);
+            for (int i = 0; i < cases.Length; i++)
+            {
+                processCase(cases[i]);
+            }
+            return writeOutput(cases);
+        }
+
+        static string writeOutput(Case[] cases)
+        {
+            var sb = new StringBuilder();
+            for (var i = 0; i < cases.Length; i++)
+            {
+                sb.AppendLine("Case #" + (i + 1) + ": " + cases[i].output);
+
+            }
+            return sb.ToString(); ;
+        }
+
+        class Case
+        {
+            public int[,] input;
+            public string output;
+            public int matches;
+
+            public static Case[] parseinput(string input)
+            {
+                string[] lines = input.Trim().Split('\n');
+
+                int nbCases = Convert.ToInt32(lines[0]);
+                Case[] cases = new Case[nbCases];
+
+                int iLine = 1;
+                for (int i = 0; i < nbCases; i++)
+                {
+                    var caseLine = lines[iLine];
+                    int[] caseLineParts = caseLine.Split(' ').Select(p => Convert.ToInt32(p)).ToArray();
+
+                    int caseLines = caseLineParts[0];
+                    var match = caseLineParts[1];
+
+                    Case newcase = new Case { input = new int[caseLines, caseLines], matches = match };
+
+                    for (var iCaseLine = 0; iCaseLine < caseLines; iCaseLine++)
+                    {
+                        iLine++;
+                        var row = lines[iLine];
+                        for (int j = 0; j < caseLines; j++)
+                        {
+                            newcase.input[j, iCaseLine] = row[j] == 'R' ? 1 : (row[j] == 'B' ? 2 : 0);
+                        }
+                    }
+                    //tools.printArray(newcase.input);
+                    cases[i] = newcase;
+                    iLine++;
+                }
+                return cases;
+            }
+        }
+    }
+
+}
+
