@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,7 +9,60 @@ namespace CodeJam
 {
     static class Tools
     {
-        static decimal goldenNumber = (1 + (decimal)Math.Sqrt(5)) / 2;
+        public static decimal goldenNumber = (1 + (decimal)Math.Sqrt(5)) / 2;
+
+        public static BigInteger FromBase(string number, int radix)
+        {
+            const string Digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+            if (radix < 2 || radix > Digits.Length)
+                throw new ArgumentException("The radix must be >= 2 and <= " +
+                    Digits.Length.ToString());
+
+            if (String.IsNullOrEmpty(number))
+                return 0;
+
+            // Make sure the arbitrary numeral system number is in upper case
+            number = number.ToUpperInvariant();
+
+            BigInteger result = 0;
+            BigInteger multiplier = 1;
+            for (int i = number.Length - 1; i >= 0; i--)
+            {
+                char c = number[i];
+                if (i == 0 && c == '-')
+                {
+                    // This is the negative sign symbol
+                    result = -result;
+                    break;
+                }
+
+                int digit = Digits.IndexOf(c);
+                if (digit == -1)
+                    throw new ArgumentException(
+                        "Invalid character in the arbitrary numeral system number",
+                        "number");
+
+                result += digit * multiplier;
+                multiplier *= radix;
+            }
+
+            return result;
+        }
+
+        public static string Encode(BigInteger value, int @base = 0, string chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        {
+            if (@base <= 0) @base = chars.Length;
+            var sb = new StringBuilder();
+            do
+            {
+                int m = (int)(value % @base);
+                sb.Insert(0, chars[m]);
+                value = (value - m) / @base;
+            } while (value > 0);
+            return sb.ToString();
+        }
+
         public static string printArrayofArray(Array arr)
         {
             string res = "\r\n";
@@ -25,7 +79,7 @@ namespace CodeJam
                     res += value + "";
                 }
                 res += "\r\n";
-            }         
+            }
             return res;
         }
         public static string printArray(Array arr)

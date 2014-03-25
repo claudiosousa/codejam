@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace CodeJam
     class Solver
     {
 
-        static List<long> fairAndSquares = new List<long>(new long[] { 1, 4, 9 });
+        static List<BigInteger> fairAndSquares = new List<BigInteger>(new BigInteger[] { 1, 4, 9 });
 
         public static bool isPalindrome(string pal)
         {
@@ -28,39 +29,43 @@ namespace CodeJam
         static void initialize()
         {
 
-            List<long> fairs = new List<long>();
-            long firstHalfFrom = (long)Math.Pow(10, 4);
+           
             string halfPal = "";
             string otherHalf;
-            long palindrom;
-            for (long j = 1; j <= firstHalfFrom; j++)
-            {
-                halfPal = j.ToString();
-                otherHalf = new String(halfPal.Reverse().ToArray());
-                palindrom = (long)Math.Pow(Convert.ToInt32(halfPal + otherHalf), 2);
-                if (isPalindrome(palindrom + ""))
+            BigInteger palindrom;
+            for (int exp = 0; exp < 50; exp++) { 
+
+                for (BigInteger j = 1; j <= firstHalfFrom; j++)
                 {
-                    fairAndSquares.Add(palindrom);
-                }
-                for (int j2 = 0; j2 < 10; j2++)
-                {
-                    palindrom = (long)Math.Pow(Convert.ToInt64(halfPal + j2 + otherHalf), 2);
+                    halfPal = Tools.Encode(j, 3);
+                    otherHalf = new String(halfPal.Reverse().ToArray());
+                    BigInteger.TryParse(halfPal + otherHalf, out palindrom);
+                    palindrom = BigInteger.Pow(palindrom, 2);
                     if (isPalindrome(palindrom + ""))
                     {
                         fairAndSquares.Add(palindrom);
                     }
+                    for (int j2 = 0; j2 < 3; j2++)
+                    {
+                        BigInteger.TryParse(halfPal + j2 + otherHalf, out palindrom);
+                        palindrom = BigInteger.Pow(palindrom, 2);
+                        if (isPalindrome(palindrom + ""))
+                        {
+                            fairAndSquares.Add(palindrom);
+                        }
 
+                    }
                 }
-            }
             fairAndSquares.Sort();
             for (int i = 0; i < fairAndSquares.Count; i++)
             {
-                long fanda = fairAndSquares[i];
-                Console.WriteLine(fanda + ":" + Math.Sqrt(fanda));
+                BigInteger fanda = fairAndSquares[i];
+                Console.WriteLine(fanda);
             }
         }
         static void processCase(Case cas)
         {
+
 
             cas.output = fairAndSquares.Where(l => l >= cas.input[0] && l <= cas.input[1]).Count() + "";
         }
