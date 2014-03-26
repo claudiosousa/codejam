@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "nodejs", "nodejs\nodejs.njsproj", "{B042BB06-2CCF-4DD9-BB11-DB44B7D7632F}"
 EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "NodejsConsoleApp1", "NodejsConsoleApp1\NodejsConsoleApp1.njsproj", "{6513ECDE-36B3-4BC3-8992-F09E80A4D245}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B042BB06-2CCF-4DD9-BB11-DB44B7D7632F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B042BB06-2CCF-4DD9-BB11-DB44B7D7632F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B042BB06-2CCF-4DD9-BB11-DB44B7D7632F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6513ECDE-36B3-4BC3-8992-F09E80A4D245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6513ECDE-36B3-4BC3-8992-F09E80A4D245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6513ECDE-36B3-4BC3-8992-F09E80A4D245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6513ECDE-36B3-4BC3-8992-F09E80A4D245}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

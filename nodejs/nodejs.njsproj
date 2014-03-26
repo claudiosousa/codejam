@@ -17,8 +17,6 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Compile Include="script.js" />
-    <Compile Include="done\2008.minscalar.js" />
-    <Compile Include="done\snappers.js" />
     <Content Include="input.in" />
     <Content Include="output.out" />
     <Content Include="cSharp\solved\2008\2008.floatingCommaPrecision.cs_" />
@@ -1118,7 +1116,6 @@
     <Folder Include="bin\node_modules\node-inspector\node_modules\yargs\node_modules\minimist\test" />
     <Folder Include="bin\node_modules\node-inspector\node_modules\yargs\test" />
     <Folder Include="bin\node_modules\node-inspector\node_modules\yargs\test\_" />
-    <Folder Include="done" />
     <Folder Include="cSharp\" />
     <Folder Include="cSharp\solved\" />
     <Folder Include="cSharp\solved\2008\" />
