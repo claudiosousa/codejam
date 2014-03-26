@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -62,6 +63,7 @@
     <None Include="Solvers\1stLineTellsCaseLines-StringSolver.cs_" />
     <None Include="solved\2013\QA.Tic-Tac-Toe-Tomek.cs_" />
     <None Include="solved\2013\QB.Lawnmower.cs_" />
+    <None Include="solved\2013\QC.FairAndSquare.cs_" />
     <Compile Include="tools\tools.cs" />
     <None Include="solved\2010\1BB.swapChickes.cs_" />
     <None Include="solved\2010\draft.1BC.PureNumber.cs_" />
