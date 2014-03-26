@@ -13,7 +13,7 @@ namespace CodeJam
     class Solver
     {
 
-        static List<BigInteger> fairAndSquares = new List<BigInteger>(new BigInteger[] { 1, 4, 9 });
+        static List<BigInteger> fairAndSquares = new List<BigInteger>(new BigInteger[] { 9 });
 
         public static bool isPalindrome(string pal)
         {
@@ -26,36 +26,40 @@ namespace CodeJam
             return true;
         }
 
+        static void tryAddPalindromesFromHalf(string half)
+        {
+            string otherHalf = new String(half.Reverse().ToArray());
+            BigInteger palindrom;
+            BigInteger.TryParse(half + otherHalf, out palindrom);
+            palindrom = BigInteger.Pow(palindrom, 2);
+            if (isPalindrome(palindrom + ""))
+                fairAndSquares.Add(palindrom);
+            BigInteger.TryParse(half + otherHalf.Substring(1), out palindrom);
+            palindrom = BigInteger.Pow(palindrom, 2);
+            if (isPalindrome(palindrom + ""))
+                fairAndSquares.Add(palindrom);
+        }
+
+        static void buildPalHalf(string half, int pos)
+        {
+            if (pos == 51)
+                return;
+            int startPos = 0;
+            if (pos == 0)
+                startPos = 1;
+            for (int i = startPos; i < 3; i++)
+            {
+                half += i;
+                tryAddPalindromesFromHalf(half);
+                buildPalHalf(half, pos + 1);
+            }
+
+        }
+
         static void initialize()
         {
-
-           
-            string halfPal = "";
-            string otherHalf;
-            BigInteger palindrom;
-            for (int exp = 0; exp < 50; exp++) { 
-
-                for (BigInteger j = 1; j <= firstHalfFrom; j++)
-                {
-                    halfPal = Tools.Encode(j, 3);
-                    otherHalf = new String(halfPal.Reverse().ToArray());
-                    BigInteger.TryParse(halfPal + otherHalf, out palindrom);
-                    palindrom = BigInteger.Pow(palindrom, 2);
-                    if (isPalindrome(palindrom + ""))
-                    {
-                        fairAndSquares.Add(palindrom);
-                    }
-                    for (int j2 = 0; j2 < 3; j2++)
-                    {
-                        BigInteger.TryParse(halfPal + j2 + otherHalf, out palindrom);
-                        palindrom = BigInteger.Pow(palindrom, 2);
-                        if (isPalindrome(palindrom + ""))
-                        {
-                            fairAndSquares.Add(palindrom);
-                        }
-
-                    }
-                }
+            buildPalHalf("", 0);
+         
             fairAndSquares.Sort();
             for (int i = 0; i < fairAndSquares.Count; i++)
             {
