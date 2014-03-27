@@ -50,7 +50,7 @@ namespace CodeJam
             return result;
         }
 
-        public static string Encode(BigInteger value, int @base = 0, string chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        public static string ToBase(BigInteger value, int @base = 0, string chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
         {
             if (@base <= 0) @base = chars.Length;
             var sb = new StringBuilder();

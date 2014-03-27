@@ -20,7 +20,8 @@ namespace CodeJam
             Case[] cases = Case.parseinput(input);
             for (int i = 0; i < cases.Length; i++)
             {
-                processCase(cases[i]);
+              Console.WriteLine("Case: " + i);
+			    processCase(cases[i]);
             }
             return writeOutput(cases);
         }
