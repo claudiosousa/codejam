@@ -11,6 +11,20 @@ namespace CodeJam
     {
         public static decimal goldenNumber = (1 + (decimal)Math.Sqrt(5)) / 2;
 
+        public static BigInteger Sqrt(BigInteger N)
+        {
+            if (0 == N)
+                return 0;
+            BigInteger n1 = (N >> 1) + 1;
+            BigInteger n2 = (n1 + (N / n1)) >> 1;
+            while (n2 < n1)
+            {
+                n1 = n2;
+                n2 = (n1 + (N / n1)) >> 1;
+            }
+            return n1;
+        }
+
         public static BigInteger FromBase(string number, int radix)
         {
             const string Digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
