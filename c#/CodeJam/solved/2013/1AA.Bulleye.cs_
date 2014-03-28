@@ -1,0 +1,151 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace CodeJam
+{
+
+    class Solver
+    {
+        static bool openChests(Dictionary<int, int> keys, List<dynamic> chests, int operation)
+        {
+            var openedChests = chests.Where(c => c.openedIndex > 0).ToArray();
+            if (openedChests.Count() > 0)
+                Console.WriteLine(openedChests.OrderBy(c => c.openedIndex).Select<dynamic, string>(c => c.index + " ").Aggregate((cumul, c) => cumul + c));
+
+            if (openedChests.Count() == chests.Count())
+                return true;
+            if (keys.Values.Max() == 0)
+                return false;
+        
+
+            operation++;
+            bool couldOpenAll = true;
+            for (int i = 0; i < chests.Count(); i++)
+            {
+                var chest = chests[i];
+                if (chest.openedIndex > 0)
+                    continue;
+
+                if (keys[chest.openKey] == 0)
+                {
+                    couldOpenAll = false;
+                    continue;
+                }
+                chest.openedIndex = operation;
+                keys[chest.openKey]--;
+                for (int j = 0; j < chest.insideKeys.Length; j++)
+                {
+                    keys[chest.insideKeys[j]]++;
+                }
+                if (openChests(keys, chests, operation))
+                    return true;
+
+                for (int j = 0; j < chest.insideKeys.Length; j++)
+                {
+                    keys[chest.insideKeys[j]]--;
+                }
+
+                chest.openedIndex = 0;
+                keys[chest.openKey]++;
+            }
+            operation--;
+            return couldOpenAll;
+        }
+
+        static void processCase(Case cas)
+        {
+            Dictionary<int, int> keys = new Dictionary<int, int>();
+            for (int i = 0; i < 400; i++)
+            {
+                keys[i] = 0;
+            }
+            for (int i = 0; i < cas.input[1].Length; i++)
+            {
+                var key = cas.input[1][i];
+                keys[key]++;
+            }
+            List<dynamic> chests = new List<dynamic>();
+            for (int i = 2; i < cas.input.Length; i++)
+            {
+                var chestLine = cas.input[i];
+                dynamic chest = new ExpandoObject();
+                chest.index = i - 1;
+                chest.openKey = chestLine[0];
+                chest.openedIndex = 0;
+                chest.insideKeys = chestLine.Skip(2).ToArray();
+                chests.Add(chest);
+            }
+            bool couldOpenAll = openChests(keys, chests, 0);
+            if (couldOpenAll)
+                cas.output = chests.Select<dynamic, string>(c => c.openedIndex + " ").Aggregate((cumul, c) => cumul + c);
+            else
+                cas.output = "IMPOSSIBLE";
+        }
+
+        public static string Solve(string input)
+        {
+            Case[] cases = Case.parseinput(input);
+            for (int i = 0; i < cases.Length; i++)
+            {
+                Console.WriteLine("Case #" + (i + 1));//+ "\r\n" + Tools.printArrayofArray(cases[i].input));
+                processCase(cases[i]);
+            }
+            return writeOutput(cases);
+        }
+
+        static string writeOutput(Case[] cases)
+        {
+            var sb = new StringBuilder();
+            for (var i = 0; i < cases.Length; i++)
+            {
+
+                sb.AppendLine("Case #" + (i + 1) + ": " + cases[i].output);
+
+            }
+            return sb.ToString(); ;
+        }
+
+        class Case
+        {
+            public int[][] input;
+            public string output;
+
+            public static Case[] parseinput(string input)
+            {
+                string[] lines = input.Trim().Split('\n');
+
+                int nbCases = Convert.ToInt32(lines[0]);
+                Case[] cases = new Case[nbCases];
+
+                int iLine = 1;
+                for (int i = 0; i < nbCases; i++)
+                {
+                    string[] lineParts = lines[iLine].Split(' ');
+                    int[] linePartsint = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
+
+                    int caseLines = linePartsint[1] + 1;
+                    Case newcase = new Case { input = new int[caseLines + 1][] };
+                    newcase.input[0] = linePartsint;
+
+                    for (var caseLine = 0; caseLine < caseLines; caseLine++)
+                    {
+                        iLine++;
+                        lineParts = lines[iLine].Split(' ');
+                        linePartsint = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
+                        newcase.input[caseLine + 1] = linePartsint;
+                    }
+                    cases[i] = newcase;
+                    iLine++;
+                }
+                return cases;
+            }
+        }
+    }
+
+}
+

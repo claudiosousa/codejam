@@ -12,55 +12,58 @@ namespace CodeJam
 
     class Solver
     {
-        static int[,] enargyData;
+        static int[,] maxVal;
         static int[] activities;
-        static int[][] maxEnergyActivitiesIndex;
         static int eMax;
         static int r;
-
-
+        static int getMaxValue(int index, int energy)
+        {
+            if (maxVal[index, energy - 1] >= 0)
+                return maxVal[index, energy - 1];
+            int maxE = 0;
+            if (index != activities.Length - 1)
+            {
+                int mixE2use = Math.Max(0, energy + r - eMax);
+                for (int i = mixE2use; i <= energy; i++)
+                {
+                    int roundE = i * activities[index];
+                    int nextE = Math.Min(eMax, energy - i + r);
+                    roundE += getMaxValue(index + 1, nextE);
+                    maxE = Math.Max(maxE, roundE);
+                }
+            }
+            else
+                maxE = energy * activities[index];
+            maxVal[index, energy - 1] = maxE;
+            return maxE;
+        }
         static void processCase(Case cas)
         {
             eMax = cas.input[0][0];
             r = cas.input[0][1];
             activities = cas.input[1];
-            enargyData = new int[activities.Length, 2];
-            maxEnergyActivitiesIndex = new int[activities.Length][];
-
+            maxVal = new int[activities.Length, eMax];
             for (int i = 0; i < activities.Length; i++)
             {
-                maxEnergyActivitiesIndex[i] = new int[] { i, activities[i] };
-
-                enargyData[i, 0] = r; //min input
-                enargyData[i, 1] = eMax; //max output
+                for (int j = 0; j < eMax; j++)
+                {
+                    maxVal[i, j] = -1;
+                }
             }
-            enargyData[0, 0] = eMax; //in = e max
-            enargyData[activities.Length - 1, 2] = 0; //max out = e 0
-
-            maxEnergyActivitiesIndex = maxEnergyActivitiesIndex.OrderByDescending(ac => ac[1]).ToArray();
-
-            long energyTotal = 0;
-            for (int i = 0; i < maxEnergyActivitiesIndex.Length; i++)
-            {
-                var activityEnergy = maxEnergyActivitiesIndex[i][1];
-                var maxAvailableE = i>0?maxEnergyActivitiesIndex[i-1][1]:eMax;
-                activityEnergy = maxAvailableE*activityEnergy;
-                energyTotal += activityEnergy;
-                maxEnergyActivitiesIndex[i][2] = 
-            }
+            var res = getMaxValue(0, eMax);
             //Console.WriteLine(Tools.printArray(maxVal));
-            cas.output = "";
+            cas.output = res + "";
         }
 
         public static string Solve(string input)
-        {
+        {       
             Case[] cases = Case.parseinput(input);
             for (int i = 0; i < cases.Length; i++)
             {
                 Console.WriteLine("Case: " + i);
                 processCase(cases[i]);
             }
-            return writeOutput(cases);
+            return writeOutput(cases);         
         }
 
         static string writeOutput(Case[] cases)

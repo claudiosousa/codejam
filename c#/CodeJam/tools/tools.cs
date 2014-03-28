@@ -94,7 +94,7 @@ namespace CodeJam
                     object value = arr.GetValue(i, j);
                     if (value is Boolean)
                         value = (bool)value ? 1 : 0;
-                    res += value + "";
+                    res += value + "\t\t";
                 }
                 res += "\r\n";
             }
