@@ -12,7 +12,7 @@ namespace CodeJam
 
     class Solver
     {
-        static int[,] enargyData;
+        static long[,] enargyData;
         static int[] activities;
         static int[][] maxEnergyActivitiesIndex;
         static int eMax;
@@ -24,32 +24,61 @@ namespace CodeJam
             eMax = cas.input[0][0];
             r = cas.input[0][1];
             activities = cas.input[1];
-            enargyData = new int[activities.Length, 2];
+            enargyData = new long[activities.Length, 3];
             maxEnergyActivitiesIndex = new int[activities.Length][];
 
             for (int i = 0; i < activities.Length; i++)
             {
                 maxEnergyActivitiesIndex[i] = new int[] { i, activities[i] };
 
-                enargyData[i, 0] = r; //min input
-                enargyData[i, 1] = eMax; //max output
+                enargyData[i, 0] = r; //min required energy
+                enargyData[i, 1] = eMax; //max energy left
+                enargyData[i, 2] = -1; //energyConsumed
             }
-            enargyData[0, 0] = eMax; //in = e max
-            enargyData[activities.Length - 1, 2] = 0; //max out = e 0
 
             maxEnergyActivitiesIndex = maxEnergyActivitiesIndex.OrderByDescending(ac => ac[1]).ToArray();
+
+            int afftetsNeighbourNTaks = eMax / r;
 
             long energyTotal = 0;
             for (int i = 0; i < maxEnergyActivitiesIndex.Length; i++)
             {
-                var activityEnergy = maxEnergyActivitiesIndex[i][1];
-                var maxAvailableE = i>0?maxEnergyActivitiesIndex[i-1][1]:eMax;
-                activityEnergy = maxAvailableE*activityEnergy;
+                var activityIndex = maxEnergyActivitiesIndex[i][0];
+                long activityEnergy = maxEnergyActivitiesIndex[i][1];
+                var maxAvailableE = activityIndex > 0 ? Math.Min(eMax, enargyData[activityIndex - 1, 1] + r) : eMax;
+                long minEnergyLeft = activityIndex < activities.Length - 1 ? Math.Max(0, enargyData[activityIndex + 1, 0] - r) : 0;
+                long energy2use = maxAvailableE - minEnergyLeft;
+                activityEnergy = (long)energy2use * activityEnergy;
                 energyTotal += activityEnergy;
-                maxEnergyActivitiesIndex[i][2] = 
+
+                enargyData[activityIndex, 0] = energy2use + minEnergyLeft;
+                enargyData[activityIndex, 1] = minEnergyLeft;
+                enargyData[activityIndex, 2] = energy2use;
+                var currentEnergy = maxAvailableE - energy2use;
+                for (int j = activityIndex + 1; j <= afftetsNeighbourNTaks + activityIndex && j < activities.Length; j++)
+                {
+                    if (enargyData[j, 2] != -1)
+                        break;
+                    currentEnergy += r;
+                    if (currentEnergy > eMax)
+                        break;
+                    //  enargyData[j, 0] = currentEnergy - r;
+                    enargyData[j, 1] = currentEnergy;
+                }
+                //energy2use -= r;
+                for (int j = activityIndex - 1; j >= Math.Max(0, activityIndex - afftetsNeighbourNTaks-1); j--)
+                {
+                    if (enargyData[j, 2] != -1)
+                        break;
+                    energy2use -= r;
+                    if (energy2use < 0)
+                        break;
+                    //   enargyData[j, 1] = energy2use + r;
+                    enargyData[j, 0] = energy2use;
+                }
             }
             //Console.WriteLine(Tools.printArray(maxVal));
-            cas.output = "";
+            cas.output = "" + energyTotal;
         }
 
         public static string Solve(string input)
