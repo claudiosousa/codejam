@@ -69,6 +69,7 @@
     <None Include="solved\2013\1AA.Bulleye.cs_" />
     <None Include="solved\2013\1AB.ManageYourEnergy.DP-failed.cs_" />
     <None Include="solved\2013\1AB.ManageYourEnergy.Sort-failed.cs_" />
+    <None Include="solved\2013\1BA.Osmos.cs_" />
     <Compile Include="tools\tools.cs" />
     <None Include="solved\2010\1BB.swapChickes.cs_" />
     <None Include="solved\2010\draft.1BC.PureNumber.cs_" />
