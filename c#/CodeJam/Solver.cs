@@ -11,44 +11,61 @@ namespace CodeJam
 
     class Solver
     {
-        static int getOperationsRequeried(long mole, int[] toEat)
-        {          
-            while (toEat.Length > 0 && toEat[0] < mole)
-            {
-                mole += toEat[0];
-                toEat = toEat.Skip(1).ToArray();
-            }
-            if (toEat.Length > 0)
-            {
-                var deleted = toEat.Skip(1).ToArray();
-                int deleteOps = 1 + getOperationsRequeried(mole, deleted);
-                if (mole > 1)
-                {
-                    int addedOps = 0;
-                    long tempMole = mole + 0;
-                    List<int> addedElements = new List<int>();
-                    while (tempMole <= toEat[0])
-                    {
-                        addedElements.Add((int)tempMole - 1);
-                        addedOps++;
-                        tempMole += tempMole - 1;
-                    }
-                    addedElements.AddRange(toEat);
-                    addedOps = addedOps + getOperationsRequeried(mole, addedElements.ToArray());
-                    return Math.Min(deleteOps, addedOps);
-                }
-                return deleteOps;
-            }
-            return 0;
-        }
+
         static void processCase(Case cas)
         {
-            int a = cas.input[0][0];
-            List<int> toEat = new List<int>(cas.input[1]);
-            toEat.Sort();
-            int operations = getOperationsRequeried(a, toEat.ToArray());
-            cas.output = "" + operations;
+            int n = cas.input[0];
+            int x = Math.Abs(cas.input[1]);
+            int y = Math.Abs(cas.input[2]);
+
+            if ((x + y) == 0)
+            {
+                cas.output = "1.0";
+                return;
+            }
+
+            if ((x + y) % 2 == 1)
+            {
+                cas.output = "0.0";
+                return;
+            }
+            int piramideSide = (int)Math.Sqrt(n * 2);
+            if (piramideSide % 2 == 0)
+                piramideSide--;
+            while ((piramideSide * piramideSide + 1) / 2 > n)
+                piramideSide -= 2;
+
+            if ((x + y) < piramideSide - 1)
+            {
+                cas.output = "1.0";
+                return;
+            }
+
+            int nonPiramideN = n - (piramideSide * (piramideSide + 1)) / 2;
+
+            if ((x + y) > piramideSide + 1
+                || y + 1 > nonPiramideN ||
+                y > piramideSide)
+            {
+                cas.output = "0.0";
+                return;
+            }
+
+            if (nonPiramideN - piramideSide > (y + 1))
+            {
+                cas.output = "1.0";
+                return;
+            }
+
+            int halfOdds = y + 1;
+            if (nonPiramideN == halfOdds)
+                cas.output = "0.5";
+            else if (nonPiramideN > halfOdds)
+                cas.output = (1 - Math.Pow(.5, nonPiramideN - halfOdds + 1)) + "";
+            else
+                cas.output = Math.Pow(.5, halfOdds - nonPiramideN + 1) + "";
         }
+
 
         public static string Solve(string input)
         {
@@ -74,35 +91,22 @@ namespace CodeJam
 
         class Case
         {
-            public int[][] input;
+            public int[] input;
             public string output;
 
             public static Case[] parseinput(string input)
             {
-                string[] lines = input.Trim().Split('\n');
+                string[] lines = input.Trim().Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
 
-                int nbCases = Convert.ToInt32(lines[0]);
+                long nbCases = Convert.ToInt64(lines[0]);
                 Case[] cases = new Case[nbCases];
 
-                int iLine = 1;
                 for (int i = 0; i < nbCases; i++)
                 {
-                    string[] lineParts = lines[iLine].Split(' ');
-                    int[] linePartsint = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
-
-                    int caseLines = 1;
-                    Case newcase = new Case { input = new int[caseLines + 1][] };
-                    newcase.input[0] = linePartsint;
-
-                    for (var caseLine = 0; caseLine < caseLines; caseLine++)
-                    {
-                        iLine++;
-                        lineParts = lines[iLine].Split(' ');
-                        linePartsint = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
-                        newcase.input[caseLine + 1] = linePartsint;
-                    }
+                    var caseLine = i + 1;
+                    var lineParts = lines[caseLine].Split(' ');
+                    Case newcase = new Case { input = lineParts.Select(n => Convert.ToInt32(n)).ToArray() };
                     cases[i] = newcase;
-                    iLine++;
                 }
                 return cases;
             }

@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="algos\BinarySearch.cs" />
+    <Compile Include="B.cs" />
     <Compile Include="frmCodeJam.cs">
       <SubType>Form</SubType>
     </Compile>
