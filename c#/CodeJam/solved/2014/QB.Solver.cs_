@@ -11,9 +11,31 @@ namespace CodeJam
 
     class Solver
     {
+
         static void processCase(Case cas)
         {
+            string[] parts = cas.input.Split(' ');
+            Decimal C = Decimal.Parse(parts[0]);
+            Decimal F = Decimal.Parse(parts[1]);
+            Decimal X = Decimal.Parse(parts[2]);
+
+            bool createNewFarm = false;
+            Decimal currentTakenSeconds = 0;
+            Decimal rate = 2;
+            do
+            {
+                createNewFarm = X / rate > C / rate + X / (rate + F);
+                if (createNewFarm)
+                {
+                    currentTakenSeconds += C / rate;
+                    rate += F;
+                }
+                else
+                    currentTakenSeconds += X / rate;
+            } while (createNewFarm);
+            cas.output = Math.Round(currentTakenSeconds, 7) + "";
         }
+
 
         public static string Solve(string input)
         {
@@ -39,30 +61,23 @@ namespace CodeJam
 
         class Case
         {
-            public decimal[][] input;
+            public string input;
             public string output;
 
             public static Case[] parseinput(string input)
             {
-                string[] lines = input.Trim().Split('\n');
+                string[] lines = input.Trim().Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
 
-                int nbCases = Convert.ToInt32(lines[0]);
+                long nbCases = Convert.ToInt64(lines[0]);
+                long linesPerCase = (lines.Length - 1) / nbCases;
+
                 Case[] cases = new Case[nbCases];
 
-                int iLine = 1;
                 for (int i = 0; i < nbCases; i++)
                 {
-                    Case newcase = new Case { input = new decimal[2][] };                    
-
-                    for (var caseLine = 0; caseLine < 2; caseLine++)
-                    {
-                        iLine++;
-                        var lineParts = lines[iLine].Split(' ');
-                        var linePartsDec = lineParts.Select(p => Decimal.Parse(p)).ToArray();
-                        newcase.input[caseLine ] = linePartsDec;
-                    }
+                    var caseLine = i * linesPerCase + 1;
+                    Case newcase = new Case { input = lines[caseLine] };
                     cases[i] = newcase;
-                    iLine++;
                 }
                 return cases;
             }

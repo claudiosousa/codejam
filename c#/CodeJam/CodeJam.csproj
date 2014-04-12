@@ -51,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="algos\BinarySearch.cs" />
-    <Compile Include="B.cs" />
     <Compile Include="frmCodeJam.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +70,10 @@
     <None Include="solved\2013\1AB.ManageYourEnergy.DP-failed.cs_" />
     <None Include="solved\2013\1AB.ManageYourEnergy.Sort-failed.cs_" />
     <None Include="solved\2013\1BA.Osmos.cs_" />
+    <None Include="Solver.cs.tempinprogress" />
+    <None Include="solved\2014\QA.Solver.cs_" />
+    <None Include="solved\2014\QB.Solver.cs_" />
+    <None Include="solved\2014\QC.Solver.cs_" />
     <Compile Include="tools\tools.cs" />
     <None Include="solved\2010\1BB.swapChickes.cs_" />
     <None Include="solved\2010\draft.1BC.PureNumber.cs_" />
