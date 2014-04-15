@@ -71,9 +71,10 @@
     <None Include="solved\2013\1AB.ManageYourEnergy.Sort-failed.cs_" />
     <None Include="solved\2013\1BA.Osmos.cs_" />
     <None Include="Solver.cs.tempinprogress" />
-    <None Include="solved\2014\QA.Solver.cs_" />
-    <None Include="solved\2014\QB.Solver.cs_" />
-    <None Include="solved\2014\QC.Solver.cs_" />
+    <None Include="solved\2014\QA.Magic Trick.cs_" />
+    <None Include="solved\2014\QB.Cookie Clicker Alpha.cs_" />
+    <None Include="solved\2014\QC.Minesweeper Master.cs_" />
+    <None Include="solved\2014\QD.Deceitful War.cs_" />
     <Compile Include="tools\tools.cs" />
     <None Include="solved\2010\1BB.swapChickes.cs_" />
     <None Include="solved\2010\draft.1BC.PureNumber.cs_" />
