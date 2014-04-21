@@ -12,57 +12,27 @@ namespace CodeJam
     class Solver
     {
 
-        static void processCase(Case cas)
+        static string solveCase(string input)
         {
-
-            cas.output = "";
+            return "0";
         }
 
 
         public static string Solve(string input)
         {
-            Case[] cases = Case.parseinput(input);
-            for (int i = 0; i < cases.Length; i++)
+            string[] lines = input.Trim().Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
+
+            int nbCases = Convert.ToInt32(lines[0]);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < nbCases; i++)
             {
-                Console.WriteLine("Case: " + i);
-                processCase(cases[i]);
+                //Console.WriteLine("Case: " + i);
+                int caseLine = i + 1;
+                string line = lines[caseLine];
+                string result = solveCase(line);
+                sb.AppendLine("Case #" + (i + 1) + ": " + result);
             }
-            return writeOutput(cases);
-        }
-
-        static string writeOutput(Case[] cases)
-        {
-            var sb = new StringBuilder();
-            for (var i = 0; i < cases.Length; i++)
-            {
-                sb.AppendLine("Case #" + (i + 1) + ": " + cases[i].output);
-
-            }
-            return sb.ToString(); ;
-        }
-
-        class Case
-        {
-            public string input;
-            public string output;
-
-            public static Case[] parseinput(string input)
-            {
-                string[] lines = input.Trim().Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
-
-                long nbCases = Convert.ToInt64(lines[0]);
-                long linesPerCase = (lines.Length - 1) / nbCases;
-
-                Case[] cases = new Case[nbCases];
-
-                for (int i = 0; i < nbCases; i++)
-                {
-                    var caseLine = i * linesPerCase + 1;
-                    Case newcase = new Case { input = lines[caseLine] };
-                    cases[i] = newcase;
-                }
-                return cases;
-            }
+            return sb.ToString();
         }
     }
 

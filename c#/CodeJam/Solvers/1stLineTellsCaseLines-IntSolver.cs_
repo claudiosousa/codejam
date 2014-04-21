@@ -11,66 +11,43 @@ namespace CodeJam
 
     class Solver
     {
-        static void processCase(Case cas)
+
+        static string solveCase(int[][] input)
         {
+            return "0";
         }
+
 
         public static string Solve(string input)
         {
-            Case[] cases = Case.parseinput(input);
-            for (int i = 0; i < cases.Length; i++)
+            string[] lines = input.Trim().Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
+
+            StringBuilder sb = new StringBuilder();
+            int nbCases = Convert.ToInt32(lines[0]);
+            int iLine = 1;
+            for (int i = 0; i < nbCases; i++)
             {
-              Console.WriteLine("Case: " + i);
-			    processCase(cases[i]);
-            }
-            return writeOutput(cases);
-        }
+                //Console.WriteLine("Case: " + i);
 
-        static string writeOutput(Case[] cases)
-        {
-            var sb = new StringBuilder();
-            for (var i = 0; i < cases.Length; i++)
-            {
-                sb.AppendLine("Case #" + (i + 1) + ": " + cases[i].output);
+                string[] lineParts = lines[iLine].Split(' ');
+                int[] linePartsint = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
 
-            }
-            return sb.ToString(); ;
-        }
+                int caseLines = linePartsint[0];
+                int[][] caseInput = new int[caseLines + 1][];
+                caseInput[0] = linePartsint;
 
-        class Case
-        {
-            public int[][] input;
-            public string output;
-
-            public static Case[] parseinput(string input)
-            {
-                string[] lines = input.Trim().Split('\n');
-
-                int nbCases = Convert.ToInt32(lines[0]);
-                Case[] cases = new Case[nbCases];
-
-                int iLine = 1;
-                for (int i = 0; i < nbCases; i++)
+                for (var caseLine = 0; caseLine < caseLines; caseLine++)
                 {
-                    string[] lineParts = lines[iLine].Split(' ');
-                    int[] linePartsint = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
-
-                    int caseLines = linePartsint[0];
-                    Case newcase = new Case { input = new int[caseLines + 1][] };
-                    newcase.input[0] = linePartsint;
-
-                    for (var caseLine = 0; caseLine < caseLines; caseLine++)
-                    {
-                        iLine++;
-                        lineParts = lines[iLine].Split(' ');
-                        linePartsint = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
-                        newcase.input[caseLine + 1] = linePartsint;
-                    }
-                    cases[i] = newcase;
                     iLine++;
+                    lineParts = lines[iLine].Split(' ');
+                    linePartsint = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
+                    caseInput[caseLine + 1] = linePartsint;
                 }
-                return cases;
+                string result = solveCase(caseInput);
+                sb.AppendLine("Case #" + (i + 1) + ": " + result);
+                iLine++;
             }
+            return sb.ToString();
         }
     }
 
