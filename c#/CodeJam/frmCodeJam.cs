@@ -54,9 +54,13 @@ namespace CodeJam
         private void btSaveFile_Click(object sender, EventArgs e)
         {
             var outPath = Path.Combine(pathDownload, "output.out");
+            if (File.Exists(outPath))
+                File.Delete(outPath);
             File.WriteAllText(outPath, tbOutput.Text);
 
             string codeoutPath = Path.Combine(pathDownload, "Solver.cs");
+            if (File.Exists(codeoutPath))
+                File.Delete(codeoutPath);
             string codeInPath = Path.Combine(Environment.CurrentDirectory, @"..\..\Solver.cs");
             File.Copy(codeInPath, codeoutPath, true);
         }
