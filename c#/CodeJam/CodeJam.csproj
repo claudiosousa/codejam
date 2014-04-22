@@ -76,6 +76,7 @@
     <None Include="solved\2014\QB.Cookie Clicker Alpha.cs_" />
     <None Include="solved\2014\QC.Minesweeper Master.cs_" />
     <None Include="solved\2014\QD.Deceitful War.cs_" />
+    <None Include="solved\2013\draft.1BB.Diamonds.cs_" />
     <Compile Include="tools\tools.cs" />
     <None Include="solved\2010\1BB.swapChickes.cs_" />
     <None Include="solved\2010\draft.1BC.PureNumber.cs_" />
