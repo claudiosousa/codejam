@@ -39,7 +39,6 @@ namespace CodeJam
             if (File.Exists(currentinputFile))
                 tbInput.Text = File.ReadAllText(currentinputFile);
             solver = new Solver();
-            solver.Initialize();
         }
 
         private void btnLoadFile_Click(object sender, EventArgs e)

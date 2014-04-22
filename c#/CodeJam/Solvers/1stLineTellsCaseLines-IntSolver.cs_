@@ -11,14 +11,13 @@ namespace CodeJam
 
     class Solver
     {
-
-        static string solveCase(int[][] input)
+        string solveCase(int[][] input)
         {
             return "0";
         }
 
 
-        public static string Solve(string input)
+        public string Solve(string input)
         {
             string[] lines = input.Trim().Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
 

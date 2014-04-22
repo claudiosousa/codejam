@@ -71,19 +71,18 @@
     <None Include="solved\2013\1AB.ManageYourEnergy.DP-failed.cs_" />
     <None Include="solved\2013\1AB.ManageYourEnergy.Sort-failed.cs_" />
     <None Include="solved\2013\1BA.Osmos.cs_" />
-    <None Include="Solver.cs.tempinprogress" />
     <None Include="solved\2014\QA.Magic Trick.cs_" />
     <None Include="solved\2014\QB.Cookie Clicker Alpha.cs_" />
     <None Include="solved\2014\QC.Minesweeper Master.cs_" />
     <None Include="solved\2014\QD.Deceitful War.cs_" />
     <None Include="solved\2013\draft.1BB.Diamonds.cs_" />
+    <None Include="solved\2013\Small.1BC.GarbledEmail.cs_" />
     <Compile Include="tools\tools.cs" />
     <None Include="solved\2010\1BB.swapChickes.cs_" />
     <None Include="solved\2010\draft.1BC.PureNumber.cs_" />
     <None Include="Solvers\1LineCase-IntSolver.cs_" />
     <None Include="Solvers\1stLineTellsCaseLines-IntSolver.cs_" />
     <None Include="Solvers\1LineCase-StringSolver.cs_" />
-    <None Include="Solvers\EqualCaseLines-StringSolver.cs_" />
     <None Include="solved\2008\2008.floatingCommaPrecision.cs_" />
     <None Include="solved\2008\2008.milkshakes.cs_" />
     <None Include="solved\2008\2008.minScalar.cs_" />
@@ -117,7 +116,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Solvers\EqualCaseLines-IntSolver.cs_" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
