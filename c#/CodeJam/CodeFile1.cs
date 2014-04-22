@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Numerics;
+using System.IO;
 
 class Myon
 {
@@ -12,11 +13,15 @@ class Myon
         new Myon().calc();
     }
 
+    string[] words;
+
     void init()
     {
-
+        words = File.ReadAllText("garbled_email_dictionary.txt").Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
     }
 
+
+    int MAX = 99999999;
     void calc()
     {
         Scanner cin = new Scanner();
@@ -26,65 +31,55 @@ class Myon
         for (int test = 1; test <= testCase; test++)
         {
             Console.Write("Case #{0}: ", test);
-            int n = cin.nextInt();
-            int x = Math.Abs(cin.nextInt());
-            int y = cin.nextInt();
-            if (x + y > 2000)
+            string s = cin.next();
+            int n = s.Length;
+            int[,] dp = new int[n + 1, 5];
+            for (int i = 0; i < n + 1; i++)
             {
-                Console.WriteLine(0); continue;
+                for (int j = 0; j < 5; j++)
+                {
+                    dp[i, j] = MAX;
+                }
             }
-            if (x == 0)
-            {
-                int need = (y + 1) * (y + 2) / 2;
-                if (n >= need) Console.WriteLine(1.0);
-                else Console.WriteLine(0.0);
-                continue;
-            }
-            int sum = x + y;
-            int nn = (sum - 1) * sum / 2;
-            n -= nn;
-            if (n <= 0)
-            {
-                Console.WriteLine(0.0);
-                continue;
-            }
-            if (n >= sum * 2)
-            {
-                Console.WriteLine(1.0);
-                continue;
-            }
-            double[] dp = new double[sum + 2];
-            dp[0] = 1;
+            dp[0, 0] = 0;
             for (int i = 0; i < n; i++)
             {
-                double[] nextdp = new double[sum + 2];
-                for (int j = 0; j <= sum; j++)
+                for (int j = 0; j < 5; j++)
                 {
-                    if (j == sum)
+                    if (dp[i, j] == MAX) continue;
+                    foreach (string ss in words)
                     {
-                        nextdp[j] += dp[j];
-                    }
-                    else if (i - j == sum)
-                    {
-                        nextdp[j + 1] += dp[j];
-                    }
-                    else
-                    {
-                        nextdp[j] += 0.5 * dp[j];
-                        nextdp[j + 1] += 0.5 * dp[j];
+                        if (i + ss.Length > n) continue;
+                        int pre = j;
+                        int change = 0;
+                        for (int k = 0; k < ss.Length; k++)
+                        {
+                            if (s[i + k] != ss[k])
+                            {
+                                if (pre != 0)
+                                {
+                                    pre = 5; break;
+                                }
+                                else pre = 4;
+                                change++;
+                            }
+                            else
+                            {
+                                pre = Math.Max(0, pre - 1);
+                            }
+                        }
+                        if (pre == 5) continue;
+                        dp[i + ss.Length, pre] = Math.Min(dp[i + ss.Length, pre], dp[i, j] + change);
                     }
                 }
-                dp = nextdp;
             }
-            double p = 0;
-            for (int i = y + 1; i <= sum + 1; i++)
+
+            int ret = MAX;
+            for (int j = 0; j < 5; j++)
             {
-                p += dp[i];
+                ret = Math.Min(dp[n, j], ret);
             }
-            Console.WriteLine("{0:0.0000000000000000}", p);
-
-
-
+            Console.WriteLine(ret);
         }
 
     }

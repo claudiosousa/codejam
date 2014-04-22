@@ -16,7 +16,7 @@ namespace CodeJam
         static string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         static string pathDownload = Path.Combine(pathUser, "Downloads");
         static string currentinputFile = "currentinput.txt";
-
+        static Solver solver;
         public frmCodeJam()
         {
             InitializeComponent();
@@ -31,13 +31,15 @@ namespace CodeJam
 
         private void btnSolve_Click(object sender, EventArgs e)
         {
-           tbOutput.Text = Solver.Solve(tbInput.Text);
+            tbOutput.Text = solver.Solve(tbInput.Text);
         }
 
         private void frmCodeJam_Shown(object sender, EventArgs e)
         {
             if (File.Exists(currentinputFile))
                 tbInput.Text = File.ReadAllText(currentinputFile);
+            solver = new Solver();
+            solver.Initialize();
         }
 
         private void btnLoadFile_Click(object sender, EventArgs e)
