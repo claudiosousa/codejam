@@ -1,0 +1,135 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace CodeJam
+{
+
+    class Solver
+    {
+        Dictionary<int, List<int>> tree;
+
+        private int getMaxTreeSize(int? node, int? parent, out string nodes)
+        {
+            int maxSize = 0;
+            string maxSizeNodes = ""; ;
+            if (!node.HasValue)
+            {
+                foreach (int key in tree.Keys)
+                {
+                    string treeFromKeyNodes;
+                    int treeFromKeySize = getMaxTreeSize(key, null, out treeFromKeyNodes);
+                    if (treeFromKeySize > maxSize)
+                    {
+                        maxSize = treeFromKeySize;
+                        maxSizeNodes = key+":"+treeFromKeyNodes;
+                    }
+                }
+                maxSize++;
+            }
+            else
+            {
+                var children = tree[node.Value].ToArray();
+                if (parent.HasValue)
+                {
+                    children = children.Where(n => n != parent.Value).ToArray();
+                    maxSizeNodes += node.Value + ",";
+                }
+                if (children.Length >= 2)
+                {
+                    int biggestChild = 0,
+                        nextBiggestChild = -1;
+                    string biggestChildNode = "",
+                        nextBiggestChildNode = "";
+                    foreach (var child in children)
+                    {
+                        string childNode;
+                        var childSize = getMaxTreeSize(child, node.Value, out childNode);
+                        if (childSize > nextBiggestChild)
+                        {
+                            if (childSize > biggestChild)
+                            {
+                                nextBiggestChildNode = biggestChildNode;
+                                biggestChildNode = childNode;
+                                nextBiggestChild = biggestChild;
+                                biggestChild = childSize;
+                            }
+                            else
+                            {
+                                nextBiggestChildNode = childNode;
+                                nextBiggestChild = childSize;
+                            }
+                        }
+                    }
+                    maxSize = nextBiggestChild + biggestChild + 2;
+                    maxSizeNodes += biggestChildNode + nextBiggestChildNode ;
+                }
+            }
+            nodes = maxSizeNodes;
+            return maxSize;
+            /*
+            List<int[]> pendingNodes
+            do{
+                int treeSize = 
+            }while()*/
+        }
+
+        string solveCase(int[][] input)
+        {
+            int N = input[0][0];
+            tree = new Dictionary<int, List<int>>();
+            for (int i = 1; i <= N; i++)
+            {
+                tree.Add(i, new List<int>());
+            }
+            for (int i = 1; i < input.Length; i++)
+            {
+                int[] edge = input[i];
+                tree[edge[0]].Add(edge[1]);
+                tree[edge[1]].Add(edge[0]);
+            }
+            string nodes;
+            return N - getMaxTreeSize(null, null, out nodes) + "";// +" - " + nodes + "";
+        }
+
+        public string Solve(string input)
+        {
+            string[] lines = input.Trim().Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
+
+            StringBuilder sb = new StringBuilder();
+            int nbCases = Convert.ToInt32(lines[0]);
+            int iLine = 1;
+            for (int i = 0; i < nbCases; i++)
+            {
+                Console.WriteLine("Case: " + i);
+
+                string[] lineParts = lines[iLine].Split(' ');
+                int[] linePartsint = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
+
+                int caseLines = linePartsint[0] - 1;
+                int[][] caseInput = new int[caseLines + 1][];
+                caseInput[0] = linePartsint;
+
+                for (var caseLine = 0; caseLine < caseLines; caseLine++)
+                {
+                    iLine++;
+                    lineParts = lines[iLine].Split(' ');
+                    linePartsint = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
+                    caseInput[caseLine + 1] = linePartsint;
+                }
+                string result = solveCase(caseInput);
+                sb.AppendLine("Case #" + (i + 1) + ": " + result);
+                iLine++;
+                if (iLine >= lines.Length)
+                    break;
+            }
+            return sb.ToString();
+        }
+    }
+
+}
+

@@ -62,7 +62,7 @@ namespace CodeJam
             string codeoutPath = Path.Combine(pathDownload, "Solver.cs");
             if (File.Exists(codeoutPath))
                 File.Delete(codeoutPath);
-            string codeInPath = Path.Combine(Environment.CurrentDirectory, @"..\..\Solver.cs");
+            string codeInPath = Path.Combine(Environment.CurrentDirectory, @"..\..\..\Solver.cs");
             File.Copy(codeInPath, codeoutPath, true);
         }
 
