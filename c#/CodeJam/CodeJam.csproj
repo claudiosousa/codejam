@@ -97,6 +97,9 @@
     <None Include="solved\2013\Small.1BC.GarbledEmail.cs_" />
     <None Include="solved\2014\1AA.Solver.cs_" />
     <None Include="solved\2014\1AB.FullBinaryTree.cs_" />
+    <None Include="solved\2014\1a.cs_" />
+    <None Include="solved\2014\1bsolver.cs_%24" />
+    <Compile Include="solver.cs" />
     <Compile Include="tools\tools.cs" />
     <None Include="solved\2010\1BB.swapChickes.cs_" />
     <None Include="solved\2010\draft.1BC.PureNumber.cs_" />
@@ -114,7 +117,7 @@
     <None Include="solved\2010\1CB.LoadTesting.Loop.cs_" />
     <None Include="solved\2010\draft.1CC.checkers.cs_" />
     <None Include="solved\2010\1BA.FileFixIt.cs_" />
-    <Compile Include="Solver.cs" />
+    <None Include="solved\2014\1AC.ProperShuffle.cs_" />
     <EmbeddedResource Include="frmCodeJam.resx">
       <DependentUpon>frmCodeJam.cs</DependentUpon>
     </EmbeddedResource>
