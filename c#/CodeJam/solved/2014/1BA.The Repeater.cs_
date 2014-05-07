@@ -23,7 +23,7 @@ namespace CodeJam
             bool end = false;
             do
             {
-                char cha = 'a';
+                char cha = default(char);
 
                 int chaFound = 0;
                 int[] chaFounds = new int[strings.Count];
@@ -61,7 +61,21 @@ namespace CodeJam
                 }
                 if (end)
                     break;
-                int toHave = 0;
+                int toHaveCost = int.MaxValue;
+                int toHaveTemp = 1, toHaveCostTemp;
+                do
+                {
+                    toHaveCostTemp = 0;
+                    for (int j = 0; j < chaFounds.Length; j++)
+                    {
+                        toHaveCostTemp += Math.Abs(chaFounds[j] - toHaveTemp);
+                    }
+                    if (toHaveCostTemp >= toHaveCost)
+                        break;
+                    toHaveCost = toHaveCostTemp + 0;
+                    toHaveTemp++;
+                } while (true);
+                /*
                 if (chaFound % strings.Count > strings.Count / 2)
                 {
                     toHave = chaFound / strings.Count + 1;
@@ -74,7 +88,8 @@ namespace CodeJam
                 {
                     requiredMoves += Math.Abs(chaFounds[j] - toHave);
                 }
-
+            */
+                requiredMoves += toHaveCost;
             } while (true);
 
             for (int i = 0; i < strings.Count; i++)
@@ -82,7 +97,7 @@ namespace CodeJam
                 var strObj = strings[i];
                 var str = strObj[0].ToString();
                 var charPOs = int.Parse(strObj[1].ToString());
-                if (charPOs != str.Length )
+                if (charPOs != str.Length)
                     return "Fegla Won";
             }
             return requiredMoves + "";

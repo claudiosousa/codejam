@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -11,129 +12,55 @@ namespace CodeJam
 
     class Solver
     {
-        Dictionary<int, List<int>> fligths = null;
-        List<int[]> cities = null;
-        int[] order = null;
-        int[] unsortedCities = null;
-        List<string> possible = new List<string>();
 
-        void navigatetoChild(HashSet<int> done, HashSet<int> parents, string prefix)
+        int maxNumbers = (int)Math.Pow(10,9);
+        int[,] res;
+        void intialize()
         {
-            if (parents.Count == order.Count())
-                possible.Add(prefix);
-            if (parents.Count > 0)
+            res = new int[maxNumbers, maxNumbers];
+            for (int i = 0; i < maxNumbers; i++)
             {
-                HashSet<int> parents2 = new HashSet<int>(parents);
-                parents2.Remove(parents2.Last());
-                navigatetoChild(done, parents2, prefix);
-            }            
-            int par = parents.Last();
-            var nextFligsts = fligths[par];
-            for (int j = 0; j < nextFligsts.Count; j++)
-            {
-                var fligt = nextFligsts[j];
-                if (done.Contains(fligt) || parents.Contains(fligt))
+                for (int j = 0; j < maxNumbers; j++)
                 {
-                    continue;
+                    int and = i & j;
+                    res[i, j] = and;
                 }
-                HashSet<int> parents2 = new HashSet<int>(parents);
-                HashSet<int> done2 = new HashSet<int>(done);
-                parents2.Add(fligt);
-                done2.Add(fligt);
-                navigatetoChild(done, parents2, prefix + unsortedCities[fligt]);
             }
-
         }
-        string navigate()
+        string solveCase(int[] input)
         {
-
-            for (int i = 0; i < order.Length; i++)
+            var a = input[0];
+            var b = input[1];
+            var k = input[2];
+            var res = 0;// k * b + k * Math.Max(0, (a - k));
+            //BigInteger res = new BigInteger();
+            for (int i = 0; i < a; i++)
             {
-                var cityi = order[i];
-                var nextFligsts = fligths[cityi];
-                for (int j = 0; j < nextFligsts.Count; j++)
+                for (int j = 0; j < b; j++)
                 {
-                    var fligt = nextFligsts[j];
-                    HashSet<int> parents2 = new HashSet<int>();
-                    HashSet<int> done2 = new HashSet<int>();
-                    parents2.Add(fligt);
-                    done2.Add(fligt);
-                    navigatetoChild(done2, parents2, unsortedCities[fligt]);
+                    if ((i & j) < k)
+                        res++;
                 }
-
             }
-
-            var sorted = possible.Sort();
-        }
-        string solveCase(int[][] input)
-        {
-            int nbCities = input[0][0];
-            cities = new List<int[]>();
-            unsortedCities = new int[nbCities];
-            for (int i = 0; i < nbCities; i++)
-            {
-                unsortedCities[i] = input[i + 1][0];
-                cities.Add(new int[] { input[i + 1][0], i + 1 });
-            }
-            cities.Sort(new Comparison<int[]>((a, b) => a[0] - b[0]));
-            order = new int[cities.Count];
-
-            for (int i = 0; i < cities.Count; i++)
-            {
-                order[i] = cities[i][1];
-            }
-            int nbFlights = input[0][1];
-
-            fligths = new Dictionary<int, List<int>>();
-            for (int i = 0; i < nbFlights; i++)
-            {
-                var nodes = input[nbCities + i + 1];
-                List<int> val;
-                if (fligths.TryGetValue(nodes[0], out val))
-                    fligths.Add(nodes[0], new List<int>(new int[] { nodes[1] }));
-                else
-                    val.Add(nodes[1]);
-
-                if (fligths.TryGetValue(nodes[1], out val))
-                    fligths.Add(nodes[1], new List<int>(new int[] { nodes[0] }));
-                else
-                    val.Add(nodes[0]);
-            }
-
-
-            navigate(new HashSet<int>(), new HashSet<int>());
-            return "0";
+            return res + "";
         }
 
 
         public string Solve(string input)
         {
+            //intialize();
             string[] lines = input.Trim().Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
 
-            StringBuilder sb = new StringBuilder();
             int nbCases = Convert.ToInt32(lines[0]);
-            int iLine = 1;
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < nbCases; i++)
             {
                 //Console.WriteLine("Case: " + i);
-
-                string[] lineParts = lines[iLine].Split(' ');
-                int[] linePartsint = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
-
-                int caseLines = linePartsint[0] * linePartsint[1];
-                int[][] caseInput = new int[caseLines + 1][];
-                caseInput[0] = linePartsint;
-
-                for (var caseLine = 0; caseLine < caseLines; caseLine++)
-                {
-                    iLine++;
-                    lineParts = lines[iLine].Split(' ');
-                    linePartsint = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
-                    caseInput[caseLine + 1] = linePartsint;
-                }
-                string result = solveCase(caseInput);
+                int caseLine = i + 1;
+                string[] lineParts = lines[caseLine].Split(' ');
+                int[] inputData = lineParts.Select(n => Convert.ToInt32(n)).ToArray();
+                string result = solveCase(inputData);
                 sb.AppendLine("Case #" + (i + 1) + ": " + result);
-                iLine++;
             }
             return sb.ToString();
         }
