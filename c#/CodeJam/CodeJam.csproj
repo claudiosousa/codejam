@@ -92,6 +92,7 @@
       <DependentUpon>frmCodeJam.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="Program2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="solved\2010\1AA.Rotate.cs_" />
     <None Include="solved\2010\1AC.NumberGame.cs_" />
