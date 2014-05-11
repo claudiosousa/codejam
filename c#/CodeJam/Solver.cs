@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
-using System.Numerics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -12,55 +11,40 @@ namespace CodeJam
 
     class Solver
     {
-
-        int maxNumbers = (int)Math.Pow(10,9);
-        int[,] res;
-        void intialize()
+        string solveCase(int[][] input)
         {
-            res = new int[maxNumbers, maxNumbers];
-            for (int i = 0; i < maxNumbers; i++)
-            {
-                for (int j = 0; j < maxNumbers; j++)
-                {
-                    int and = i & j;
-                    res[i, j] = and;
-                }
-            }
-        }
-        string solveCase(int[] input)
-        {
-            var a = input[0];
-            var b = input[1];
-            var k = input[2];
-            var res = 0;// k * b + k * Math.Max(0, (a - k));
-            //BigInteger res = new BigInteger();
-            for (int i = 0; i < a; i++)
-            {
-                for (int j = 0; j < b; j++)
-                {
-                    if ((i & j) < k)
-                        res++;
-                }
-            }
-            return res + "";
+            return "0";
         }
 
 
         public string Solve(string input)
         {
-            //intialize();
             string[] lines = input.Trim().Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
 
-            int nbCases = Convert.ToInt32(lines[0]);
             StringBuilder sb = new StringBuilder();
+            int nbCases = Convert.ToInt32(lines[0]);
+            int iLine = 1;
             for (int i = 0; i < nbCases; i++)
             {
                 //Console.WriteLine("Case: " + i);
-                int caseLine = i + 1;
-                string[] lineParts = lines[caseLine].Split(' ');
-                int[] inputData = lineParts.Select(n => Convert.ToInt32(n)).ToArray();
-                string result = solveCase(inputData);
+
+                string[] lineParts = lines[iLine].Split(' ');
+                int[] linePartsint = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
+
+                int caseLines = linePartsint[0];
+                int[][] caseInput = new int[caseLines + 1][];
+                caseInput[0] = linePartsint;
+
+                for (var caseLine = 0; caseLine < caseLines; caseLine++)
+                {
+                    iLine++;
+                    lineParts = lines[iLine].Split(' ');
+                    linePartsint = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
+                    caseInput[caseLine + 1] = linePartsint;
+                }
+                string result = solveCase(caseInput);
                 sb.AppendLine("Case #" + (i + 1) + ": " + result);
+                iLine++;
             }
             return sb.ToString();
         }

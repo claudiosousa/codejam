@@ -13,20 +13,17 @@ namespace CodeJam
     class Solver
     {
 
-        Dictionary<int, int> res = new Dictionary<int, int>();
+        int maxNumbers = (int)Math.Pow(10,9);
+        int[,] res;
         void intialize()
         {
-            int foundVal = 0;
-            for (int i = 0; i < 1000; i++)
+            res = new int[maxNumbers, maxNumbers];
+            for (int i = 0; i < maxNumbers; i++)
             {
-                for (int j = 0; j < 1000; j++)
+                for (int j = 0; j < maxNumbers; j++)
                 {
-                    var and = i & j;
-
-                    if (!res.TryGetValue(and, out foundVal))
-                        res.Add(and, 1);
-                    else
-                        res[and] = foundVal + 1;
+                    int and = i & j;
+                    res[i, j] = and;
                 }
             }
         }
@@ -51,7 +48,7 @@ namespace CodeJam
 
         public string Solve(string input)
         {
-            intialize();
+            //intialize();
             string[] lines = input.Trim().Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
 
             int nbCases = Convert.ToInt32(lines[0]);

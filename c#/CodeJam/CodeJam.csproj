@@ -85,7 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="algos\BinarySearch.cs" />
-    <Compile Include="CodeFile1.cs" />
     <Compile Include="frmCodeJam.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,7 +113,7 @@
     <None Include="solved\2014\1AA.Solver.cs_" />
     <None Include="solved\2014\1AB.FullBinaryTree.cs_" />
     <None Include="solved\2014\1BA.The Repeater.cs_" />
-    <None Include="solved\2014\1BB.solver.cs_%24" />
+    <None Include="solved\2014\1BB.Lotery.cs.draft_" />
     <None Include="solved\2014\1BC.solver.cs_" />
     <Compile Include="solver.cs" />
     <Compile Include="tools\tools.cs" />
