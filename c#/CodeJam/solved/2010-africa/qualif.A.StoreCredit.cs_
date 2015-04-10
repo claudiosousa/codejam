@@ -1,0 +1,56 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace CodeJam
+{
+
+    class Solver
+    {
+        string solveCase(int total,int[] prices)
+        {
+            Dictionary<int, int> pricesbypos = new Dictionary<int, int>();
+            for (int i = 0; i < prices.Length; i++)
+            {
+                int p = prices[i];
+                int pos;
+                if (pricesbypos.TryGetValue(total - p, out pos))
+                {
+                    return pos +" "+(i+1);
+                }
+                pricesbypos[p] = i + 1;
+            }
+            return "0";
+        }
+
+
+        public string Solve(string input)
+        {
+            string[] lines = input.Trim().Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
+
+            StringBuilder sb = new StringBuilder();
+            int nbCases = Convert.ToInt32(lines[0]);
+            int iLine = 1;
+            for (int i = 0; i < nbCases; i++)
+            {
+                //Console.WriteLine("Case: " + i);
+
+                int total = Convert.ToInt32(lines[iLine]);
+                iLine += 2;
+                string[] lineParts = lines[iLine].Split(' ');
+                int[] linePartsint = lineParts.Select(p => Convert.ToInt32(p)).ToArray();
+
+                string result = solveCase(total, linePartsint);
+                sb.AppendLine("Case #" + (i + 1) + ": " + result);
+                iLine++;
+            }
+            return sb.ToString();
+        }
+    }
+
+}
+

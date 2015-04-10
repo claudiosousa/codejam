@@ -92,7 +92,6 @@
       <DependentUpon>frmCodeJam.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="Program2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="solved\2010\1AA.Rotate.cs_" />
     <None Include="solved\2010\1AC.NumberGame.cs_" />
@@ -116,6 +115,8 @@
     <None Include="solved\2014\1BA.The Repeater.cs_" />
     <None Include="solved\2014\1BB.Lotery.cs.draft_" />
     <None Include="solved\2014\1BC.solver.cs_" />
+    <None Include="solved\2010-africa\qualif.A.StoreCredit.cs_" />
+    <None Include="solved\2010-africa\qualif.B.ReverseWords.cs_" />
     <Compile Include="solver.cs" />
     <Compile Include="tools\tools.cs" />
     <None Include="solved\2010\1BB.swapChickes.cs_" />
