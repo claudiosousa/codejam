@@ -14,8 +14,7 @@ namespace CodeJam
         string solveCase(string input)
         {
             var res = input.Split(' ').Reverse();
-           return res.Aggregate((a,b)=>  a+" "+b);
-         
+            return res.Aggregate((a, b) => a + " " + b);
         }
 
 
