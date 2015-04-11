@@ -118,6 +118,8 @@
     <None Include="solved\2010-africa\qualif.A.StoreCredit.cs_" />
     <None Include="solved\2010-africa\qualif.B.ReverseWords.cs_" />
     <None Include="solved\2015\QA.StandingOvation.cs_" />
+    <None Include="solver - .cs_" />
+    <None Include="solved\2015\QD.Ominous-Small.cs_" />
     <Compile Include="solver.cs" />
     <None Include="tools\Solver.cs_" />
     <Compile Include="tools\tools.cs" />

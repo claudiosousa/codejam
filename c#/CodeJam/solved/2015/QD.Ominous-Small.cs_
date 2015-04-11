@@ -1,0 +1,54 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace CodeJam
+{
+
+    class Solver
+    {
+        string solveCase(int[] input)
+        {
+            int x = input[0];
+            int r = input[1];
+            int c = input[2];
+            if ((c * r) % x != 0)
+                return "RICHARD";
+            int maxSide = (x + 1) / 2;
+            if (maxSide > r || maxSide > c)
+                return "RICHARD";
+            if (r >= x && c >= x)
+                return "GABRIEL";
+
+            if (x>=4 && (c<3 || r<3))
+                return "RICHARD";
+
+            return "GABRIEL";
+        }
+
+
+        public string Solve(string input)
+        {
+            string[] lines = input.Trim().Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
+
+            int nbCases = Convert.ToInt32(lines[0]);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < nbCases; i++)
+            {
+                //Console.WriteLine("Case: " + i);
+                int caseLine = i + 1;
+                string[] lineParts = lines[caseLine].Split(' ');
+                int[] inputData = lineParts.Select(n => Convert.ToInt32(n)).ToArray();
+                string result = solveCase(inputData);
+                sb.AppendLine("Case #" + (i + 1) + ": " + result);
+            }
+            return sb.ToString();
+        }
+    }
+
+}
+
