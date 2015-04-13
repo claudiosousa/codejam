@@ -14,19 +14,24 @@ namespace CodeJam
         int currentMin;
         int calculateIfSplit(List<int> plates, int minutes)
         {
+            List<int> plates2 = null;
             minutes++;
             int maxPankakes = plates.Max();
             int pi = plates.IndexOf(maxPankakes);
+            if (maxPankakes == 9)
+            {
+                plates2 = new List<int>(plates);
+                plates2[pi] = 6;
+                plates2.Add(3);
+            }
             int half = plates[pi] / 2;
             plates[pi] -= half;
-            List<int> plates2 = new List<int>(plates);
-            var max = plates.Max();
             plates.Add(half);
-            if (plates.Count == 2 || plates[pi] == max)
+
+            if (plates2 == null)
                 return calculateMinutes(plates, minutes);
 
 
-            plates2[plates2.IndexOf(max)] += half;
             return Math.Min(calculateMinutes(plates, minutes), calculateMinutes(plates2, minutes));
         }
 
@@ -58,8 +63,8 @@ namespace CodeJam
                 currentMin = minutes;
                 return minutes;
             }
-            if (plates.Max() <= 2 )
-                return calculateIfNoSplit(new List<int>(plates), minutes); 
+            if (plates.Max() <= 3)
+                return calculateIfNoSplit(new List<int>(plates), minutes);
             /*if (plates.Max() % 2 == 1)
                 return calculateIfNoSplit(new List<int>(plates), minutes);
             */

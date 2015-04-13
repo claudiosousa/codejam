@@ -76,25 +76,45 @@ namespace CodeJam
         ulong strLength;
         byte[] str2byte;
         ulong byteCount;
-        bool canFindChar(int char2find, ulong index)
+
+        List<ulong> findAllRightSums(int char2find, ulong start, ulong end)
         {
+            List<ulong> res = new List<ulong>();
             int mult = 1;
-            while (index < strLength)
+            bool reverse = end < start;
+            ulong index = start;
+            while (reverse ? index > end : index < end)
             {
                 int nextChar = str2byte[index % byteCount];
-                mult = multiply(mult, nextChar);
-                if (char2find!= 4 && char2find == mult)
+                if (reverse)
+                    mult = multiply(nextChar, mult);
+                else
+                    mult = multiply(mult, nextChar);
+                if (char2find == mult)
                 {
-                    if (canFindChar(char2find + 1, index + 1))
-                        return true;
+                    res.Add(index);
                 }
-                index++;    
+                if (reverse)
+                    index--;
+                else
+                    index++;
             }
-            return mult == char2find;
+            return res;
+        }
+
+        List<ulong> iIndexes, kIndexes;
+        List<KeyValuePair<ulong, bool>> ikIndexes;
+        Dictionary<ulong, int> ikIndexesByValue;
+        Dictionary<int, int> iStepSums;
+
+        sbyte getSumValueBetween(ulong currentIVal, ulong currentKVal)
+        {
+            return 0;
         }
 
         string solveCase(string[][] input)
         {
+
             var str = input[1][0];
             byteCount = (ulong)str.LongCount();
             strLength = ulong.Parse(input[0][1]) * byteCount;
@@ -103,7 +123,60 @@ namespace CodeJam
             {
                 str2byte[i] = (byte)((int)str[i] - 103);
             }
-            return canFindChar(2, 0) ? "YES" : "NO";
+
+            iIndexes = findAllRightSums(2, 0, strLength);
+            if (iIndexes.Count == 0)
+                return "NO";
+            kIndexes = findAllRightSums(4, strLength - 1, iIndexes[0]);
+            if (kIndexes.Count == 0)
+                return "NO";
+            ikIndexesByValue = new Dictionary<ulong, int>();
+            ikIndexes = new List<KeyValuePair<ulong, bool>>(iIndexes.Select(i => new KeyValuePair<ulong, bool>(i, true)));
+            ikIndexes.AddRange(kIndexes.Select(k => new KeyValuePair<ulong, bool>(k, false)));
+            ikIndexes.Sort((a, b) => a.Key.CompareTo(b.Key));
+            ikIndexes = new List<KeyValuePair<ulong, bool>>(ikIndexes.Distinct());
+            iStepSums = new Dictionary<int, int>();
+            for (int i = 0; i < ikIndexes.Count; i++)
+            {
+                var ikIndex = ikIndexes[i];
+                if (!ikIndexesByValue.ContainsKey(ikIndex.Key))
+                    ikIndexesByValue.Add(ikIndex.Key, i);
+                if (i < ikIndexes.Count - 1)
+                {
+                    var nextikIndex = ikIndexes[i + 1];
+                    int sum = 1;
+                    var start = ikIndex.Value ? ikIndex.Key + 1 : ikIndex.Key;
+                    var end = nextikIndex.Value ? nextikIndex.Key : nextikIndex.Key - 1;
+                    for (ulong j = start; j <= end; j++)
+                    {
+                        int nextChar = str2byte[j % byteCount];
+                        sum = multiply(sum, nextChar);
+                    }
+                    iStepSums.Add(i, sum);
+                }
+
+            }
+            for (int i = 0; i < iIndexes.Count; i++)
+            {
+                ulong currentIVal = iIndexes[0];
+                for (int k = 0; k < kIndexes.Count; k++)
+                {
+                    ulong currentKVal = kIndexes[0];
+                    if (currentKVal <= currentIVal)
+                        break;
+                    int startIndex = ikIndexesByValue[currentIVal];
+                    int endIndex = ikIndexesByValue[currentKVal];
+                    int sum = 1;
+                    for (int j = startIndex; j < endIndex; j++)
+                    {
+                        sum = multiply(sum, iStepSums[j]);
+                    }
+                    if (sum == 3)
+                        return "YES";
+                }
+
+            }
+            return "NO";
         }
 
 
