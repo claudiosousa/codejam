@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeJam.algos;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
@@ -11,29 +12,41 @@ namespace CodeJam
 
     class Solver
     {
+        struct barber
+        {
+            public int i;
+            public int time;
+            public ulong Next;
+        }
+
         string solveCase(int[][] input)
         {
-            int maxDecrease = 0;
-            int cumulatedDecrease = 0;
-            int lastVal = input[1][0];
-            for (int i = 1; i < input[1].Length; i++)
+            int n = input[0][1];
+
+            List<barber> barbers = new List<barber>(input.Length);
+            int[] barbersTimes = input[1];
+            for (int i = 0; i < barbersTimes.Length; i++)
             {
-                var tlastVal = lastVal;
-                int currentVal = input[1][i];
-                lastVal = currentVal;
-                if (currentVal >= tlastVal) 
-                    continue;
-                int delta = tlastVal - currentVal;
-                if (delta > maxDecrease)
-                    maxDecrease = delta;
-                cumulatedDecrease += delta;
+                int t = barbersTimes[i];
+                barbers.Add(new barber { i = i + 1, time = t });
             }
-            long option2 = 0;
-              for (int i = 0; i < input[1].Length-1; i++)
-              {
-                  option2 += (long)Math.Min(input[1][i], maxDecrease);
-              }
-            return cumulatedDecrease + " " + option2;
+            barbers.Sort((a, b) => a.Next > b.Next ? 1 : (a.Next < b.Next ? -1 : (a.i < b.i ? -1 : 1)));
+
+
+            // barber b;
+            int afteri = 0;
+            for (int i = 0; i < n; i++)
+            {
+                barber b = barbers[0];
+                if (i==n-1)
+                    return b.i.ToString();
+                b.Next += (ulong)b.time;              
+                barbers.RemoveAt(0);
+                afteri = barbers.FindLastMatchingFromBeginning((x) => x.Next < b.Next || (x.Next == b.Next && x.i < b.i));
+                barbers.Insert(afteri + 1, b);
+                // BinarySearch. barbers.BinarySearch
+            }
+            return "0";
         }
 
 
