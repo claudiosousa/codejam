@@ -1,0 +1,95 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace CodeJam
+{
+
+    class Solver
+    {
+        long currentMin;
+        static List<long> getTurnNumbers(long start)
+        {
+            var res = new List<long>();
+            if (start % 10 == 0)
+                start = start - 1;
+            string startStr = start.ToString();
+            int digits = start.ToString().Length;
+            if (digits == 1)
+                return res;
+
+            for (int i = digits - 1; i >= 0; i--)
+            {
+                int a = startStr[i] - 48;
+                if (a == 1 && i == digits - 1)
+                {
+                    res.Add(start);
+                    continue;
+                }
+                if (a == 0)
+                    continue;
+
+                long pow = (long)Math.Pow(10, digits - i);
+                res.Add(((long)(start / pow)) * (long)pow + 1);
+            }
+
+            if (digits > 2)
+                getTurnNumbers((long)Math.Pow(10, digits - 1) - 1).ForEach(i => res.Add(i));
+
+            return res;
+        }
+        void calculateMinForValue(long toReach, long cumul)
+        {
+
+            List<long> turnNumbers = getTurnNumbers(toReach);
+
+            long total = cumul + toReach;
+            if (currentMin > total)
+                currentMin = total;
+
+            for (int i = 0; i < turnNumbers.Count; i++)
+            {
+                long turnAt = turnNumbers[i];
+                long nextToReach = long.Parse(new String(turnAt.ToString().Reverse().ToArray()));
+                if (nextToReach >= turnAt)
+                    continue;
+                calculateMinForValue(nextToReach, toReach - turnAt + 1 + cumul);
+            }
+
+        }
+        string solveCase(long[] input)
+        {
+
+            currentMin = long.MaxValue;
+            long toReach = input[0];
+            calculateMinForValue(toReach, 0);
+            return currentMin.ToString();
+        }
+
+
+        public string Solve(string input)
+        {
+            string[] lines = input.Trim().Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
+
+            int nbCases = Convert.ToInt32(lines[0]);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < nbCases; i++)
+            {
+                //MessageBox.Show(i + "");
+                int caseLine = i + 1;
+                string[] lineParts = lines[caseLine].Split(' ');
+                long[] inputData = lineParts.Select(n => Convert.ToInt64(n)).ToArray();
+                string result = solveCase(inputData);
+                sb.AppendLine("Case #" + (i + 1) + ": " + result);
+            }
+            return sb.ToString();
+        }
+    }
+
+}
+

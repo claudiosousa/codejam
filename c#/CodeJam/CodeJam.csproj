@@ -114,6 +114,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="solved\2010\1AA.Rotate.cs_" />
     <None Include="solved\2010\1AC.NumberGame.cs_" />
+    <None Include="solved\2015\1LineCase-IntSolver.cs_" />
     <None Include="Solvers\1stLineTellsCaseLines-StringSolver.cs_" />
     <None Include="solved\2013\QA.Tic-Tac-Toe-Tomek.cs_" />
     <None Include="solved\2013\QB.Lawnmower.cs_" />
@@ -140,6 +141,9 @@
     <None Include="solved\2015\QD.Ominous-Small.cs_" />
     <None Include="solved\2015\QD.Ominous-Large.cs_" />
     <None Include="solved\2015\1AA.Mushroom Hunter.cs_" />
+    <None Include="solved\2015\1AB.Barbers.NOT SOLVED.cs_" />
+    <None Include="solved\2015\1BA.Counter Culture.cs_" />
+    <None Include="solved\2015\1BC.HivkingDeer.cs_" />
     <Compile Include="solver.cs" />
     <None Include="solved\2015\QB.HouseOfPankakes-small.cs_" />
     <Compile Include="tools\tools.cs" />
