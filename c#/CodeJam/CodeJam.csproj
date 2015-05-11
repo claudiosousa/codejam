@@ -144,6 +144,9 @@
     <None Include="solved\2015\1AB.Barbers.NOT SOLVED.cs_" />
     <None Include="solved\2015\1BA.Counter Culture.cs_" />
     <None Include="solved\2015\1BC.HivkingDeer.cs_" />
+    <None Include="solved\2015\+CA.Brateship.cs_" />
+    <None Include="solved\2015\1CC.Coins.solver.cs_" />
+    <None Include="solver - Copy.cs_" />
     <Compile Include="solver.cs" />
     <None Include="solved\2015\QB.HouseOfPankakes-small.cs_" />
     <Compile Include="tools\tools.cs" />
