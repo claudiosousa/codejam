@@ -10,15 +10,15 @@ var maxload = Number(size[4]);
 var p_count = Number(datastr[1]);
 var p_weights = datastr[2].split(' ').map(Number);
 var w_count = Number(datastr[3]);
-var w_coords = [];
 var w_items = [];
 
 var currentLine = 3;
 for (var i = 0; i < w_count; i++) {
     currentLine++;
-    w_coords.push(datastr[currentLine].split(' ').map(Number));
+    var coords = datastr[currentLine].split(' ').map(Number);
     currentLine++;
-    w_items.push(datastr[currentLine].split(' ').map(Number));
+    var items = datastr[currentLine].split(' ').map(Number);
+    w_items.push({ id: i, coords: coords, items: items });
 }
 
 var c_count = Number(datastr[++currentLine]);
@@ -60,7 +60,7 @@ var getDistance = function (c1, c2) {
 
 c_prods = c_prods.sort((a, b) => {
     var getval = function (c) {
-        return getDistance(w_coords[0], c.coords) + c.prods.length;
+        return /*getDistance(w_coords[0], c.coords)*/ + c.prods.length;
     }
     return getval(a) - getval(b);
 })
@@ -85,15 +85,24 @@ for (var i = 0; i < d_count; i++) {
     });
 }
 
+var getWareHouseForProduct = function (p, nb, coords) {
+    var ws = w_items.filter(w=> w.items[p] >= nb);
+    if (ws.length > 0) {
+        ws = ws.sort((w1, w2) => getDistance(coords, w1) - getDistance(coords, w2));
+        return ws[0];
+    }
+    throw "TODO";
+}
 var processOrders = function () {
     var donesomething = true;
     while (donesomething && tasks.length > 0) {
         donesomething = false;
         for (var i = 0; i < d_count; i++) {
             var drone = drones[i];
-            var dist_to_w = getDistance(drone.coords, w_coords[0]);
             var task = tasks[0];
-            drone.coords = w_coords[0];
+            var warehouse = getWareHouseForProduct(task.p, task.nb, task.coords);
+            var dist_to_w = getDistance(drone.coords, warehouse.coords);
+            drone.coords = warehouse.coords;
             var dist_to_c = getDistance(drone.coords, task.coords);
             drone.turns += dist_to_w + 1 + dist_to_c + 1;
             var pcarried = [];
@@ -101,7 +110,7 @@ var processOrders = function () {
             var writeCommands = function () {
                 pcarried.forEach((nb, p) => {
                     if (nb > 0)
-                        commands.push(i + " L 0 " + p + " " + nb);
+                        commands.push(i + " L " + warehouse.id + " " + p + " " + nb);
                 });
                 dropCommands.forEach(c => {
                     if (c.nb > 0)
@@ -123,13 +132,19 @@ var processOrders = function () {
                     pcarried[task.p]++;
                     dropCommand.nb++;
                     task.nb--;
-                    if (task.nb == 0) {
-                        tasks.shift();
+                    warehouse.items[task.p]--;
+                    var taskIndex = 0;
+                    if (task.nb == 0 || warehouse.items[task.p] == 0) {
+                        if (task.nb == 0)
+                            tasks.splice(taskIndex, 1);
                         if (tasks.length == 0) {
                             writeCommands();
                             return;
                         }
-                        task = tasks[0];
+                        taskIndex = tasks.findIndex(t=> warehouse.items[t.p] > 0);
+                        if (taskIndex < 0)
+                            break;
+                        task = tasks[taskIndex];
                         p_w = p_weights[task.p];
                         if (!pcarried[task.p]) {
                             pcarried[task.p] = 0;
