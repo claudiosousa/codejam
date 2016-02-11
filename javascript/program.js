@@ -1,5 +1,5 @@
 var fs = require('fs');
-var datastr = fs.readFileSync('busy_day.in', "utf8").split('\n');
+var datastr = fs.readFileSync('redundancy.in', "utf8").split('\n');
 
 var size = datastr[0].split(' ');
 var rows = Number(size[0]);
@@ -70,7 +70,8 @@ c_prods = c_prods.sort((a, b) => {
     var getval = function (c) {
         var p = Number(Object.getOwnPropertyNames(c.prods)[0]);
         var warehouse = getWareHouseForProduct(p, c.prods[p], c.coords);
-        return getDistance(warehouse.coords, c.coords) + c.prods.length;
+        var weight = c.prods.map((nb, p) => p_weights[p] * nb).reduce((a, b) => a + b, 0);
+        return (getDistance(warehouse.coords, c.coords) * weight / maxload) + c.prods.length;
     }
     return getval(a) - getval(b);
 })
@@ -95,6 +96,9 @@ for (var i = 0; i < d_count; i++) {
     });
 }
 
+var getClosestTaskWithClosestWareHouse = function (coords) {
+    return 0;
+}
 
 var processOrders = function () {
     var donesomething = true;
@@ -102,8 +106,9 @@ var processOrders = function () {
         donesomething = false;
         for (var i = 0; i < d_count; i++) {
             var drone = drones[i];
-            var task = tasks[0];
-            var taskIndex = 0;
+            var taskIndex = getClosestTaskWithClosestWareHouse(drone.coords);
+
+            var task = tasks[taskIndex];
 
             var warehouse = getWareHouseForProduct(task.p, task.nb, task.coords);
             var dist_to_w = getDistance(drone.coords, warehouse.coords);
@@ -154,8 +159,8 @@ var processOrders = function () {
                         }
                         taskIndex = tasks.findIndex(t=> warehouse.items[t.p] > 0);
                         //console.log(taskIndex);
-                        if (taskIndex < 0){
-                           // console.log(w / maxload);
+                        if (taskIndex < 0) {
+                            // console.log(w / maxload);
                             break;
                         }
                         task = tasks[taskIndex];
