@@ -11,7 +11,7 @@
 			"cwd": "${workspaceRoot}",
 			"runtimeExecutable": null,
 			"runtimeArgs": [
-				"--nolazy"
+				//"--nolazy"
 			],
 			"env": {
 				"NODE_ENV": "development"
