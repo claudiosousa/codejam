@@ -1,5 +1,5 @@
 var fs = require('fs');
-var datastr = fs.readFileSync('mother_of_all_warehouses.in', "utf8").split('\n');
+var datastr = fs.readFileSync('busy_day.in', "utf8").split('\n');
 
 var size = datastr[0].split(' ');
 var rows = Number(size[0]);
@@ -57,10 +57,20 @@ var getDistance = function (c1, c2) {
     return Math.ceil(Math.sqrt(Math.pow(c1[0] - c2[0], 2) + Math.pow(c1[1] - c2[1], 2)));
 };
 
+var getWareHouseForProduct = function (p, nb, coords) {
+    var ws = w_items.filter(w=> w.items[p] >= nb);
+    if (ws.length > 0) {
+        ws = ws.sort((w1, w2) => getDistance(coords, w1) - getDistance(coords, w2));
+        return ws[0];
+    }
+    throw "TODO";
+}
 
 c_prods = c_prods.sort((a, b) => {
     var getval = function (c) {
-        return /*getDistance(w_coords[0], c.coords)*/ + c.prods.length;
+        var p = Number(Object.getOwnPropertyNames(c.prods)[0]);
+        var warehouse = getWareHouseForProduct(p, c.prods[p], c.coords);
+        return getDistance(warehouse.coords, c.coords) + c.prods.length;
     }
     return getval(a) - getval(b);
 })
@@ -85,14 +95,7 @@ for (var i = 0; i < d_count; i++) {
     });
 }
 
-var getWareHouseForProduct = function (p, nb, coords) {
-    var ws = w_items.filter(w=> w.items[p] >= nb);
-    if (ws.length > 0) {
-        ws = ws.sort((w1, w2) => getDistance(coords, w1) - getDistance(coords, w2));
-        return ws[0];
-    }
-    throw "TODO";
-}
+
 var processOrders = function () {
     var donesomething = true;
     while (donesomething && tasks.length > 0) {
@@ -100,6 +103,8 @@ var processOrders = function () {
         for (var i = 0; i < d_count; i++) {
             var drone = drones[i];
             var task = tasks[0];
+            var taskIndex = 0;
+
             var warehouse = getWareHouseForProduct(task.p, task.nb, task.coords);
             var dist_to_w = getDistance(drone.coords, warehouse.coords);
             drone.coords = warehouse.coords;
@@ -131,19 +136,28 @@ var processOrders = function () {
                     w_valid = w;
                     pcarried[task.p]++;
                     dropCommand.nb++;
+
                     task.nb--;
+                    
+                    //console.log("+"+warehouse.items[task.p]);
                     warehouse.items[task.p]--;
-                    var taskIndex = 0;
-                    if (task.nb == 0 || warehouse.items[task.p] == 0) {
-                        if (task.nb == 0)
+                    //console.log("-"+warehouse.items[task.p]);
+                    
+                    if (task.nb == 0 || warehouse.items[task.p] <= 0) {
+                        if (task.nb == 0) {
+                            var a = tasks.length;
                             tasks.splice(taskIndex, 1);
+                        }
                         if (tasks.length == 0) {
                             writeCommands();
                             return;
                         }
                         taskIndex = tasks.findIndex(t=> warehouse.items[t.p] > 0);
-                        if (taskIndex < 0)
+                        //console.log(taskIndex);
+                        if (taskIndex < 0){
+                           // console.log(w / maxload);
                             break;
+                        }
                         task = tasks[taskIndex];
                         p_w = p_weights[task.p];
                         if (!pcarried[task.p]) {
