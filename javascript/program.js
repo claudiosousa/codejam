@@ -1,5 +1,5 @@
 var fs = require('fs');
-var datastr = fs.readFileSync('redundancy.in', "utf8").split('\n');
+var datastr = fs.readFileSync('mother_of_all_warehouses.in', "utf8").split('\n');
 
 var size = datastr[0].split(' ');
 var rows = Number(size[0]);
@@ -58,22 +58,32 @@ var getDistance = function (c1, c2) {
 };
 
 var getWareHouseForProduct = function (p, nb, coords) {
-    var ws = w_items.filter(w=> w.items[p] >= nb);
-    if (ws.length > 0) {
-        ws = ws.sort((w1, w2) => getDistance(coords, w1) - getDistance(coords, w2));
-        return ws[0];
-    }
-    throw "TODO";
+    var minValue = Number.MAX_VALUE;
+    var warehouse;
+    w_items.forEach((w, i) => {
+        if (w.items[p] < nb)
+            return;
+        var dist = getDistance(coords, w.coords);
+        if (dist < minValue) {
+            minValue = dist;
+            warehouse = w;
+        }
+    })
+    return warehouse;
 }
 
-c_prods = c_prods.sort((a, b) => {
-    var getval = function (c) {
+var getCostForOrder = function (c) {
+    if (!c.cost) {
         var p = Number(Object.getOwnPropertyNames(c.prods)[0]);
         var warehouse = getWareHouseForProduct(p, c.prods[p], c.coords);
         var weight = c.prods.map((nb, p) => p_weights[p] * nb).reduce((a, b) => a + b, 0);
-        return (getDistance(warehouse.coords, c.coords) * weight / maxload) + c.prods.length;
+        c.cost = (getDistance(warehouse.coords, c.coords) * weight / maxload) + c.prods.length;
     }
-    return getval(a) - getval(b);
+    return c.cost;
+}
+
+c_prods = c_prods.sort((a, b) => {
+    return getCostForOrder(a) - getCostForOrder(b);
 })
 
 
@@ -81,7 +91,7 @@ var tasks = [];
 
 c_prods.forEach(c=> {
     c.prods.forEach((nb, p) => {
-        tasks.push({ id: c.id, coords: c.coords, p: p, nb: nb });
+        tasks.push({ id: c.id, coords: c.coords, p: p, nb: nb, cost: c.cost });
     });
 });
 
@@ -96,8 +106,44 @@ for (var i = 0; i < d_count; i++) {
     });
 }
 
-var getClosestTaskWithClosestWareHouse = function (coords) {
-    return 0;
+var getTaskWithClosestWareHouse = function (coords) {
+    var minValue = Number.MAX_VALUE;
+    var taskIndex = 0;
+    tasks.forEach((t, i) => {
+        var cost = t.cost + getDistance(coords, getWareHouseForProduct(t.p, t.nb, coords));
+        if (cost < minValue) {
+            minValue = cost;
+            taskIndex = i;
+        }
+    })
+    return taskIndex;
+    /*
+    var task = tasks.sort((t1, t2) => {
+        return t1.cost - t2.cost + getDistance(coords, t1.coords) - +getDistance(coords, t1.coords);
+    })[0];
+    return tasks.findIndex(t=> t === task);
+    */
+}
+
+var getClosestTask = function (coords, warehouse) {
+    var minValue = Number.MAX_VALUE;
+    var taskIndex = -1;
+    tasks.forEach((t, i) => {
+        if (warehouse.items[t.p] == 0)
+            return;
+        var cost = t.cost + getDistance(coords, t.coords);
+        if (cost < minValue) {
+            minValue = cost;
+            taskIndex = i;
+        }
+    })
+    return taskIndex;
+    /*
+    var task = tasks.sort((t1, t2) => {
+        return t1.cost - t2.cost + getDistance(coords, t1.coords) - +getDistance(coords, t1.coords);
+    })[0];
+    return tasks.findIndex(t=> t === task);
+    */
 }
 
 var processOrders = function () {
@@ -106,7 +152,7 @@ var processOrders = function () {
         donesomething = false;
         for (var i = 0; i < d_count; i++) {
             var drone = drones[i];
-            var taskIndex = getClosestTaskWithClosestWareHouse(drone.coords);
+            var taskIndex = getTaskWithClosestWareHouse(drone.coords);
 
             var task = tasks[taskIndex];
 
@@ -157,7 +203,7 @@ var processOrders = function () {
                             writeCommands();
                             return;
                         }
-                        taskIndex = tasks.findIndex(t=> warehouse.items[t.p] > 0);
+                        taskIndex = getClosestTask(drone.coords, warehouse);
                         //console.log(taskIndex);
                         if (taskIndex < 0) {
                             // console.log(w / maxload);
