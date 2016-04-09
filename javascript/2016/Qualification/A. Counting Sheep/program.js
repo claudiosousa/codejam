@@ -13,8 +13,8 @@ var lastInFile = fs.readdirSync(downloadsPath)
 if (!lastInFile.local)
     fs.copySync(lastInFile.fd, lastInFile.f);
 lastInFile = lastInFile.f;
-
-var datastr = fs.readFileSync(lastinfile, "utf8").split('\n');
+lastInFile = 'A-small-attempt0.in'
+var datastr = fs.readFileSync(lastInFile, "utf8").split('\n');
 var outputLines = [];
 
 
@@ -58,7 +58,7 @@ function processScenario(n, ni) {
 }
 
 
-fs.writeFileSync(lastinfile.replace(/\.in$/, '.out'), outputLines.join('\n'));
+fs.writeFileSync(lastInFile.replace(/\.in$/, '.out'), outputLines.join('\n'));
 
 process.exit(0);
 
