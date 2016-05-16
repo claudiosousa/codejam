@@ -46,40 +46,35 @@ for (var i = 0; i < data.length; i++)
 
 function processScenario(s) {
     var parts = s.split(' ').map(Number);
-    parts[0];
-    var K = parts.splice(3)[0];
+    var B = parts[0];
+    var M = parts[1];
 
-    var possibilities = [];
-    var combi = [{}, {}, {}];
+    var inBetween = B - 2;
+    var possiblePaths = 0;
+    var inBetweenFact = fact(inBetween);
+    for (var i = 0; i <= inBetween; i++)
+        possiblePaths += inBetweenFact / fact(inBetween - i);
+    var possible = possiblePaths >= M;
+    var res = possible ? "POSSIBLE" : "IMPOSSIBLE";
+    if (possible) {
+        var matrix = [];
+        var line = Array(B).fill(1);
 
-    var testCombi = function (i, a, b) {
-        var add = a + "_" + b;
-        return combi[i][add] == undefined || combi[i][add] < K;
-    }
-    var addCombi = function (i, a, b) {
-        var add = a + "_" + b;
-        if (combi[i][add] == undefined)
-            combi[i][add] = 1;
-        else
-            combi[i][add]++;
-    }
-    for (var j1 = 0; j1 < parts[0]; j1++) {
-        for (var j2 = 0; j2 < parts[1]; j2++) {
-            for (var j3 = 0; j3 < parts[2]; j3++) {
-                var j2_ = j1 % 2 == 0 ? j2 : parts[1] - j2 - 1;
-                var j3_ = j1 >= 2 == 0 ? j3 : parts[2] - j3 - 1;
-                if (testCombi(0, j1, j2_) && testCombi(1, j1, j3_) && testCombi(2, j2_, j3_)) {
-                    addCombi(0, j1, j2_);
-                    addCombi(1, j1, j3_);
-                    addCombi(2, j2_, j3_);
-                    possibilities.push("\n" + (j1 + 1) + " " + (j2_ + 1) + " " + (j3_ + 1));
-                }
-            }
+        for (var i = 0; i < B; i++)
+            matrix.push(line.slice(0));
+        for (var i = 0; i < B; i++) {
+            matrix[B - 1][i] = 0;
+            matrix[i][i] = 0;
+            matrix[i][0] = 0;
         }
+
+        /*
+                matrix[0][B - 1] = 1;
+                for (var i = 0; i < M - 1; i++) {
+                
+                }*/
+        res += matrix.map(l => "\n" + l.join('')).join('');
     }
-
-    res = possibilities.length + possibilities.join('');
-
     return res;
 }
 
