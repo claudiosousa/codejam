@@ -1,5 +1,11 @@
 const getStdin = require('get-stdin'),
-    fsp = require('fs-promise');
+    fsp = require('fs-promise'),
+    math = require('mathjs');
+
+math.config({
+    number: 'BigNumber',
+    precision: 20
+});
 
 (process.argv.length > 2 ? fsp.readFile(process.argv[2], { encoding: 'utf8' }) : getStdin())
     .then(parseCases)
@@ -20,25 +26,16 @@ function parseCases(inputStr) {
 
     for (var i = 0; i < nbCases; i++) {
         let lineParts = lines[i + 1].split(' ');
-        cases.push(Number(lineParts));
+        cases.push([math.bignumber(lineParts[0]), math.bignumber(lineParts[1])]);
     }
 
     return cases;
 }
 
-function processCase(cas, i) {
-    let nb = cas;
-    while (true) {
-        let charArr = (nb + "").split('');
-
-        for (var i = 1; i < charArr.length; i++)
-            if (charArr[i] < charArr[i - 1]) {
-                nb -= Number(charArr.slice(i)) + 1;
-                break;
-            }
-
-        if (i == charArr.length)
-            break;
-    }
-    return nb;
+function processCase([N, K], i) {
+    let powerof2 = math.pow(2, math.log(K, math.bignumber(2)));
+    let free = math.ceil(math.divide(math.subtract(N, math.subtract(K, 1)), powerof2));
+    free = math.subtract(free, 1);
+    free = math.divide(free, 2);
+    return math.ceil(free).toNumber() + " " + math.floor(free).toNumber();
 }
