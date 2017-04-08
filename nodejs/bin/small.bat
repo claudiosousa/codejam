@@ -1,1 +1,0 @@
-node ..\template\script.js ..\template\small.in > ..\template\small.out
