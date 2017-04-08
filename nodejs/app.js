@@ -33,9 +33,8 @@ function parseCases(inputStr) {
 }
 
 function processCase([N, K], i) {
-    let powerof2 = math.pow(2, math.log(K, math.bignumber(2)));
-    let free = math.ceil(math.divide(math.subtract(N, math.subtract(K, 1)), powerof2));
-    free = math.subtract(free, 1);
-    free = math.divide(free, 2);
-    return math.ceil(free).toNumber() + " " + math.floor(free).toNumber();
+    let powerof2 = math.bignumber(2).pow(math.bignumber(K).log(2).floor());
+    let free = N.sub(K.sub(1)).div(powerof2).ceil();
+    free = free.sub(1).div(2);
+    return free.ceil().toNumber() + " " +free.floor().toNumber();
 }
