@@ -16,7 +16,7 @@ math.config({
 function printCasesOutput(outputs) {
     outputs.forEach((output, i) => {
         console.log("Case #" + (i + 1) + ": " + output);
-    })
+    });
 }
 
 function parseCases(inputStr) {
@@ -36,5 +36,5 @@ function processCase([N, K], i) {
     let powerof2 = math.bignumber(2).pow(math.bignumber(K).log(2).floor());
     let free = N.sub(K.sub(1)).div(powerof2).ceil();
     free = free.sub(1).div(2);
-    return free.ceil().toNumber() + " " +free.floor().toNumber();
+    return free.ceil().toNumber() + " " + free.floor().toNumber();
 }

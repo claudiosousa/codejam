@@ -4,7 +4,7 @@ const getStdin = require('get-stdin'),
 
 math.config({
     number: 'BigNumber',
-    precision: 20
+    precision: 60
 });
 
 (process.argv.length > 2 ? fsp.readFile(process.argv[2], { encoding: 'utf8' }) : getStdin())
